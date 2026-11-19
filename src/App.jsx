@@ -74,8 +74,8 @@ export default function App() {
     {
       id: 1,
       smallTitle: "High-Speed Broadband",
-      mainTitle: "Watch Anything Without Buffering",
-      mainHighlight: "Without Buffering",
+      titlePrefix: "Watch Anything ",
+      titleHighlight: "Without Buffering",
       description: "Enjoy uninterrupted HD and 4K streaming—whether it’s movies, series, or live sports. Stable and fast internet for your whole family.",
       buttonText: "View Packages",
       buttonLink: "#packages",
@@ -85,18 +85,13 @@ export default function App() {
       badgeColor: "bg-purple-100 text-purple-700 border-purple-200",
       badgeIcon: Tv,
       tag: "Streaming & Family",
-      card: {
-        badge: "4K UHD Streaming",
-        stat: "100 Mbps",
-        label: "BDIX & Media Cache",
-        highlight: "Zero Buffer Guaranteed"
-      }
+      shortTag: "Streaming"
     },
     {
       id: 2,
       smallTitle: "Together for Everyone",
-      mainTitle: "More Devices, Same Speed",
-      mainHighlight: "Same Speed",
+      titlePrefix: "More Devices, ",
+      titleHighlight: "Same Speed",
       description: "Browsing, online classes, freelancing, or office work—your speed won't drop even with multiple devices connected at once. Get everything done hassle-free.",
       buttonText: "Get Connected Now",
       buttonLink: "#contact",
@@ -106,18 +101,13 @@ export default function App() {
       badgeColor: "bg-blue-100 text-blue-700 border-blue-200",
       badgeIcon: Users,
       tag: "Work & Multi-Device",
-      card: {
-        badge: "Multi-Device Network",
-        stat: "15+ Devices",
-        label: "Simultaneous Bandwidth",
-        highlight: "Zero Speed Drop"
-      }
+      shortTag: "Work"
     },
     {
       id: 3,
       smallTitle: "Gamers' Choice",
-      mainTitle: "Zero Lag, Maximum Fun",
-      mainHighlight: "Zero Lag",
+      titlePrefix: "Zero Lag, ",
+      titleHighlight: "Maximum Fun",
       description: "Play online games worry-free with low ping and a stable connection. Download large files or game updates at lightning speed.",
       buttonText: "View Offers",
       buttonLink: "#packages",
@@ -127,12 +117,7 @@ export default function App() {
       badgeColor: "bg-emerald-100 text-emerald-700 border-emerald-200",
       badgeIcon: Gamepad2,
       tag: "Low-Ping Gaming",
-      card: {
-        badge: "Low-Ping Gaming",
-        stat: "1-3 ms",
-        label: "Direct BDIX Route",
-        highlight: "Lag-Free Competitive Play"
-      }
+      shortTag: "Gaming"
     }
   ];
 
@@ -479,10 +464,10 @@ export default function App() {
         </div>
       </div>
 
-      {/* 3. HERO SLIDER SECTION (RESPECTING EXACT USER BREAKPOINTS & SPACING) */}
+      {/* 3. HERO SLIDER SECTION (80VH HEIGHT, CRYSTAL-CLEAR BACKGROUND IMAGERY, TRANSLUCENT FROSTED TEXT GLASS, REMOVED RIGHT CARDS) */}
       <section 
         id="home" 
-        className="relative overflow-hidden section-spacing bg-[#fafbff] border-b border-slate-200/80 min-h-[540px] sm:min-h-[580px] lg:min-h-[620px] flex items-center"
+        className="relative overflow-hidden min-h-[580px] lg:h-[80vh] flex flex-col justify-between border-b border-slate-200/80 bg-slate-900"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
@@ -494,147 +479,110 @@ export default function App() {
               currentSlide === idx ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
             }`}
           >
-            {/* Background Photography (hero-1, hero-2, hero-3) */}
+            {/* Background Photography (hero-1, hero-2, hero-3) - Clear, vivid, high resolution */}
             <img
               src={slide.image}
-              alt={slide.mainTitle}
-              className={`w-full h-full object-cover object-right md:object-center transform transition-transform duration-[10000ms] ease-out ${
+              alt={slide.smallTitle}
+              className={`w-full h-full object-cover object-center transform transition-transform duration-[8000ms] ease-out ${
                 currentSlide === idx ? 'scale-105' : 'scale-100'
               }`}
             />
-            {/* Light-theme directional gradient overlays: Keep 100% light, pure, and high contrast */}
-            <div className="absolute inset-0 hidden md:block bg-gradient-to-r from-white via-white/95 via-50% to-white/30"></div>
-            <div className="absolute inset-0 md:hidden bg-gradient-to-t from-white via-white/95 to-white/80 backdrop-blur-[1px]"></div>
+            {/* Soft, Transparent Directional Vignette: keeps 100% of the image recognizable while ensuring text contrast */}
+            <div className="absolute inset-0 hidden md:block bg-gradient-to-r from-white/90 via-white/40 to-transparent"></div>
+            <div className="absolute inset-0 md:hidden bg-gradient-to-t from-white/95 via-white/60 to-white/20"></div>
           </div>
         ))}
 
-        {/* Subtle Ambient Colorful Glow Accents */}
-        <div className="absolute top-10 left-10 w-96 h-96 bg-purple-200/40 rounded-full blur-3xl pointer-events-none z-0 animate-pulse-subtle"></div>
-        <div className="absolute bottom-10 right-20 w-80 h-80 bg-cyan-200/30 rounded-full blur-3xl pointer-events-none z-0"></div>
-
         {/* Content Container adhering strictly to User's Breakpoint & Spacing Specs */}
-        <div className="content-container relative z-10 w-full">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-14">
+        <div className="content-container relative z-10 w-full flex-1 flex flex-col justify-center py-10 lg:py-16">
+          
+          {/* Frosted Translucent Glass Card for Text - High legibility, sleek modern aesthetic */}
+          <div className="max-w-xl lg:max-w-2xl bg-white/80 backdrop-blur-md p-6 sm:p-8 md:p-10 rounded-2xl border border-white/70 shadow-xl shadow-purple-950/5 text-center lg:text-left">
             
-            {/* Left Content Column */}
-            <div className="max-w-2xl text-center lg:text-left">
-              
-              {/* Small Title Badge */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-[4px] text-xs sm:text-sm font-bold border mb-5 shadow-sm bg-white/90 backdrop-blur-sm border-purple-200 text-purple-700">
-                {React.createElement(slides[currentSlide].badgeIcon, { className: "w-4 h-4 text-purple-600 flex-shrink-0" })}
-                <span>{slides[currentSlide].smallTitle}</span>
-              </div>
-
-              {/* Main Title */}
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-extrabold text-slate-900 tracking-tight leading-[1.15] mb-5 min-h-[72px] sm:min-h-[88px] lg:min-h-[125px] flex items-center justify-center lg:justify-start">
-                <span>
-                  {slides[currentSlide].mainTitle.replace(slides[currentSlide].mainHighlight, '')}
-                  <span className="bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-700 bg-clip-text text-transparent">
-                    {slides[currentSlide].mainHighlight}
-                  </span>
-                </span>
-              </h1>
-
-              {/* Description */}
-              <p className="text-slate-600 text-sm sm:text-base lg:text-lg font-normal leading-relaxed mb-8 max-w-xl min-h-[48px] sm:min-h-[54px]">
-                {slides[currentSlide].description}
-              </p>
-
-              {/* Action Buttons */}
-              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3.5">
-                <a 
-                  href={slides[currentSlide].buttonLink}
-                  className="inline-flex items-center justify-center gap-2 px-6 h-12 rounded-[4px] bg-purple-600 hover:bg-purple-700 text-white font-semibold text-sm sm:text-base shadow-lg shadow-purple-500/25 transition-all whitespace-nowrap transform hover:-translate-y-0.5"
-                >
-                  <span>{slides[currentSlide].buttonText}</span>
-                  <ArrowRight className="w-4 h-4 flex-shrink-0" />
-                </a>
-
-                <a 
-                  href={slides[currentSlide].secondaryLink}
-                  className="inline-flex items-center justify-center gap-2 px-5 h-12 rounded-[4px] bg-white/95 hover:bg-white border border-slate-300 text-slate-700 font-semibold text-sm sm:text-base shadow-sm hover:shadow transition-all whitespace-nowrap"
-                >
-                  <MessageSquare className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                  <span>{slides[currentSlide].secondaryText}</span>
-                </a>
-              </div>
-
+            {/* Small Title Badge */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-[4px] text-xs sm:text-sm font-bold border mb-4 shadow-sm bg-white/90 border-purple-200 text-purple-700">
+              {React.createElement(slides[currentSlide].badgeIcon, { className: "w-4 h-4 text-purple-600 flex-shrink-0" })}
+              <span>{slides[currentSlide].smallTitle}</span>
             </div>
 
-            {/* Right Interactive Highlights Card (Floating Glassy Status Badge) */}
-            <div className="w-full max-w-[420px] lg:w-[420px] mx-auto lg:mx-0 flex-shrink-0">
-              <div className="bg-white/90 backdrop-blur-md border border-purple-100/90 rounded-2xl p-6 sm:p-7 shadow-xl shadow-purple-900/10 relative">
-                <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span className="font-bold text-slate-800 text-sm">{slides[currentSlide].card.badge}</span>
-                  </div>
-                  <span className="text-[11px] font-extrabold px-2.5 py-0.5 rounded-[4px] bg-purple-100 text-purple-700">
-                    Bagnibari Fiber
-                  </span>
-                </div>
-                
-                <div className="my-5 py-5 px-4 rounded-xl bg-gradient-to-br from-purple-50/70 via-indigo-50/40 to-blue-50/40 border border-purple-100 text-center">
-                  <div className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
-                    {slides[currentSlide].card.stat}
-                  </div>
-                  <p className="text-xs text-purple-700 font-bold mt-1 uppercase tracking-wider">
-                    {slides[currentSlide].card.label}
-                  </p>
-                </div>
+            {/* Main Title - Perfectly split into prefix and highlighted text */}
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[48px] font-extrabold text-slate-900 tracking-tight leading-[1.15] mb-4">
+              <span>{slides[currentSlide].titlePrefix}</span>
+              <span className="bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-700 bg-clip-text text-transparent">
+                {slides[currentSlide].titleHighlight}
+              </span>
+            </h1>
 
-                <div className="flex items-center justify-between text-xs font-semibold text-slate-600 pt-1">
-                  <span className="flex items-center gap-1.5 text-emerald-600">
-                    <CheckCircle2 className="w-4 h-4" /> {slides[currentSlide].card.highlight}
-                  </span>
-                  <span className="text-slate-400">99.9% Uptime</span>
-                </div>
-              </div>
+            {/* Description */}
+            <p className="text-slate-600 text-sm sm:text-base lg:text-lg font-normal leading-relaxed mb-8 max-w-xl">
+              {slides[currentSlide].description}
+            </p>
+
+            {/* Action Buttons */}
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3.5">
+              <a 
+                href={slides[currentSlide].buttonLink}
+                className="inline-flex items-center justify-center gap-2 px-6 h-12 rounded-[4px] bg-purple-600 hover:bg-purple-700 text-white font-semibold text-sm sm:text-base shadow-lg shadow-purple-500/25 transition-all whitespace-nowrap transform hover:-translate-y-0.5 active:translate-y-0"
+              >
+                <span>{slides[currentSlide].buttonText}</span>
+                <ArrowRight className="w-4 h-4 flex-shrink-0" />
+              </a>
+
+              <a 
+                href={slides[currentSlide].secondaryLink}
+                className="inline-flex items-center justify-center gap-2 px-5 h-12 rounded-[4px] bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 font-semibold text-sm sm:text-base shadow-sm hover:shadow transition-all whitespace-nowrap"
+              >
+                <MessageSquare className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                <span>{slides[currentSlide].secondaryText}</span>
+              </a>
             </div>
 
           </div>
 
-          {/* Slider Navigation Bar & Indicators */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-12 pt-8 border-t border-slate-200/70">
+        </div>
+
+        {/* Slider Bottom Navigation & Controls */}
+        <div className="relative z-10 w-full pb-6 lg:pb-8">
+          <div className="content-container flex flex-row items-center justify-between gap-2 sm:gap-4">
             
             {/* Category / Slide Selectors */}
-            <div className="flex items-center gap-1.5 sm:gap-2.5 flex-wrap justify-center">
+            <div className="flex items-center gap-1.5 sm:gap-2.5">
               {slides.map((s, idx) => (
                 <button
                   key={s.id}
                   onClick={() => setCurrentSlide(idx)}
-                  className={`px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-[4px] text-xs font-bold transition-all flex items-center gap-1.5 ${
+                  className={`px-2.5 py-1.5 sm:px-3.5 sm:py-2 rounded-[4px] text-xs sm:text-sm font-bold transition-all flex items-center gap-1.5 shadow-sm whitespace-nowrap ${
                     currentSlide === idx 
-                      ? 'bg-purple-600 text-white shadow-md shadow-purple-500/25 scale-105' 
-                      : 'bg-white/80 hover:bg-white text-slate-600 border border-slate-200/80'
+                      ? 'bg-purple-600 text-white shadow-md shadow-purple-500/30 scale-105' 
+                      : 'bg-white/90 hover:bg-white text-slate-700 border border-slate-200/90 backdrop-blur-sm'
                   }`}
                 >
-                  <span className={`w-2 h-2 rounded-full ${currentSlide === idx ? 'bg-amber-300' : 'bg-slate-300'}`}></span>
-                  <span>0{s.id} • {s.tag}</span>
+                  <span className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${currentSlide === idx ? 'bg-amber-300' : 'bg-slate-400'}`}></span>
+                  <span className="hidden sm:inline">0{s.id} • {s.tag}</span>
+                  <span className="sm:hidden">0{s.id} • {s.shortTag}</span>
                 </button>
               ))}
             </div>
 
             {/* Prev / Next Arrows */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 sm:gap-2.5 flex-shrink-0">
               <button
                 onClick={() => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)}
-                className="w-10 h-10 rounded-[4px] bg-white/90 hover:bg-white text-slate-700 border border-slate-200 shadow-sm flex items-center justify-center transition-all hover:border-purple-300 active:scale-95"
+                className="w-9 h-9 sm:w-10 sm:h-10 rounded-[4px] bg-white/95 hover:bg-white text-slate-700 border border-slate-200 shadow-md backdrop-blur-sm flex items-center justify-center transition-all hover:border-purple-400 hover:text-purple-600 active:scale-95"
                 aria-label="Previous Slide"
               >
-                <ChevronLeft className="w-5 h-5 text-slate-700" />
+                <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
               <button
                 onClick={() => setCurrentSlide((prev) => (prev + 1) % slides.length)}
-                className="w-10 h-10 rounded-[4px] bg-white/90 hover:bg-white text-slate-700 border border-slate-200 shadow-sm flex items-center justify-center transition-all hover:border-purple-300 active:scale-95"
+                className="w-9 h-9 sm:w-10 sm:h-10 rounded-[4px] bg-white/95 hover:bg-white text-slate-700 border border-slate-200 shadow-md backdrop-blur-sm flex items-center justify-center transition-all hover:border-purple-400 hover:text-purple-600 active:scale-95"
                 aria-label="Next Slide"
               >
-                <ChevronRight className="w-5 h-5 text-slate-700" />
+                <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
             </div>
 
           </div>
-
         </div>
       </section>
 
