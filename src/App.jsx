@@ -31,9 +31,9 @@ import {
   Gamepad2
 } from 'lucide-react';
 
-import hero1Img from './hero-1.jpg';
-import hero2Img from './hero-2.jpg';
-import hero3Img from './hero-3.jpg';
+import hero1Img from './image/hero-1.jpg';
+import hero2Img from './image/hero-2.jpg';
+import hero3Img from './image/hero-3.jpg';
 
 export default function App() {
   // Mobile Drawer State
