@@ -681,9 +681,9 @@ export default function App() {
                       {slide.description}
                     </p>
 
-                    {/* Action Buttons with Modern Hover & Moving Arrow */}
+                    {/* Action Buttons with Sleek & Balanced Dimensions */}
                     <div
-                      className={`flex flex-wrap items-center justify-start gap-3.5 ${isSlideActive ? 'animate-slide-btns' : ''
+                      className={`flex flex-wrap items-center justify-start gap-3 ${isSlideActive ? 'animate-slide-btns' : ''
                         }`}
                     >
                       <a
@@ -691,10 +691,10 @@ export default function App() {
                         onClick={(e) => {
                           if (wasDraggingRef.current) e.preventDefault();
                         }}
-                        className="group inline-flex items-center justify-center gap-2 px-6 sm:px-7 h-11 sm:h-12 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold text-sm sm:text-base shadow-lg shadow-purple-600/35 hover:shadow-xl hover:shadow-purple-500/50 transition-all duration-300 ease-out whitespace-nowrap transform hover:-translate-y-0.5 active:translate-y-0"
+                        className="group inline-flex items-center justify-center gap-2 px-5 sm:px-6 h-10 sm:h-10.5 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-semibold text-xs sm:text-sm shadow-md shadow-slate-950/30 hover:shadow-lg transition-all duration-300 ease-out whitespace-nowrap transform hover:-translate-y-0.5 active:translate-y-0"
                       >
                         <span>{slide.buttonText}</span>
-                        <ArrowRight className="w-4 h-4 flex-shrink-0 transition-transform duration-300 ease-out group-hover:translate-x-1.5" />
+                        <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0 transition-transform duration-300 ease-out group-hover:translate-x-1" />
                       </a>
 
                       <a
@@ -702,9 +702,9 @@ export default function App() {
                         onClick={(e) => {
                           if (wasDraggingRef.current) e.preventDefault();
                         }}
-                        className="group inline-flex items-center justify-center gap-2 px-5 sm:px-6 h-11 sm:h-12 rounded-full bg-white/10 hover:bg-white/20 hover:border-white/40 border border-white/20 text-white font-semibold text-sm sm:text-base backdrop-blur-md shadow-sm hover:shadow-md hover:shadow-white/10 transition-all duration-300 ease-out whitespace-nowrap transform hover:-translate-y-0.5 active:translate-y-0"
+                        className="group inline-flex items-center justify-center gap-2 px-4.5 sm:px-5 h-10 sm:h-10.5 rounded-full bg-white/10 hover:bg-white/20 hover:border-white/40 border border-white/20 text-white font-medium text-xs sm:text-sm backdrop-blur-md shadow-sm hover:shadow-md transition-all duration-300 ease-out whitespace-nowrap transform hover:-translate-y-0.5 active:translate-y-0"
                       >
-                        <MessageSquare className="w-4 h-4 text-emerald-400 flex-shrink-0 transition-transform duration-300 ease-out group-hover:scale-110" />
+                        <MessageSquare className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400 flex-shrink-0 transition-transform duration-300 ease-out group-hover:scale-110" />
                         <span>{slide.secondaryText}</span>
                       </a>
                     </div>
@@ -716,27 +716,56 @@ export default function App() {
           })}
         </div>
 
-        {/* Carousel Navigation Dots - Bottom Center */}
-        <div className="absolute bottom-5 sm:bottom-7 left-1/2 -translate-x-1/2 z-20 flex items-center justify-center gap-2.5 px-3.5 py-1.5 rounded-full bg-slate-950/40 backdrop-blur-md border border-white/10 shadow-lg">
-          {slides.map((s, dotIdx) => {
-            const isDotActive = activeRealIndex === dotIdx;
-            return (
-              <button
-                key={s.id}
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  goToSlide(dotIdx);
-                }}
-                className={`rounded-full transition-all duration-500 focus:outline-none ${
-                  isDotActive
-                    ? 'w-7 sm:w-8 h-2 sm:h-2.5 bg-gradient-to-r from-purple-500 via-indigo-400 to-fuchsia-500 shadow-md shadow-purple-500/50'
-                    : 'w-2 sm:w-2.5 h-2 sm:h-2.5 bg-white/40 hover:bg-white/80'
-                }`}
-                aria-label={`Go to slide ${s.id}: ${s.smallTitle}`}
-              />
-            );
-          })}
+        {/* Carousel Navigation Controller - Bottom Center with Prev/Next Arrows & Dots */}
+        <div className="absolute bottom-5 sm:bottom-7 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 sm:gap-2.5 px-2.5 sm:px-3 py-1.5 rounded-full bg-slate-950/60 backdrop-blur-md border border-white/15 shadow-xl select-none">
+          {/* Left Arrow (Prev) */}
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              goToPrev();
+            }}
+            className="w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-white/75 hover:text-white hover:bg-white/15 active:scale-95 transition-all focus:outline-none"
+            aria-label="Previous Slide"
+          >
+            <ChevronLeft className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+          </button>
+
+          {/* Dots in Middle */}
+          <div className="flex items-center gap-2 px-1">
+            {slides.map((s, dotIdx) => {
+              const isDotActive = activeRealIndex === dotIdx;
+              return (
+                <button
+                  key={s.id}
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    goToSlide(dotIdx);
+                  }}
+                  className={`rounded-full transition-all duration-300 focus:outline-none ${
+                    isDotActive
+                      ? 'w-6 sm:w-7 h-2 bg-gradient-to-r from-purple-500 via-indigo-400 to-fuchsia-500 shadow-sm shadow-purple-500/50'
+                      : 'w-2 h-2 bg-white/40 hover:bg-white/80'
+                  }`}
+                  aria-label={`Go to slide ${s.id}: ${s.smallTitle}`}
+                />
+              );
+            })}
+          </div>
+
+          {/* Right Arrow (Next) */}
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              goToNext();
+            }}
+            className="w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-white/75 hover:text-white hover:bg-white/15 active:scale-95 transition-all focus:outline-none"
+            aria-label="Next Slide"
+          >
+            <ChevronRight className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+          </button>
         </div>
       </section>
 
