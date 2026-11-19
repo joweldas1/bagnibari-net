@@ -1,27 +1,27 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { 
-  Wifi, 
-  Zap, 
-  Phone, 
-  ShieldCheck, 
-  CheckCircle2, 
-  ArrowRight, 
-  ChevronLeft, 
-  ChevronRight, 
-  Tv, 
-  Film, 
-  Download, 
-  Upload, 
-  Clock, 
-  MapPin, 
-  CreditCard, 
-  Search, 
-  Sparkles, 
-  Headphones, 
-  MessageSquare, 
-  Send, 
-  Star, 
-  Gift, 
+import {
+  Wifi,
+  Zap,
+  Phone,
+  ShieldCheck,
+  CheckCircle2,
+  ArrowRight,
+  ChevronLeft,
+  ChevronRight,
+  Tv,
+  Film,
+  Download,
+  Upload,
+  Clock,
+  MapPin,
+  CreditCard,
+  Search,
+  Sparkles,
+  Headphones,
+  MessageSquare,
+  Send,
+  Star,
+  Gift,
   Gauge,
   Activity,
   Award,
@@ -49,6 +49,121 @@ export default function App() {
   const isDraggingRef = useRef(false);
   const wasDraggingRef = useRef(false);
 
+
+
+
+  // Slider Data matching User's Exact Specification
+  const slides = [
+    {
+      id: 1,
+      smallTitle: "High-Speed Broadband",
+      titlePrefix: "Watch Anything ",
+      titleHighlight: "Without Buffering",
+      description: "Enjoy uninterrupted HD and 4K streaming—whether it’s movies, series, or live sports. Stable and fast internet for your whole family.",
+      buttonText: "View Packages",
+      buttonLink: "#packages",
+      secondaryText: "WhatsApp Support",
+      secondaryLink: "https://wa.me/8801700000000",
+      image: hero1Img,
+      badgeColor: "bg-purple-500/20 text-purple-200 border-purple-400/30",
+      badgeIcon: Tv,
+      tag: "Streaming & Family",
+      shortTag: "Streaming",
+      kenburnsClass: "animate-kenburns-in"
+    },
+    {
+      id: 2,
+      smallTitle: "Together for Everyone",
+      titlePrefix: "More Devices, ",
+      titleHighlight: "Same Speed",
+      description: "Browsing, online classes, freelancing, or office work—your speed won't drop even with multiple devices connected at once. Get everything done hassle-free.",
+      buttonText: "Get Connected Now",
+      buttonLink: "#contact",
+      secondaryText: "View Packages",
+      secondaryLink: "#packages",
+      image: hero2Img,
+      badgeColor: "bg-indigo-500/20 text-indigo-200 border-indigo-400/30",
+      badgeIcon: Users,
+      tag: "Work & Multi-Device",
+      shortTag: "Work",
+      kenburnsClass: "animate-kenburns-out"
+    },
+    {
+      id: 3,
+      smallTitle: "Gamers' Choice",
+      titlePrefix: "Zero Lag, ",
+      titleHighlight: "Maximum Fun",
+      description: "Play online games worry-free with low ping and a stable connection. Download large files or game updates at lightning speed.",
+      buttonText: "View Offers",
+      buttonLink: "#packages",
+      secondaryText: "Coverage Areas",
+      secondaryLink: "#coverage",
+      image: hero3Img,
+      badgeColor: "bg-emerald-500/20 text-emerald-200 border-emerald-400/30",
+      badgeIcon: Gamepad2,
+      tag: "Low-Ping Gaming",
+      shortTag: "Gaming",
+      kenburnsClass: "animate-kenburns-pan"
+    }
+  ];
+
+  // 1. Infinite Track Array (Last Clone + Original Slides + First Clone)
+  const extendedSlides = [
+    slides[slides.length - 1],
+    ...slides,
+    slides[0],
+  ];
+
+  // 2. Start at index 1 (which is the real first slide)
+  const [trackIndex, setTrackIndex] = useState(1);
+  const [isTransitioning, setIsTransitioning] = useState(true);
+
+  // Real active index (0, 1, 2) for dots & animations
+  const activeRealIndex =
+    trackIndex === 0
+      ? slides.length - 1
+      : trackIndex === extendedSlides.length - 1
+        ? 0
+        : trackIndex - 1;
+
+  const goToSlide = (realIdx) => {
+    setIsTransitioning(true);
+    setTrackIndex(realIdx + 1);
+  };
+
+  const goToNext = () => {
+    if (trackIndex >= extendedSlides.length - 1) return;
+    setIsTransitioning(true);
+    setTrackIndex((prev) => prev + 1);
+  };
+
+  const goToPrev = () => {
+    if (trackIndex <= 0) return;
+    setIsTransitioning(true);
+    setTrackIndex((prev) => prev - 1);
+  };
+
+  // Seamless jump without animation when reaching clones
+  const handleTrackTransitionEnd = () => {
+    if (trackIndex === extendedSlides.length - 1) {
+      setIsTransitioning(false);
+      setTrackIndex(1);
+    } else if (trackIndex === 0) {
+      setIsTransitioning(false);
+      setTrackIndex(slides.length);
+    }
+  };
+
+
+
+
+
+
+
+
+
+
+
   // Mouse drag handlers
   const handleMouseDown = (e) => {
     if (e.button !== 0) return;
@@ -75,9 +190,9 @@ export default function App() {
     setIsPaused(false);
 
     if (dragOffset < -50) {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
+      goToNext();
     } else if (dragOffset > 50) {
-      setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+      goToPrev();
     }
     setDragOffset(0);
   };
@@ -136,69 +251,14 @@ export default function App() {
     }
   }, [mobileMenuOpen]);
 
-  // Slider Data matching User's Exact Specification
-  const slides = [
-    {
-      id: 1,
-      smallTitle: "High-Speed Broadband",
-      titlePrefix: "Watch Anything ",
-      titleHighlight: "Without Buffering",
-      description: "Enjoy uninterrupted HD and 4K streaming—whether it’s movies, series, or live sports. Stable and fast internet for your whole family.",
-      buttonText: "View Packages",
-      buttonLink: "#packages",
-      secondaryText: "WhatsApp Support",
-      secondaryLink: "https://wa.me/8801700000000",
-      image: hero1Img,
-      badgeColor: "bg-purple-500/20 text-purple-200 border-purple-400/30",
-      badgeIcon: Tv,
-      tag: "Streaming & Family",
-      shortTag: "Streaming",
-      kenburnsClass: "animate-kenburns-in"
-    },
-    {
-      id: 2,
-      smallTitle: "Together for Everyone",
-      titlePrefix: "More Devices, ",
-      titleHighlight: "Same Speed",
-      description: "Browsing, online classes, freelancing, or office work—your speed won't drop even with multiple devices connected at once. Get everything done hassle-free.",
-      buttonText: "Get Connected Now",
-      buttonLink: "#contact",
-      secondaryText: "View Packages",
-      secondaryLink: "#packages",
-      image: hero2Img,
-      badgeColor: "bg-indigo-500/20 text-indigo-200 border-indigo-400/30",
-      badgeIcon: Users,
-      tag: "Work & Multi-Device",
-      shortTag: "Work",
-      kenburnsClass: "animate-kenburns-out"
-    },
-    {
-      id: 3,
-      smallTitle: "Gamers' Choice",
-      titlePrefix: "Zero Lag, ",
-      titleHighlight: "Maximum Fun",
-      description: "Play online games worry-free with low ping and a stable connection. Download large files or game updates at lightning speed.",
-      buttonText: "View Offers",
-      buttonLink: "#packages",
-      secondaryText: "Coverage Areas",
-      secondaryLink: "#coverage",
-      image: hero3Img,
-      badgeColor: "bg-emerald-500/20 text-emerald-200 border-emerald-400/30",
-      badgeIcon: Gamepad2,
-      tag: "Low-Ping Gaming",
-      shortTag: "Gaming",
-      kenburnsClass: "animate-kenburns-pan"
-    }
-  ];
-
   // Auto Slider Effect
   useEffect(() => {
     if (isPaused) return;
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
+      goToNext();
     }, 6000);
     return () => clearInterval(interval);
-  }, [isPaused, slides.length]);
+  }, [isPaused, trackIndex]);
 
   // Packages Data
   const packages = [
@@ -285,8 +345,8 @@ export default function App() {
     { name: "East Para & Canal Road Extension", landmark: "New Fiber Expansion & Pre-Booking", status: "Expanding (Pre-booking open)" },
   ];
 
-  const filteredAreas = coverageAreas.filter(area => 
-    area.name.toLowerCase().includes(searchArea.toLowerCase()) || 
+  const filteredAreas = coverageAreas.filter(area =>
+    area.name.toLowerCase().includes(searchArea.toLowerCase()) ||
     area.landmark.toLowerCase().includes(searchArea.toLowerCase())
   );
 
@@ -313,11 +373,11 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#fafbff] text-slate-800 flex flex-col font-sans overflow-x-hidden w-full">
-      
+
       {/* 1. TOP ANNOUNCEMENT STRIP (1-LINE SLIDING MARQUEE ON MOBILE, CLEAN FLEX ON DESKTOP - ALIGNED WITH NAVBAR) */}
       <div className="bg-gradient-to-r from-purple-700 via-indigo-600 to-blue-600 text-white text-xs py-2 shadow-sm overflow-hidden select-none">
         <div className="content-container">
-          
+
           {/* Mobile View: 1-line smooth sliding marquee ticker */}
           <div className="flex md:hidden items-center h-5 overflow-hidden">
             <div className="flex-shrink-0 z-20 pr-2">
@@ -363,7 +423,7 @@ export default function App() {
       {/* 2. STICKY LIGHT NAVBAR (WITH MOBILE HAMBURGER TOGGLE) */}
       <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm">
         <div className="content-container h-20 flex items-center justify-between">
-          
+
           {/* Brand Logo */}
           <a href="#home" className="flex items-center gap-2.5 sm:gap-3 group">
             <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-purple-600 to-indigo-600 flex items-center justify-center text-white font-black text-xl shadow-md shadow-purple-500/25 group-hover:scale-105 transition-transform">
@@ -390,17 +450,17 @@ export default function App() {
 
           {/* Desktop Action Buttons */}
           <div className="hidden lg:flex items-center gap-3">
-            <a 
-              href="https://wa.me/8801700000000" 
-              target="_blank" 
+            <a
+              href="https://wa.me/8801700000000"
+              target="_blank"
               rel="noreferrer"
               className="inline-flex items-center justify-center gap-2 px-4 h-[38px] rounded-[4px] bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-sm transition-all border border-slate-200 whitespace-nowrap"
             >
               <MessageSquare className="w-4 h-4 text-emerald-600 flex-shrink-0" />
               <span>WhatsApp</span>
             </a>
-            <a 
-              href="#contact" 
+            <a
+              href="#contact"
               className="inline-flex items-center justify-center gap-2 px-5 h-[38px] rounded-[4px] bg-purple-600 hover:bg-purple-700 text-white font-semibold text-sm shadow-md shadow-purple-500/20 hover:shadow-lg hover:shadow-purple-500/30 transition-all whitespace-nowrap"
             >
               <span>Get Connected</span>
@@ -426,18 +486,16 @@ export default function App() {
 
       {/* 2.1 MOBILE SIDE DRAWER (OPENS FROM LEFT SIDE) */}
       {/* Backdrop */}
-      <div 
-        className={`fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 transition-opacity duration-300 lg:hidden ${
-          mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
+      <div
+        className={`fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 transition-opacity duration-300 lg:hidden ${mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+          }`}
         onClick={() => setMobileMenuOpen(false)}
       />
 
       {/* Drawer Container (Sliding in from LEFT) */}
       <div
-        className={`fixed top-0 left-0 bottom-0 w-[84vw] max-w-[320px] bg-white z-50 shadow-2xl p-5 sm:p-6 flex flex-col justify-between transform transition-transform duration-300 ease-in-out lg:hidden border-r border-slate-200 overflow-y-auto ${
-          mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
+        className={`fixed top-0 left-0 bottom-0 w-[84vw] max-w-[320px] bg-white z-50 shadow-2xl p-5 sm:p-6 flex flex-col justify-between transform transition-transform duration-300 ease-in-out lg:hidden border-r border-slate-200 overflow-y-auto ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
+          }`}
       >
         <div>
           {/* Drawer Top Header - Align Logo and Close Button to the edges */}
@@ -453,7 +511,7 @@ export default function App() {
                 <p className="text-[9px] uppercase tracking-wider text-indigo-600 font-bold">Ultra Fast Fiber</p>
               </div>
             </div>
-            
+
             {/* Drawer Close Button (Pushed further to the right) */}
             <button
               onClick={() => setMobileMenuOpen(false)}
@@ -497,7 +555,7 @@ export default function App() {
         {/* Drawer Bottom Actions: Redesigned Beautiful Mobile Action Card */}
         <div className="pt-5 border-t border-slate-100 mt-6">
           <div className="bg-slate-50/90 rounded-xl p-3.5 border border-slate-200/70 space-y-2.5 shadow-sm">
-            
+
             {/* Get Connected Action - Optically balanced vertical padding */}
             <a
               href="#contact"
@@ -537,9 +595,10 @@ export default function App() {
       {/* ========================================================================= */}
       {/* >>>>>>>>>>>>>>>>>>> 3. HERO SLIDER SECTION START <<<<<<<<<<<<<<<<<<<<<<<< */}
       {/* ========================================================================= */}
-      <section 
-        id="home" 
-        className="relative overflow-hidden min-h-[580px] lg:h-[80vh] flex flex-col justify-between border-b border-slate-200/80 bg-slate-900 select-none cursor-grab active:cursor-grabbing"
+
+      <section
+        id="home"
+        className="relative overflow-hidden min-h-[580px] lg:h-[80vh] flex flex-col justify-center border-b border-slate-200/80 bg-slate-900 select-none cursor-grab active:cursor-grabbing"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => {
           if (!isDraggingRef.current) setIsPaused(false);
@@ -552,174 +611,135 @@ export default function App() {
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        {/* Dynamic Sliding Track (moves horizontally with true sliding transition and drag tracking) */}
-        <div 
-          className={`absolute inset-0 flex h-full ${
-            isDragging 
-              ? '' 
-              : 'transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]'
-          }`}
+        {/* Infinite Sliding Track */}
+        <div
+          onTransitionEnd={handleTrackTransitionEnd}
+          className={`absolute inset-0 flex h-full ${isDragging || !isTransitioning
+            ? ''
+            : 'transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]'
+            }`}
           style={{
-            width: `${slides.length * 100}%`,
-            transform: `translate3d(calc(-${(currentSlide * 100) / slides.length}% + ${dragOffset}px), 0, 0)`
+            width: `${extendedSlides.length * 100}%`,
+            transform: `translate3d(calc(-${(trackIndex * 100) / extendedSlides.length}% + ${dragOffset}px), 0, 0)`
           }}
         >
-          {slides.map((slide, idx) => (
-            <div
-              key={slide.id}
-              className="relative h-full flex flex-col justify-center flex-shrink-0 overflow-hidden"
-              style={{ width: `${100 / slides.length}%` }}
-            >
-              {/* Background Photography with Dynamic Ken Burns Zoom In/Out Animation */}
-              <div className="absolute inset-0 overflow-hidden pointer-events-none select-none">
-                <img
-                  key={`hero-img-${currentSlide === idx ? 'active-' + currentSlide : 'idle-' + idx}`}
-                  src={slide.image}
-                  alt={slide.smallTitle}
-                  className={`w-full h-full object-cover object-center will-change-transform ${
-                    currentSlide === idx 
-                      ? slide.kenburnsClass 
+          {extendedSlides.map((slide, idx) => {
+            const isSlideActive = idx === trackIndex;
+            return (
+              <div
+                key={`slide-track-${slide.id}-${idx}`}
+                className="relative h-full flex flex-col justify-center flex-shrink-0 overflow-hidden"
+                style={{ width: `${100 / extendedSlides.length}%` }}
+              >
+                {/* Background Photography */}
+                <div className="absolute inset-0 overflow-hidden pointer-events-none select-none">
+                  <img
+                    src={slide.image}
+                    alt={slide.smallTitle}
+                    className={`w-full h-full object-cover object-center will-change-transform ${isSlideActive
+                      ? slide.kenburnsClass
                       : 'scale-100 transition-transform duration-1000 ease-out'
-                  }`}
-                  draggable={false}
-                />
-              </div>
-
-              {/* Cinematic Blackish Gradient Overlay (Eliminates white fog, highlights photography & guarantees 100% text contrast) */}
-              <div className="absolute inset-0 hidden md:block bg-gradient-to-r from-slate-950/95 via-slate-950/75 via-45% to-slate-950/25 pointer-events-none"></div>
-              <div className="absolute inset-0 md:hidden bg-gradient-to-t from-slate-950/95 via-slate-950/75 via-55% to-slate-950/30 pointer-events-none"></div>
-              <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-950/85 to-transparent pointer-events-none"></div>
-
-              {/* Content Container adhering strictly to User's Breakpoint & Spacing Specs */}
-              <div className="content-container relative z-10 w-full py-8 lg:py-12">
-                
-                {/* Hero Text Column (Crisp, High-Contrast Ultra-Readable Typography - Left Aligned on All Devices) */}
-                <div className="max-w-xl lg:max-w-2xl text-left">
-                  
-                  {/* Small Title Badge - Staggered 1 */}
-                  <div 
-                    key={`badge-${currentSlide}-${idx}`}
-                    className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold border mb-4 shadow-sm backdrop-blur-md ${slide.badgeColor} ${
-                      currentSlide === idx ? 'animate-slide-badge' : ''
-                    }`}
-                  >
-                    {React.createElement(slide.badgeIcon, { className: "w-4 h-4 flex-shrink-0" })}
-                    <span>{slide.smallTitle}</span>
-                  </div>
-
-                  {/* Main Title - Staggered 2 */}
-                  <h1 
-                    key={`title-${currentSlide}-${idx}`}
-                    className={`text-3xl sm:text-4xl md:text-5xl lg:text-[50px] font-extrabold text-white tracking-tight leading-[1.14] mb-4 drop-shadow-sm ${
-                      currentSlide === idx ? 'animate-slide-title' : ''
-                    }`}
-                  >
-                    <span>{slide.titlePrefix}</span>
-                    <span className="bg-gradient-to-r from-purple-400 via-indigo-300 to-fuchsia-400 bg-clip-text text-transparent">
-                      {slide.titleHighlight}
-                    </span>
-                  </h1>
-
-                  {/* Description - Staggered 3 */}
-                  <p 
-                    key={`desc-${currentSlide}-${idx}`}
-                    className={`text-slate-200 text-sm sm:text-base lg:text-lg font-normal leading-relaxed mb-8 max-w-xl drop-shadow-sm ${
-                      currentSlide === idx ? 'animate-slide-desc' : ''
-                    }`}
-                  >
-                    {slide.description}
-                  </p>
-
-                  {/* Action Buttons - Staggered 4 (Left-Aligned on Mobile & Desktop) */}
-                  <div 
-                    key={`btns-${currentSlide}-${idx}`}
-                    className={`flex flex-wrap items-center justify-start gap-3.5 ${
-                      currentSlide === idx ? 'animate-slide-btns' : ''
-                    }`}
-                  >
-                    <a 
-                      href={slide.buttonLink}
-                      onClick={(e) => {
-                        if (wasDraggingRef.current) e.preventDefault();
-                      }}
-                      className="inline-flex items-center justify-center gap-2 px-7 h-12 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold text-sm sm:text-base shadow-lg shadow-purple-600/35 hover:shadow-purple-600/50 transition-all whitespace-nowrap transform hover:-translate-y-0.5 active:translate-y-0"
-                    >
-                      <span>{slide.buttonText}</span>
-                      <ArrowRight className="w-4 h-4 flex-shrink-0" />
-                    </a>
-
-                    <a 
-                      href={slide.secondaryLink}
-                      onClick={(e) => {
-                        if (wasDraggingRef.current) e.preventDefault();
-                      }}
-                      className="inline-flex items-center justify-center gap-2 px-6 h-12 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold text-sm sm:text-base backdrop-blur-md shadow-sm transition-all whitespace-nowrap transform hover:-translate-y-0.5 active:translate-y-0"
-                    >
-                      <MessageSquare className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                      <span>{slide.secondaryText}</span>
-                    </a>
-                  </div>
-
+                      }`}
+                    draggable={false}
+                  />
                 </div>
 
+                {/* Cinematic Blackish Gradient Overlay */}
+                <div className="absolute inset-0 hidden md:block bg-gradient-to-r from-slate-950/95 via-slate-950/75 via-45% to-slate-950/25 pointer-events-none"></div>
+                <div className="absolute inset-0 md:hidden bg-gradient-to-t from-slate-950/95 via-slate-950/75 via-55% to-slate-950/30 pointer-events-none"></div>
+                <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-950/85 to-transparent pointer-events-none"></div>
+
+                {/* Content Container */}
+                <div className="content-container relative z-10 w-full py-10 lg:py-14">
+                  <div className="max-w-xl lg:max-w-2xl text-left">
+
+                    {/* Small Title Badge - Fixed Symmetric Top/Bottom Padding */}
+                    <div
+                      className={`inline-flex items-center justify-center gap-2 px-4 h-8 sm:h-9 rounded-full text-xs sm:text-sm font-bold leading-none border mb-5 shadow-sm backdrop-blur-md ${slide.badgeColor} ${isSlideActive ? 'animate-slide-badge' : ''
+                        }`}
+                    >
+                      {React.createElement(slide.badgeIcon, { className: "w-4 h-4 flex-shrink-0 block" })}
+                      <span className="leading-none">{slide.smallTitle}</span>
+                    </div>
+
+                    {/* Main Title */}
+                    <h1
+                      className={`text-3xl sm:text-4xl md:text-5xl lg:text-[50px] font-extrabold text-white tracking-tight leading-[1.14] mb-4 drop-shadow-sm ${isSlideActive ? 'animate-slide-title' : ''
+                        }`}
+                    >
+                      <span>{slide.titlePrefix}</span>
+                      <span className="bg-gradient-to-r from-purple-400 via-indigo-300 to-fuchsia-400 bg-clip-text text-transparent">
+                        {slide.titleHighlight}
+                      </span>
+                    </h1>
+
+                    {/* Description */}
+                    <p
+                      className={`text-slate-200 text-sm sm:text-base lg:text-lg font-normal leading-relaxed mb-8 max-w-xl drop-shadow-sm ${isSlideActive ? 'animate-slide-desc' : ''
+                        }`}
+                    >
+                      {slide.description}
+                    </p>
+
+                    {/* Action Buttons */}
+                    <div
+                      className={`flex flex-wrap items-center justify-start gap-3.5 ${isSlideActive ? 'animate-slide-btns' : ''
+                        }`}
+                    >
+                      <a
+                        href={slide.buttonLink}
+                        onClick={(e) => {
+                          if (wasDraggingRef.current) e.preventDefault();
+                        }}
+                        className="inline-flex items-center justify-center gap-2 px-7 h-12 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold text-sm sm:text-base shadow-lg shadow-purple-600/35 hover:shadow-purple-600/50 transition-all whitespace-nowrap transform hover:-translate-y-0.5 active:translate-y-0"
+                      >
+                        <span>{slide.buttonText}</span>
+                        <ArrowRight className="w-4 h-4 flex-shrink-0" />
+                      </a>
+
+                      <a
+                        href={slide.secondaryLink}
+                        onClick={(e) => {
+                          if (wasDraggingRef.current) e.preventDefault();
+                        }}
+                        className="inline-flex items-center justify-center gap-2 px-6 h-12 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold text-sm sm:text-base backdrop-blur-md shadow-sm transition-all whitespace-nowrap transform hover:-translate-y-0.5 active:translate-y-0"
+                      >
+                        <MessageSquare className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                        <span>{slide.secondaryText}</span>
+                      </a>
+                    </div>
+
+                    {/* Clean Slider Dots Placed Directly Below the Action Buttons */}
+                    <div className="mt-8 sm:mt-10 flex items-center gap-2.5">
+                      {slides.map((s, dotIdx) => {
+                        const isDotActive = activeRealIndex === dotIdx;
+                        return (
+                          <button
+                            key={s.id}
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              goToSlide(dotIdx);
+                            }}
+                            className={`rounded-full transition-all duration-300 focus:outline-none ${isDotActive
+                              ? 'w-8 h-2.5 bg-gradient-to-r from-purple-500 via-indigo-400 to-fuchsia-500 shadow-md shadow-purple-500/40'
+                              : 'w-2.5 h-2.5 bg-white/35 hover:bg-white/75'
+                              }`}
+                            aria-label={`Go to slide ${s.id}: ${s.smallTitle}`}
+                          />
+                        );
+                      })}
+                    </div>
+
+                  </div>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Empty placeholder flex spacer so bottom controls stay at bottom */}
-        <div className="flex-1 pointer-events-none"></div>
-
-        {/* Slider Bottom Navigation & Controls (No Arrows - Pure Responsive Sleek Dots & Pill Tags) */}
-        <div className="relative z-10 w-full pb-6 lg:pb-8">
-          <div className="content-container flex flex-row items-center justify-between gap-3 sm:gap-4">
-            
-            {/* Desktop & Tablet: All 3 Category Tag Pills */}
-            <div className="hidden sm:flex items-center gap-2 sm:gap-2.5">
-              {slides.map((s, idx) => (
-                <button
-                  key={s.id}
-                  onClick={() => setCurrentSlide(idx)}
-                  className={`px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-bold transition-all flex items-center gap-2 shadow-sm whitespace-nowrap ${
-                    currentSlide === idx 
-                      ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-500/35 ring-1 ring-white/25 scale-105' 
-                      : 'bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white border border-white/15 backdrop-blur-md'
-                  }`}
-                >
-                  <span className={`w-2 h-2 rounded-full ${currentSlide === idx ? 'bg-amber-300 animate-pulse' : 'bg-slate-500'}`}></span>
-                  <span>0{s.id} • {s.tag}</span>
-                </button>
-              ))}
-            </div>
-
-            {/* Mobile View: Active Category Pill */}
-            <div className="flex sm:hidden items-center">
-              <div className="px-3.5 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md shadow-purple-500/35 ring-1 ring-white/25 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-300 animate-pulse"></span>
-                <span>0{slides[currentSlide].id} • {slides[currentSlide].shortTag}</span>
-              </div>
-            </div>
-
-            {/* Dots Navigation for Changing Slides (Interactive Animated Dots Replacing Arrows) */}
-            <div className="flex items-center gap-2 sm:gap-2.5 bg-slate-900/80 backdrop-blur-md px-3 sm:px-3.5 py-2 rounded-full border border-white/15 shadow-md flex-shrink-0">
-              {slides.map((s, idx) => (
-                <button
-                  key={s.id}
-                  onClick={() => setCurrentSlide(idx)}
-                  className={`rounded-full transition-all duration-300 focus:outline-none ${
-                    currentSlide === idx
-                      ? 'w-7 sm:w-8 h-2 sm:h-2.5 bg-gradient-to-r from-purple-500 via-indigo-500 to-fuchsia-500 shadow-md shadow-purple-500/50 ring-1 ring-white/30'
-                      : 'w-2 sm:w-2.5 h-2 sm:h-2.5 bg-white/30 hover:bg-white/70 hover:scale-125'
-                  }`}
-                  aria-label={`Go to slide ${s.id}: ${s.smallTitle}`}
-                  title={`0${s.id} • ${s.tag}`}
-                />
-              ))}
-            </div>
-
-          </div>
+            );
+          })}
         </div>
       </section>
+
+
       {/* ========================================================================= */}
       {/* <<<<<<<<<<<<<<<<<<<< 3. HERO SLIDER SECTION END >>>>>>>>>>>>>>>>>>>>>>>>> */}
       {/* ========================================================================= */}
@@ -727,7 +747,7 @@ export default function App() {
       {/* 4. KEY ADVANTAGES (4 COLORFUL FEATURE CARDS) */}
       <section id="features" className="section-spacing bg-white border-b border-slate-100">
         <div className="content-container">
-          
+
           <div className="text-center max-w-2xl mx-auto mb-16">
             <span className="text-xs uppercase font-extrabold tracking-wider text-purple-700 px-3.5 py-1 rounded-full bg-purple-100 border border-purple-200">
               Why Bagnibari Net
@@ -741,7 +761,7 @@ export default function App() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            
+
             {/* Feature 1 */}
             <div className="bg-[#fbfbfe] border border-slate-200/80 rounded-3xl p-8 hover:border-purple-300 hover:shadow-xl hover:shadow-purple-500/5 transition-all">
               <div className="w-14 h-14 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center mb-6">
@@ -794,7 +814,7 @@ export default function App() {
       {/* 5. PACKAGES SECTION (LIGHT, VIBRANT & HIGH-CONVERTING) */}
       <section id="packages" className="section-spacing bg-[#fafbff] border-b border-slate-200/60">
         <div className="content-container">
-          
+
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="text-xs uppercase font-extrabold tracking-wider text-purple-700 px-3.5 py-1 rounded-full bg-purple-100 border border-purple-200">
               Home Broadband Plans
@@ -810,14 +830,13 @@ export default function App() {
           {/* Packages 4-Card Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {packages.map((pkg) => (
-              <div 
-                key={pkg.id} 
-                className={`rounded-3xl p-6 sm:p-7 border flex flex-col justify-between transition-all duration-300 ${pkg.color} ${
-                  pkg.popular ? 'transform lg:-translate-y-2' : 'hover:-translate-y-1 hover:shadow-lg'
-                }`}
+              <div
+                key={pkg.id}
+                className={`rounded-3xl p-6 sm:p-7 border flex flex-col justify-between transition-all duration-300 ${pkg.color} ${pkg.popular ? 'transform lg:-translate-y-2' : 'hover:-translate-y-1 hover:shadow-lg'
+                  }`}
               >
                 <div>
-                  
+
                   {/* Top Badge */}
                   <div className="flex justify-between items-center mb-4">
                     <span className={`text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider ${pkg.badgeColor}`}>
@@ -831,7 +850,7 @@ export default function App() {
                   </div>
 
                   <h3 className="text-xl font-bold text-slate-900">{pkg.name}</h3>
-                  
+
                   {/* Speed Number */}
                   <div className="text-4xl font-extrabold text-slate-900 mt-2 mb-1">
                     {pkg.speed} <span className="text-xl font-bold text-purple-600">Mbps</span>
@@ -860,11 +879,10 @@ export default function App() {
                   <a
                     href="#contact"
                     onClick={() => setFormData({ ...formData, packageSelected: `${pkg.name} (${pkg.speed} Mbps - ৳${pkg.price}/mo)` })}
-                    className={`block w-full text-center py-3 rounded-[4px] font-semibold text-sm transition-all ${
-                      pkg.popular 
-                        ? 'bg-purple-600 hover:bg-purple-700 text-white shadow-md shadow-purple-500/20 hover:shadow-lg'
-                        : 'bg-slate-100 hover:bg-purple-600 hover:text-white text-slate-800'
-                    }`}
+                    className={`block w-full text-center py-3 rounded-[4px] font-semibold text-sm transition-all ${pkg.popular
+                      ? 'bg-purple-600 hover:bg-purple-700 text-white shadow-md shadow-purple-500/20 hover:shadow-lg'
+                      : 'bg-slate-100 hover:bg-purple-600 hover:text-white text-slate-800'
+                      }`}
                   >
                     Select This Package
                   </a>
@@ -895,7 +913,7 @@ export default function App() {
       {/* 6. INTERACTIVE SPEED TEST SIMULATOR WIDGET */}
       <section id="speedtest" className="section-spacing bg-white border-b border-slate-200/60">
         <div className="content-container text-center">
-          
+
           <span className="text-xs uppercase font-extrabold tracking-wider text-purple-700 px-3.5 py-1 rounded-full bg-purple-100 border border-purple-200">
             Live Network Diagnostic
           </span>
@@ -907,7 +925,7 @@ export default function App() {
           </p>
 
           <div className="bg-gradient-to-br from-purple-50/70 via-indigo-50/40 to-blue-50/50 border border-purple-200/80 rounded-3xl p-8 sm:p-12 shadow-lg shadow-purple-500/5 max-w-2xl mx-auto">
-            
+
             {!speedResult && !testingSpeed && (
               <div>
                 <div className="w-20 h-20 rounded-full bg-white text-purple-600 shadow-md flex items-center justify-center mx-auto mb-6">
@@ -986,7 +1004,7 @@ export default function App() {
       {/* 7. COVERAGE AREA SECTION (WITH INTERACTIVE FILTER SEARCH) */}
       <section id="coverage" className="section-spacing bg-[#fafbff] border-b border-slate-200/60">
         <div className="content-container">
-          
+
           <div className="text-center max-w-2xl mx-auto mb-12">
             <span className="text-xs uppercase font-extrabold tracking-wider text-purple-700 px-3.5 py-1 rounded-full bg-purple-100 border border-purple-200">
               Coverage Locations
@@ -1014,7 +1032,7 @@ export default function App() {
           {/* Area Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredAreas.map((area, idx) => (
-              <div 
+              <div
                 key={idx}
                 className="bg-white border border-slate-200/90 rounded-2xl p-6 shadow-sm hover:border-purple-300 hover:shadow-md transition-all flex flex-col justify-between"
               >
@@ -1030,8 +1048,8 @@ export default function App() {
                 </div>
                 <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
                   <span className="text-slate-500">Installation: &lt; 24 Hours</span>
-                  <a 
-                    href="#contact" 
+                  <a
+                    href="#contact"
                     onClick={() => setFormData({ ...formData, area: area.name })}
                     className="text-purple-600 font-bold hover:underline"
                   >
@@ -1048,8 +1066,8 @@ export default function App() {
             <p className="text-purple-100 text-sm max-w-2xl mx-auto mb-6">
               Our line technicians are actively laying fiber lines in new lanes weekly. Send us your address and we'll check feasibility within 2 hours.
             </p>
-            <a 
-              href="#contact" 
+            <a
+              href="#contact"
               className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white hover:bg-purple-50 text-purple-700 font-bold text-sm shadow-md transition-all"
             >
               <span>Submit Area Feasibility Request</span>
@@ -1063,7 +1081,7 @@ export default function App() {
       {/* 8. EASY BILL PAYMENT GUIDE (BKASH & NAGAD) */}
       <section id="paybill" className="section-spacing bg-white border-b border-slate-200/60">
         <div className="content-container">
-          
+
           <div className="text-center max-w-2xl mx-auto mb-16">
             <span className="text-xs uppercase font-extrabold tracking-wider text-purple-700 px-3.5 py-1 rounded-full bg-purple-100 border border-purple-200">
               Bill Payment Methods
@@ -1086,7 +1104,7 @@ export default function App() {
 
           {/* Two Payment Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            
+
             {/* bKash */}
             <div className="bg-[#fef9f9] border border-pink-200 rounded-3xl p-8 hover:shadow-lg transition-all">
               <div className="flex items-center justify-between pb-4 border-b border-pink-100 mb-6">
@@ -1179,12 +1197,12 @@ export default function App() {
       {/* 9. INSTANT CONNECTION & CONTACT FORM */}
       <section id="contact" className="section-spacing bg-[#fafbff] border-b border-slate-200/60">
         <div className="content-container">
-          
+
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-            
+
             {/* Left Contact Information (5 Cols) */}
             <div className="lg:col-span-5 space-y-6">
-              
+
               <div className="bg-white border border-slate-200/90 rounded-3xl p-8 shadow-sm">
                 <span className="text-xs uppercase font-extrabold tracking-wider text-purple-700 px-3 py-1 rounded-full bg-purple-100">
                   Customer Support
@@ -1233,9 +1251,9 @@ export default function App() {
                   </div>
                 </div>
 
-                <a 
-                  href="https://wa.me/8801700000000" 
-                  target="_blank" 
+                <a
+                  href="https://wa.me/8801700000000"
+                  target="_blank"
                   rel="noreferrer"
                   className="mt-8 block w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-center text-sm shadow-md shadow-emerald-500/20 transition-all"
                 >
@@ -1259,7 +1277,7 @@ export default function App() {
             {/* Right: New Connection Request Form (7 Cols) */}
             <div className="lg:col-span-7">
               <div className="bg-white border border-slate-200/90 rounded-3xl p-8 sm:p-10 shadow-sm">
-                
+
                 {formSubmitted ? (
                   <div className="text-center py-12">
                     <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto mb-4">
@@ -1289,7 +1307,7 @@ export default function App() {
                     </p>
 
                     <form onSubmit={handleFormSubmit} className="space-y-5">
-                      
+
                       <div>
                         <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Full Name *</label>
                         <input
@@ -1384,9 +1402,9 @@ export default function App() {
       {/* 10. COLORFUL MODERN FOOTER */}
       <footer className="bg-white border-t border-slate-200 pt-16 pb-12 mt-auto text-slate-500 text-sm">
         <div className="content-container">
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-slate-100">
-            
+
             {/* Col 1 */}
             <div>
               <div className="flex items-center gap-2.5 mb-4">
