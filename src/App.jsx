@@ -534,7 +534,9 @@ export default function App() {
         </div>
       </div>
 
-      {/* 3. HERO SLIDER SECTION (TRUE HORIZONTAL SLIDING, MOUSE DRAG / TOUCH SWIPE, STAGGERED CONTENT ANIMATIONS) */}
+      {/* ========================================================================= */}
+      {/* >>>>>>>>>>>>>>>>>>> 3. HERO SLIDER SECTION START <<<<<<<<<<<<<<<<<<<<<<<< */}
+      {/* ========================================================================= */}
       <section 
         id="home" 
         className="relative overflow-hidden min-h-[580px] lg:h-[80vh] flex flex-col justify-between border-b border-slate-200/80 bg-slate-900 select-none cursor-grab active:cursor-grabbing"
@@ -718,6 +720,9 @@ export default function App() {
           </div>
         </div>
       </section>
+      {/* ========================================================================= */}
+      {/* <<<<<<<<<<<<<<<<<<<< 3. HERO SLIDER SECTION END >>>>>>>>>>>>>>>>>>>>>>>>> */}
+      {/* ========================================================================= */}
 
       {/* 4. KEY ADVANTAGES (4 COLORFUL FEATURE CARDS) */}
       <section id="features" className="section-spacing bg-white border-b border-slate-100">
