@@ -257,7 +257,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#fafbff] text-slate-800 flex flex-col font-sans">
+    <div className="min-h-screen bg-[#fafbff] text-slate-800 flex flex-col font-sans overflow-x-hidden w-full">
       
       {/* 1. TOP ANNOUNCEMENT STRIP (1-LINE SLIDING MARQUEE ON MOBILE, CLEAN FLEX ON DESKTOP - ALIGNED WITH NAVBAR) */}
       <div className="bg-gradient-to-r from-purple-700 via-indigo-600 to-blue-600 text-white text-xs py-2 shadow-sm overflow-hidden select-none">
@@ -270,7 +270,7 @@ export default function App() {
                 <Zap className="w-2.5 h-2.5 fill-current text-slate-950" /> LIVE
               </span>
             </div>
-            <div className="flex-1 overflow-hidden relative">
+            <div className="flex-1 min-w-0 overflow-hidden relative">
               <div className="animate-marquee-smooth flex items-center gap-8 text-[11px] font-medium whitespace-nowrap pl-2">
                 <span>🚀 Ultra-Fast Optical Fiber Broadband is now live across Bagnibari & Siddham!</span>
                 <span className="text-amber-300 font-bold">📞 24/7 Hotline: 017XX-XXXXXX</span>
@@ -339,28 +339,24 @@ export default function App() {
               href="https://wa.me/8801700000000" 
               target="_blank" 
               rel="noreferrer"
-              className="inline-flex items-center justify-center px-4 h-[38px] rounded-[4px] bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-sm transition-all border border-slate-200 leading-none"
+              className="inline-flex items-center justify-center gap-2 px-4 h-[38px] rounded-[4px] bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-sm transition-all border border-slate-200 whitespace-nowrap"
             >
-              <span className="flex items-center gap-2 -translate-y-[2px]">
-                <MessageSquare className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                <span>WhatsApp</span>
-              </span>
+              <MessageSquare className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+              <span>WhatsApp</span>
             </a>
             <a 
               href="#contact" 
-              className="inline-flex items-center justify-center px-5 h-[38px] rounded-[4px] bg-purple-600 hover:bg-purple-700 text-white font-semibold text-sm shadow-md shadow-purple-500/20 hover:shadow-lg hover:shadow-purple-500/30 transition-all leading-none"
+              className="inline-flex items-center justify-center gap-2 px-5 h-[38px] rounded-[4px] bg-purple-600 hover:bg-purple-700 text-white font-semibold text-sm shadow-md shadow-purple-500/20 hover:shadow-lg hover:shadow-purple-500/30 transition-all whitespace-nowrap"
             >
-              <span className="flex items-center gap-2 -translate-y-[2px]">
-                <span>Get Connected</span>
-                <ArrowRight className="w-4 h-4 flex-shrink-0" />
-              </span>
+              <span>Get Connected</span>
+              <ArrowRight className="w-4 h-4 flex-shrink-0" />
             </a>
           </div>
 
           {/* Mobile Hamburger / Close Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden w-9 h-9 rounded-[4px] bg-white hover:bg-purple-50 active:bg-purple-100 text-purple-600 flex items-center justify-center border border-slate-200/90 shadow-sm transition-all focus:outline-none"
+            className="lg:hidden w-9 h-9 rounded-[4px] bg-white hover:bg-purple-50 active:bg-purple-100 text-purple-600 flex items-center justify-center border border-slate-200/90 shadow-sm transition-all focus:outline-none flex-shrink-0"
             aria-label="Toggle Navigation Menu"
           >
             {mobileMenuOpen ? (
@@ -451,12 +447,10 @@ export default function App() {
             <a
               href="#contact"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full h-11 px-4 rounded-[4px] bg-purple-600 hover:bg-purple-700 active:bg-purple-800 text-white font-semibold text-sm shadow-md shadow-purple-500/20 flex items-center justify-center transition-all active:scale-[0.99] leading-none"
+              className="w-full h-11 px-4 rounded-[4px] bg-purple-600 hover:bg-purple-700 active:bg-purple-800 text-white font-semibold text-sm shadow-md shadow-purple-500/20 inline-flex items-center justify-center gap-2 transition-all active:scale-[0.99] whitespace-nowrap"
             >
-              <span className="flex items-center justify-center gap-2 -translate-y-[2.5px]">
-                <span>Get Connected</span>
-                <ArrowRight className="w-4 h-4 flex-shrink-0" />
-              </span>
+              <span>Get Connected</span>
+              <ArrowRight className="w-4 h-4 flex-shrink-0" />
             </a>
 
             {/* WhatsApp Action */}
@@ -464,12 +458,10 @@ export default function App() {
               href="https://wa.me/8801700000000"
               target="_blank"
               rel="noreferrer"
-              className="w-full h-11 px-4 rounded-[4px] bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-semibold text-sm shadow-sm shadow-emerald-600/15 flex items-center justify-center transition-all active:scale-[0.99] leading-none"
+              className="w-full h-11 px-4 rounded-[4px] bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-semibold text-sm shadow-sm shadow-emerald-600/15 inline-flex items-center justify-center gap-2 transition-all active:scale-[0.99] whitespace-nowrap"
             >
-              <span className="flex items-center justify-center gap-2 -translate-y-[2.5px]">
-                <MessageSquare className="w-4 h-4 flex-shrink-0" />
-                <span>Chat on WhatsApp</span>
-              </span>
+              <MessageSquare className="w-4 h-4 flex-shrink-0" />
+              <span>Chat on WhatsApp</span>
             </a>
 
             {/* 24/7 Helpline Row */}
@@ -552,29 +544,25 @@ export default function App() {
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3.5">
                 <a 
                   href={slides[currentSlide].buttonLink}
-                  className="px-6 h-12 rounded-[4px] bg-purple-600 hover:bg-purple-700 text-white font-semibold text-sm sm:text-base shadow-lg shadow-purple-500/25 transition-all flex items-center justify-center leading-none transform hover:-translate-y-0.5"
+                  className="inline-flex items-center justify-center gap-2 px-6 h-12 rounded-[4px] bg-purple-600 hover:bg-purple-700 text-white font-semibold text-sm sm:text-base shadow-lg shadow-purple-500/25 transition-all whitespace-nowrap transform hover:-translate-y-0.5"
                 >
-                  <span className="flex items-center gap-2 -translate-y-[2px]">
-                    <span>{slides[currentSlide].buttonText}</span>
-                    <ArrowRight className="w-4 h-4 flex-shrink-0" />
-                  </span>
+                  <span>{slides[currentSlide].buttonText}</span>
+                  <ArrowRight className="w-4 h-4 flex-shrink-0" />
                 </a>
 
                 <a 
                   href={slides[currentSlide].secondaryLink}
-                  className="px-5 h-12 rounded-[4px] bg-white/95 hover:bg-white border border-slate-300 text-slate-700 font-semibold text-sm sm:text-base shadow-sm hover:shadow transition-all flex items-center justify-center leading-none"
+                  className="inline-flex items-center justify-center gap-2 px-5 h-12 rounded-[4px] bg-white/95 hover:bg-white border border-slate-300 text-slate-700 font-semibold text-sm sm:text-base shadow-sm hover:shadow transition-all whitespace-nowrap"
                 >
-                  <span className="flex items-center gap-2 -translate-y-[1px]">
-                    <MessageSquare className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                    <span>{slides[currentSlide].secondaryText}</span>
-                  </span>
+                  <MessageSquare className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                  <span>{slides[currentSlide].secondaryText}</span>
                 </a>
               </div>
 
             </div>
 
             {/* Right Interactive Highlights Card (Floating Glassy Status Badge) */}
-            <div className="w-full lg:w-[420px] flex-shrink-0">
+            <div className="w-full max-w-[420px] lg:w-[420px] mx-auto lg:mx-0 flex-shrink-0">
               <div className="bg-white/90 backdrop-blur-md border border-purple-100/90 rounded-2xl p-6 sm:p-7 shadow-xl shadow-purple-900/10 relative">
                 <div className="flex items-center justify-between pb-4 border-b border-slate-100">
                   <div className="flex items-center gap-2">
@@ -610,12 +598,12 @@ export default function App() {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-12 pt-8 border-t border-slate-200/70">
             
             {/* Category / Slide Selectors */}
-            <div className="flex items-center gap-2 sm:gap-3 flex-wrap justify-center">
+            <div className="flex items-center gap-1.5 sm:gap-2.5 flex-wrap justify-center">
               {slides.map((s, idx) => (
                 <button
                   key={s.id}
                   onClick={() => setCurrentSlide(idx)}
-                  className={`px-3.5 py-2 rounded-[4px] text-xs font-bold transition-all flex items-center gap-2 ${
+                  className={`px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-[4px] text-xs font-bold transition-all flex items-center gap-1.5 ${
                     currentSlide === idx 
                       ? 'bg-purple-600 text-white shadow-md shadow-purple-500/25 scale-105' 
                       : 'bg-white/80 hover:bg-white text-slate-600 border border-slate-200/80'
