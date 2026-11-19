@@ -258,18 +258,22 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           
           {/* Mobile View: 1-line smooth sliding marquee ticker */}
-          <div className="flex md:hidden items-center overflow-hidden h-5">
-            <span className="bg-white/20 text-white px-1.5 py-0.5 rounded text-[10px] font-extrabold mr-2.5 flex-shrink-0 flex items-center gap-1 z-10 shadow-sm">
-              <Zap className="w-2.5 h-2.5 text-amber-300" /> LIVE
-            </span>
-            <div className="animate-marquee-smooth flex items-center gap-8 text-[11px] font-medium whitespace-nowrap">
-              <span>🚀 Ultra-Fast Optical Fiber Broadband is now live across Bagnibari & Siddham!</span>
-              <span className="text-amber-300 font-bold">📞 24/7 Hotline: 017XX-XXXXXX</span>
-              <span>🎁 Special Welcome Offer: 100% Free Optical Fiber Drop Wire Setup!</span>
-              {/* Duplicate for seamless infinite loop */}
-              <span>🚀 Ultra-Fast Optical Fiber Broadband is now live across Bagnibari & Siddham!</span>
-              <span className="text-amber-300 font-bold">📞 24/7 Hotline: 017XX-XXXXXX</span>
-              <span>🎁 Special Welcome Offer: 100% Free Optical Fiber Drop Wire Setup!</span>
+          <div className="flex md:hidden items-center h-5 overflow-hidden">
+            <div className="flex-shrink-0 z-20 pr-2">
+              <span className="bg-amber-400 text-slate-950 px-2 py-0.5 rounded-[3px] text-[10px] font-black flex items-center gap-1 shadow-sm uppercase tracking-wider">
+                <Zap className="w-2.5 h-2.5 fill-current text-slate-950" /> LIVE
+              </span>
+            </div>
+            <div className="flex-1 overflow-hidden relative">
+              <div className="animate-marquee-smooth flex items-center gap-8 text-[11px] font-medium whitespace-nowrap pl-2">
+                <span>🚀 Ultra-Fast Optical Fiber Broadband is now live across Bagnibari & Siddham!</span>
+                <span className="text-amber-300 font-bold">📞 24/7 Hotline: 017XX-XXXXXX</span>
+                <span>🎁 Special Welcome Offer: 100% Free Optical Fiber Drop Wire Setup!</span>
+                {/* Duplicate for seamless infinite loop */}
+                <span>🚀 Ultra-Fast Optical Fiber Broadband is now live across Bagnibari & Siddham!</span>
+                <span className="text-amber-300 font-bold">📞 24/7 Hotline: 017XX-XXXXXX</span>
+                <span>🎁 Special Welcome Offer: 100% Free Optical Fiber Drop Wire Setup!</span>
+              </div>
             </div>
           </div>
 
@@ -350,13 +354,13 @@ export default function App() {
           {/* Mobile Hamburger / Close Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden w-10 h-10 rounded-[4px] bg-purple-600 hover:bg-purple-700 active:bg-purple-800 text-white flex items-center justify-center shadow-sm shadow-purple-500/25 transition-all focus:outline-none"
+            className="lg:hidden w-9 h-9 rounded-[4px] bg-white hover:bg-purple-50 active:bg-purple-100 text-purple-600 flex items-center justify-center border border-slate-200/90 shadow-sm transition-all focus:outline-none"
             aria-label="Toggle Navigation Menu"
           >
             {mobileMenuOpen ? (
-              <X className="w-5 h-5 text-white transition-transform duration-200 rotate-90 scale-110" />
+              <X className="w-5 h-5 text-purple-600 transition-transform duration-200 rotate-90 scale-105" />
             ) : (
-              <Menu className="w-5 h-5 text-white transition-transform duration-200" />
+              <Menu className="w-5 h-5 text-purple-600 transition-transform duration-200" />
             )}
           </button>
 
