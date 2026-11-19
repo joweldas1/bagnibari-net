@@ -329,17 +329,17 @@ export default function App() {
               href="https://wa.me/8801700000000" 
               target="_blank" 
               rel="noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-sm transition-all border border-slate-200 leading-none"
+              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-sm transition-all border border-slate-200 leading-none h-[38px]"
             >
               <MessageSquare className="w-4 h-4 text-emerald-600 flex-shrink-0" />
               <span>WhatsApp</span>
             </a>
             <a 
               href="#contact" 
-              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-purple-600 hover:bg-purple-700 text-white font-semibold text-sm shadow-md shadow-purple-500/20 hover:shadow-lg hover:shadow-purple-500/30 transition-all leading-none"
+              className="inline-flex items-center justify-center gap-2 px-4.5 pt-2 pb-3 rounded-lg bg-purple-600 hover:bg-purple-700 text-white font-semibold text-sm shadow-md shadow-purple-500/20 hover:shadow-lg hover:shadow-purple-500/30 transition-all leading-none h-[38px]"
             >
-              <span>Get Connected</span>
-              <ArrowRight className="w-4 h-4 flex-shrink-0" />
+              <span className="relative top-[0.5px]">Get Connected</span>
+              <ArrowRight className="w-4 h-4 flex-shrink-0 relative top-[0.5px]" />
             </a>
           </div>
 
@@ -437,10 +437,10 @@ export default function App() {
             <a
               href="#contact"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full h-11 px-4 rounded-[4px] bg-purple-600 hover:bg-purple-700 active:bg-purple-800 text-white font-semibold text-sm shadow-md shadow-purple-500/20 flex items-center justify-center gap-2 transition-all active:scale-[0.99]"
+              className="w-full h-11 px-4 pt-2.5 pb-3 rounded-[4px] bg-purple-600 hover:bg-purple-700 active:bg-purple-800 text-white font-semibold text-sm shadow-md shadow-purple-500/20 flex items-center justify-center gap-2 transition-all active:scale-[0.99] leading-none"
             >
-              <span className="relative top-[0.5px]">Get Connected</span>
-              <ArrowRight className="w-4 h-4 flex-shrink-0 relative top-[0.5px]" />
+              <span className="relative top-[1px]">Get Connected</span>
+              <ArrowRight className="w-4 h-4 flex-shrink-0 relative top-[1px]" />
             </a>
 
             {/* WhatsApp Action */}
