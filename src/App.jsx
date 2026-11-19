@@ -573,15 +573,15 @@ export default function App() {
                 draggable={false}
               />
 
-              {/* Soft, Transparent Directional Vignette */}
-              <div className="absolute inset-0 hidden md:block bg-gradient-to-r from-white/90 via-white/40 to-transparent pointer-events-none"></div>
-              <div className="absolute inset-0 md:hidden bg-gradient-to-t from-white/95 via-white/60 to-white/20 pointer-events-none"></div>
+              {/* Soft, Transparent Directional Overlay (Subtle wash behind text to highlight it without obscuring photography) */}
+              <div className="absolute inset-0 hidden md:block bg-gradient-to-r from-white/90 via-white/45 via-45% to-transparent pointer-events-none"></div>
+              <div className="absolute inset-0 md:hidden bg-gradient-to-t from-white/95 via-white/55 via-50% to-transparent pointer-events-none"></div>
 
               {/* Content Container adhering strictly to User's Breakpoint & Spacing Specs */}
               <div className="content-container relative z-10 w-full py-8 lg:py-12">
                 
-                {/* Frosted Translucent Glass Card for Text */}
-                <div className="max-w-xl lg:max-w-2xl bg-white/80 backdrop-blur-md p-6 sm:p-8 md:p-10 rounded-2xl border border-white/70 shadow-xl shadow-purple-950/5 text-center lg:text-left">
+                {/* Hero Text Column (NO Solid Card / Box - Entire Background Image Remains Visible) */}
+                <div className="max-w-xl lg:max-w-2xl text-center lg:text-left">
                   
                   {/* Small Title Badge - Staggered 1 */}
                   <div 
