@@ -727,7 +727,7 @@ export default function App() {
               e.stopPropagation();
               goToPrev();
             }}
-            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full text-white/70 hover:text-white hover:bg-white/10 active:scale-90 transition-all duration-200 flex items-center justify-center focus:outline-none"
+            className="slider-nav-btn w-9 h-9 sm:w-10 sm:h-10 rounded-full text-white/70 hover:text-white hover:bg-white/10 active:scale-90 transition-all duration-200 flex items-center justify-center outline-none border-none ring-0 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 active:outline-none active:ring-0 select-none"
             aria-label="Previous Slide"
           >
             <ChevronLeft className="w-6 h-6 sm:w-7 sm:h-7 drop-shadow-md" />
@@ -739,7 +739,7 @@ export default function App() {
               e.stopPropagation();
               goToNext();
             }}
-            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full text-white/70 hover:text-white hover:bg-white/10 active:scale-90 transition-all duration-200 flex items-center justify-center focus:outline-none"
+            className="slider-nav-btn w-9 h-9 sm:w-10 sm:h-10 rounded-full text-white/70 hover:text-white hover:bg-white/10 active:scale-90 transition-all duration-200 flex items-center justify-center outline-none border-none ring-0 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 active:outline-none active:ring-0 select-none"
             aria-label="Next Slide"
           >
             <ChevronRight className="w-6 h-6 sm:w-7 sm:h-7 drop-shadow-md" />
@@ -747,7 +747,7 @@ export default function App() {
         </div>
 
         {/* Carousel Navigation Dots (Red Mark - Just Dots, No BG, No Padding, No Arrows) */}
-        <div className="absolute bottom-5 sm:bottom-7 left-1/2 -translate-x-1/2 z-20 flex items-center justify-center gap-2 sm:gap-2.5">
+        <div className="absolute bottom-5 sm:bottom-7 left-1/2 -translate-x-1/2 z-20 flex items-center justify-center gap-2 sm:gap-2.5 select-none">
           {slides.map((s, dotIdx) => {
             const isDotActive = activeRealIndex === dotIdx;
             return (
@@ -758,7 +758,7 @@ export default function App() {
                   e.stopPropagation();
                   goToSlide(dotIdx);
                 }}
-                className={`rounded-full transition-all duration-300 focus:outline-none ${
+                className={`slider-nav-btn rounded-full transition-all duration-300 outline-none border-none ring-0 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 active:outline-none active:ring-0 select-none ${
                   isDotActive
                     ? 'w-7 sm:w-8 h-2 sm:h-2.5 bg-gradient-to-r from-purple-500 via-indigo-400 to-fuchsia-500 shadow-md shadow-purple-500/50'
                     : 'w-2 sm:w-2.5 h-2 sm:h-2.5 bg-white/40 hover:bg-white/80 shadow-sm'

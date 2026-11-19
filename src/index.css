@@ -108,6 +108,29 @@
   will-change: transform, opacity, filter;
 }
 
+/* Global Clean Button Reset - Remove Outline & Tap Highlight on Click */
+button,
+button:focus,
+button:focus-visible,
+button:active {
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+.slider-nav-btn {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+.slider-nav-btn:focus,
+.slider-nav-btn:focus-visible,
+.slider-nav-btn:active {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
 /* Dynamic Ken Burns Zoom In / Out Animations for Hero Active Slides */
 @keyframes kenburns-zoom-in {
   0% {
