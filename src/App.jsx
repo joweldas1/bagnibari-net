@@ -329,17 +329,21 @@ export default function App() {
               href="https://wa.me/8801700000000" 
               target="_blank" 
               rel="noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-sm transition-all border border-slate-200 leading-none h-[38px]"
+              className="inline-flex items-center justify-center px-4 h-[38px] rounded-[4px] bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-sm transition-all border border-slate-200 leading-none"
             >
-              <MessageSquare className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-              <span>WhatsApp</span>
+              <span className="flex items-center gap-2 -translate-y-[0.5px]">
+                <MessageSquare className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                <span>WhatsApp</span>
+              </span>
             </a>
             <a 
               href="#contact" 
-              className="inline-flex items-center justify-center gap-2 px-4.5 pt-2 pb-3 rounded-lg bg-purple-600 hover:bg-purple-700 text-white font-semibold text-sm shadow-md shadow-purple-500/20 hover:shadow-lg hover:shadow-purple-500/30 transition-all leading-none h-[38px]"
+              className="inline-flex items-center justify-center px-5 h-[38px] rounded-[4px] bg-purple-600 hover:bg-purple-700 text-white font-semibold text-sm shadow-md shadow-purple-500/20 hover:shadow-lg hover:shadow-purple-500/30 transition-all leading-none"
             >
-              <span className="relative top-[0.5px]">Get Connected</span>
-              <ArrowRight className="w-4 h-4 flex-shrink-0 relative top-[0.5px]" />
+              <span className="flex items-center gap-2 -translate-y-[2px]">
+                <span>Get Connected</span>
+                <ArrowRight className="w-4 h-4 flex-shrink-0" />
+              </span>
             </a>
           </div>
 
@@ -437,10 +441,12 @@ export default function App() {
             <a
               href="#contact"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full h-11 px-4 pt-2.5 pb-3 rounded-[4px] bg-purple-600 hover:bg-purple-700 active:bg-purple-800 text-white font-semibold text-sm shadow-md shadow-purple-500/20 flex items-center justify-center gap-2 transition-all active:scale-[0.99] leading-none"
+              className="w-full h-11 px-4 rounded-[4px] bg-purple-600 hover:bg-purple-700 active:bg-purple-800 text-white font-semibold text-sm shadow-md shadow-purple-500/20 flex items-center justify-center transition-all active:scale-[0.99] leading-none"
             >
-              <span className="relative top-[1px]">Get Connected</span>
-              <ArrowRight className="w-4 h-4 flex-shrink-0 relative top-[1px]" />
+              <span className="flex items-center justify-center gap-2 -translate-y-[2px]">
+                <span>Get Connected</span>
+                <ArrowRight className="w-4 h-4 flex-shrink-0" />
+              </span>
             </a>
 
             {/* WhatsApp Action */}
@@ -448,10 +454,12 @@ export default function App() {
               href="https://wa.me/8801700000000"
               target="_blank"
               rel="noreferrer"
-              className="w-full h-10 px-4 rounded-[4px] bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-semibold text-sm shadow-sm shadow-emerald-600/15 flex items-center justify-center gap-2 transition-all active:scale-[0.99]"
+              className="w-full h-10 px-4 rounded-[4px] bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-semibold text-sm shadow-sm shadow-emerald-600/15 flex items-center justify-center transition-all active:scale-[0.99] leading-none"
             >
-              <MessageSquare className="w-4 h-4 flex-shrink-0 relative top-[0.5px]" />
-              <span className="relative top-[0.5px]">Chat on WhatsApp</span>
+              <span className="flex items-center justify-center gap-2 -translate-y-[1px]">
+                <MessageSquare className="w-4 h-4 flex-shrink-0" />
+                <span>Chat on WhatsApp</span>
+              </span>
             </a>
 
             {/* 24/7 Helpline Row */}
@@ -512,18 +520,22 @@ export default function App() {
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3.5">
                 <a 
                   href={slides[currentSlide].primaryLink}
-                  className="px-6 py-3.5 rounded-lg bg-purple-600 hover:bg-purple-700 text-white font-semibold text-sm sm:text-base shadow-lg shadow-purple-500/25 transition-all flex items-center justify-center gap-2 transform hover:-translate-y-0.5 leading-none"
+                  className="px-6 h-12 rounded-[4px] bg-purple-600 hover:bg-purple-700 text-white font-semibold text-sm sm:text-base shadow-lg shadow-purple-500/25 transition-all flex items-center justify-center leading-none transform hover:-translate-y-0.5"
                 >
-                  <span>{slides[currentSlide].primaryBtn}</span>
-                  <ArrowRight className="w-4 h-4 flex-shrink-0" />
+                  <span className="flex items-center gap-2 -translate-y-[1.5px]">
+                    <span>{slides[currentSlide].primaryBtn}</span>
+                    <ArrowRight className="w-4 h-4 flex-shrink-0" />
+                  </span>
                 </a>
 
                 <a 
                   href={slides[currentSlide].secondaryLink}
-                  className="px-5 py-3.5 rounded-lg bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 font-semibold text-sm sm:text-base shadow-sm hover:shadow transition-all flex items-center justify-center gap-2 leading-none"
+                  className="px-5 h-12 rounded-[4px] bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 font-semibold text-sm sm:text-base shadow-sm hover:shadow transition-all flex items-center justify-center leading-none"
                 >
-                  <MessageSquare className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                  <span>{slides[currentSlide].secondaryBtn}</span>
+                  <span className="flex items-center gap-2 -translate-y-[1px]">
+                    <MessageSquare className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                    <span>{slides[currentSlide].secondaryBtn}</span>
+                  </span>
                 </a>
               </div>
 
@@ -796,7 +808,7 @@ export default function App() {
                   <a
                     href="#contact"
                     onClick={() => setFormData({ ...formData, packageSelected: `${pkg.name} (${pkg.speed} Mbps - ৳${pkg.price}/mo)` })}
-                    className={`block w-full text-center py-3 rounded-lg font-semibold text-sm transition-all ${
+                    className={`block w-full text-center py-3 rounded-[4px] font-semibold text-sm transition-all ${
                       pkg.popular 
                         ? 'bg-purple-600 hover:bg-purple-700 text-white shadow-md shadow-purple-500/20 hover:shadow-lg'
                         : 'bg-slate-100 hover:bg-purple-600 hover:text-white text-slate-800'
@@ -1296,9 +1308,9 @@ export default function App() {
 
                       <button
                         type="submit"
-                        className="w-full py-3.5 rounded-lg bg-purple-600 hover:bg-purple-700 text-white font-semibold text-base shadow-lg shadow-purple-500/25 transition-all transform hover:-translate-y-0.5 active:translate-y-0 leading-none"
+                        className="w-full h-12 rounded-[4px] bg-purple-600 hover:bg-purple-700 text-white font-semibold text-base shadow-lg shadow-purple-500/25 transition-all transform hover:-translate-y-0.5 active:translate-y-0 leading-none flex items-center justify-center"
                       >
-                        Submit Connection Request ➔
+                        <span className="-translate-y-[1.5px]">Submit Connection Request ➔</span>
                       </button>
 
                       <p className="text-center text-xs text-slate-400">
