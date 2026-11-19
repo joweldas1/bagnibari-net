@@ -598,7 +598,7 @@ export default function App() {
 
       <section
         id="home"
-        className="relative overflow-hidden min-h-[580px] lg:h-[80vh] flex flex-col justify-center border-b border-slate-200/80 bg-slate-900 select-none cursor-grab active:cursor-grabbing"
+        className="relative overflow-hidden min-h-[490px] sm:min-h-[560px] lg:h-[80vh] flex flex-col justify-center border-b border-slate-200/80 bg-slate-900 select-none cursor-grab active:cursor-grabbing"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => {
           if (!isDraggingRef.current) setIsPaused(false);
@@ -647,10 +647,10 @@ export default function App() {
                 {/* Deep Blackish Cinematic Overlay for 100% Crisp Text Contrast */}
                 <div className="absolute inset-0 hidden md:block hero-dark-overlay pointer-events-none"></div>
                 <div className="absolute inset-0 md:hidden hero-mobile-overlay pointer-events-none"></div>
-                <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-slate-950/95 to-transparent pointer-events-none"></div>
+                <div className="absolute inset-x-0 bottom-0 h-28 sm:h-36 bg-gradient-to-t from-slate-950/80 sm:from-slate-950/95 to-transparent pointer-events-none"></div>
 
                 {/* Content Container */}
-                <div className="content-container relative z-10 w-full py-10 lg:py-14">
+                <div className="content-container relative z-10 w-full py-7 sm:py-10 lg:py-14">
                   <div
                     key={isSlideActive ? `active-content-${idx}` : `inactive-content-${idx}`}
                     className="max-w-xl lg:max-w-2xl text-left"
@@ -658,7 +658,7 @@ export default function App() {
 
                     {/* Small Title Badge - Balanced & Symmetrical Padding */}
                     <div
-                      className={`inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 h-7 sm:h-8 rounded-full text-xs sm:text-[13px] font-semibold tracking-wide border mb-5 shadow-sm backdrop-blur-md ${slide.badgeColor} ${isSlideActive ? 'animate-hero-badge' : 'opacity-0'
+                      className={`inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 h-7 sm:h-8 rounded-full text-xs sm:text-[13px] font-semibold tracking-wide border mb-3.5 sm:mb-5 shadow-sm backdrop-blur-md ${slide.badgeColor} ${isSlideActive ? 'animate-hero-badge' : 'opacity-0'
                         }`}
                     >
                       {React.createElement(slide.badgeIcon, { className: "w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" })}
@@ -667,7 +667,7 @@ export default function App() {
 
                     {/* Main Title with Crystal-Clear Contrast */}
                     <h1
-                      className={`text-3xl sm:text-4xl md:text-5xl lg:text-[50px] font-extrabold text-white tracking-tight leading-[1.14] mb-4 drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)] ${isSlideActive ? 'animate-hero-title' : 'opacity-0'
+                      className={`text-[28px] sm:text-4xl md:text-5xl lg:text-[50px] font-extrabold text-white tracking-tight leading-[1.18] sm:leading-[1.14] mb-3 sm:mb-4 drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)] ${isSlideActive ? 'animate-hero-title' : 'opacity-0'
                         }`}
                     >
                       <span>{slide.titlePrefix}</span>
@@ -678,14 +678,14 @@ export default function App() {
 
                     {/* Description */}
                     <p
-                      className={`text-slate-200 text-sm sm:text-base lg:text-lg font-normal leading-relaxed mb-8 max-w-xl drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)] ${isSlideActive ? 'animate-hero-desc' : 'opacity-0'
+                      className={`text-slate-200 text-xs sm:text-base lg:text-lg font-normal leading-relaxed mb-5 sm:mb-8 max-w-xl drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)] ${isSlideActive ? 'animate-hero-desc' : 'opacity-0'
                         }`}
                     >
                       {slide.description}
                     </p>
 
                     {/* Action Buttons with Rhythmic Individual Stagger */}
-                    <div className="flex flex-wrap items-center justify-start gap-3">
+                    <div className="flex flex-wrap items-center justify-start gap-2.5 sm:gap-3">
                       <a
                         href={slide.buttonLink}
                         onClick={(e) => {
@@ -704,7 +704,7 @@ export default function App() {
                         onClick={(e) => {
                           if (wasDraggingRef.current) e.preventDefault();
                         }}
-                        className={`group inline-flex items-center justify-center gap-2 px-4.5 sm:px-5 h-10 sm:h-10.5 rounded-full bg-white/10 hover:bg-white/20 hover:border-white/40 border border-white/20 text-white font-medium text-xs sm:text-sm backdrop-blur-md shadow-sm hover:shadow-md transition-all duration-300 ease-out whitespace-nowrap transform hover:-translate-y-0.5 active:translate-y-0 ${
+                        className={`group inline-flex items-center justify-center gap-2 px-5 sm:px-6 h-10 sm:h-10.5 rounded-full bg-white/10 hover:bg-white/20 hover:border-white/40 border border-white/20 text-white font-medium text-xs sm:text-sm backdrop-blur-md shadow-sm hover:shadow-md transition-all duration-300 ease-out whitespace-nowrap transform hover:-translate-y-0.5 active:translate-y-0 ${
                           isSlideActive ? 'animate-hero-btn-secondary' : 'opacity-0'
                         }`}
                       >
