@@ -331,7 +331,7 @@ export default function App() {
               rel="noreferrer"
               className="inline-flex items-center justify-center px-4 h-[38px] rounded-[4px] bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-sm transition-all border border-slate-200 leading-none"
             >
-              <span className="flex items-center gap-2 -translate-y-[0.5px]">
+              <span className="flex items-center gap-2 -translate-y-[2px]">
                 <MessageSquare className="w-4 h-4 text-emerald-600 flex-shrink-0" />
                 <span>WhatsApp</span>
               </span>
@@ -443,7 +443,7 @@ export default function App() {
               onClick={() => setMobileMenuOpen(false)}
               className="w-full h-11 px-4 rounded-[4px] bg-purple-600 hover:bg-purple-700 active:bg-purple-800 text-white font-semibold text-sm shadow-md shadow-purple-500/20 flex items-center justify-center transition-all active:scale-[0.99] leading-none"
             >
-              <span className="flex items-center justify-center gap-2 -translate-y-[2px]">
+              <span className="flex items-center justify-center gap-2 -translate-y-[2.5px]">
                 <span>Get Connected</span>
                 <ArrowRight className="w-4 h-4 flex-shrink-0" />
               </span>
@@ -454,9 +454,9 @@ export default function App() {
               href="https://wa.me/8801700000000"
               target="_blank"
               rel="noreferrer"
-              className="w-full h-10 px-4 rounded-[4px] bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-semibold text-sm shadow-sm shadow-emerald-600/15 flex items-center justify-center transition-all active:scale-[0.99] leading-none"
+              className="w-full h-11 px-4 rounded-[4px] bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-semibold text-sm shadow-sm shadow-emerald-600/15 flex items-center justify-center transition-all active:scale-[0.99] leading-none"
             >
-              <span className="flex items-center justify-center gap-2 -translate-y-[1px]">
+              <span className="flex items-center justify-center gap-2 -translate-y-[2.5px]">
                 <MessageSquare className="w-4 h-4 flex-shrink-0" />
                 <span>Chat on WhatsApp</span>
               </span>
