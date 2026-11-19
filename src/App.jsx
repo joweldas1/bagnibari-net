@@ -329,24 +329,24 @@ export default function App() {
               href="https://wa.me/8801700000000" 
               target="_blank" 
               rel="noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-sm transition-all border border-slate-200"
+              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-sm transition-all border border-slate-200 leading-none"
             >
-              <MessageSquare className="w-4 h-4 text-emerald-600" />
+              <MessageSquare className="w-4 h-4 text-emerald-600 flex-shrink-0" />
               <span>WhatsApp</span>
             </a>
             <a 
               href="#contact" 
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold text-sm shadow-md shadow-purple-500/20 hover:shadow-lg hover:shadow-purple-500/30 transition-all transform active:scale-95"
+              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-purple-600 hover:bg-purple-700 text-white font-semibold text-sm shadow-md shadow-purple-500/20 hover:shadow-lg hover:shadow-purple-500/30 transition-all leading-none"
             >
               <span>Get Connected</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4 flex-shrink-0" />
             </a>
           </div>
 
           {/* Mobile Hamburger / Close Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2.5 rounded-2xl text-slate-700 hover:text-purple-600 hover:bg-slate-100 border border-slate-200 transition-colors focus:outline-none"
+            className="lg:hidden p-2.5 rounded-lg text-slate-700 hover:text-purple-600 hover:bg-slate-100 border border-slate-200 transition-colors focus:outline-none"
             aria-label="Toggle Navigation Menu"
           >
             {mobileMenuOpen ? (
@@ -430,10 +430,10 @@ export default function App() {
           <a
             href="#contact"
             onClick={() => setMobileMenuOpen(false)}
-            className="w-full py-3.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold text-center text-sm shadow-md shadow-purple-500/20 flex items-center justify-center gap-2"
+            className="w-full h-11 px-4 rounded-lg bg-purple-600 hover:bg-purple-700 text-white font-semibold text-center text-sm shadow-md shadow-purple-500/20 flex items-center justify-center gap-2 leading-none transition-all active:scale-[0.98]"
           >
             <span>Get Connected</span>
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-4 h-4 flex-shrink-0" />
           </a>
 
           {/* WhatsApp Action */}
@@ -441,14 +441,14 @@ export default function App() {
             href="https://wa.me/8801700000000"
             target="_blank"
             rel="noreferrer"
-            className="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-center text-sm shadow-md shadow-emerald-500/20 flex items-center justify-center gap-2"
+            className="w-full h-11 px-4 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-center text-sm shadow-md shadow-emerald-500/20 flex items-center justify-center gap-2 leading-none transition-all active:scale-[0.98]"
           >
-            <MessageSquare className="w-4 h-4" />
+            <MessageSquare className="w-4 h-4 flex-shrink-0" />
             <span>Chat on WhatsApp</span>
           </a>
 
           {/* 24/7 Helpline Call Pill */}
-          <div className="bg-purple-50 p-3 rounded-xl border border-purple-100 text-center">
+          <div className="bg-purple-50 p-3 rounded-lg border border-purple-100 text-center">
             <p className="text-[11px] text-slate-500 font-medium">24/7 Emergency Helpline:</p>
             <a href="tel:01700000000" className="text-purple-700 font-extrabold text-xs block mt-0.5 hover:underline">
               📞 017XX-XXXXXX
@@ -498,20 +498,20 @@ export default function App() {
               </p>
 
               {/* Action Buttons */}
-              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4">
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3.5">
                 <a 
                   href={slides[currentSlide].primaryLink}
-                  className="px-8 py-4 rounded-2xl bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-700 hover:from-purple-700 hover:to-indigo-800 text-white font-bold text-base shadow-xl shadow-purple-500/25 transition-all flex items-center gap-2 transform hover:-translate-y-0.5"
+                  className="px-6 py-3.5 rounded-lg bg-purple-600 hover:bg-purple-700 text-white font-semibold text-sm sm:text-base shadow-lg shadow-purple-500/25 transition-all flex items-center justify-center gap-2 transform hover:-translate-y-0.5 leading-none"
                 >
                   <span>{slides[currentSlide].primaryBtn}</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-4 h-4 flex-shrink-0" />
                 </a>
 
                 <a 
                   href={slides[currentSlide].secondaryLink}
-                  className="px-6 py-4 rounded-2xl bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 font-bold text-base shadow-sm hover:shadow transition-all flex items-center gap-2"
+                  className="px-5 py-3.5 rounded-lg bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 font-semibold text-sm sm:text-base shadow-sm hover:shadow transition-all flex items-center justify-center gap-2 leading-none"
                 >
-                  <MessageSquare className="w-4 h-4 text-emerald-600" />
+                  <MessageSquare className="w-4 h-4 text-emerald-600 flex-shrink-0" />
                   <span>{slides[currentSlide].secondaryBtn}</span>
                 </a>
               </div>
@@ -785,9 +785,9 @@ export default function App() {
                   <a
                     href="#contact"
                     onClick={() => setFormData({ ...formData, packageSelected: `${pkg.name} (${pkg.speed} Mbps - ৳${pkg.price}/mo)` })}
-                    className={`block w-full text-center py-3.5 rounded-xl font-bold text-sm transition-all ${
+                    className={`block w-full text-center py-3 rounded-lg font-semibold text-sm transition-all ${
                       pkg.popular 
-                        ? 'bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white shadow-lg shadow-purple-500/25'
+                        ? 'bg-purple-600 hover:bg-purple-700 text-white shadow-md shadow-purple-500/20 hover:shadow-lg'
                         : 'bg-slate-100 hover:bg-purple-600 hover:text-white text-slate-800'
                     }`}
                   >
@@ -1285,7 +1285,7 @@ export default function App() {
 
                       <button
                         type="submit"
-                        className="w-full py-4 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold text-base shadow-lg shadow-purple-500/25 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+                        className="w-full py-3.5 rounded-lg bg-purple-600 hover:bg-purple-700 text-white font-semibold text-base shadow-lg shadow-purple-500/25 transition-all transform hover:-translate-y-0.5 active:translate-y-0 leading-none"
                       >
                         Submit Connection Request ➔
                       </button>
