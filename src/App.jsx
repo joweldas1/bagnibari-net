@@ -644,10 +644,10 @@ export default function App() {
                   />
                 </div>
 
-                {/* Cinematic Blackish Gradient Overlay */}
-                <div className="absolute inset-0 hidden md:block bg-gradient-to-r from-slate-950/95 via-slate-950/75 via-45% to-slate-950/25 pointer-events-none"></div>
-                <div className="absolute inset-0 md:hidden bg-gradient-to-t from-slate-950/95 via-slate-950/75 via-55% to-slate-950/30 pointer-events-none"></div>
-                <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-950/85 to-transparent pointer-events-none"></div>
+                {/* Cinematic Soft Gradient Overlays for Maximum Text Legibility */}
+                <div className="absolute inset-0 hidden md:block bg-gradient-to-r from-slate-950/92 via-slate-950/80 via-55% to-slate-950/35 pointer-events-none"></div>
+                <div className="absolute inset-0 md:hidden bg-gradient-to-t from-slate-950/95 via-slate-950/80 via-60% to-slate-950/40 pointer-events-none"></div>
+                <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent pointer-events-none"></div>
 
                 {/* Content Container */}
                 <div className="content-container relative z-10 w-full py-10 lg:py-14">
@@ -665,9 +665,9 @@ export default function App() {
                       <span className="leading-none">{slide.smallTitle}</span>
                     </div>
 
-                    {/* Main Title */}
+                    {/* Main Title with Crystal-Clear Contrast */}
                     <h1
-                      className={`text-3xl sm:text-4xl md:text-5xl lg:text-[50px] font-extrabold text-white tracking-tight leading-[1.14] mb-4 drop-shadow-sm ${isSlideActive ? 'animate-hero-title' : 'opacity-0'
+                      className={`text-3xl sm:text-4xl md:text-5xl lg:text-[50px] font-extrabold text-white tracking-tight leading-[1.14] mb-4 drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)] ${isSlideActive ? 'animate-hero-title' : 'opacity-0'
                         }`}
                     >
                       <span>{slide.titlePrefix}</span>
@@ -678,7 +678,7 @@ export default function App() {
 
                     {/* Description */}
                     <p
-                      className={`text-slate-200 text-sm sm:text-base lg:text-lg font-normal leading-relaxed mb-8 max-w-xl drop-shadow-sm ${isSlideActive ? 'animate-hero-desc' : 'opacity-0'
+                      className={`text-slate-200 text-sm sm:text-base lg:text-lg font-normal leading-relaxed mb-8 max-w-xl drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)] ${isSlideActive ? 'animate-hero-desc' : 'opacity-0'
                         }`}
                     >
                       {slide.description}
