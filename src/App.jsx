@@ -900,7 +900,7 @@ export default function App() {
         <div className="content-container">
 
           {/* Section Header: Left on Phone, Centered on PC */}
-          <div className="text-left sm:text-center max-w-2xl sm:mx-auto mb-2 sm:mb-16">
+          <div className="text-left sm:text-center max-w-2xl sm:mx-auto mb-5 sm:mb-7">
             <div className="flex justify-start sm:justify-center">
               <span
                 className={`text-xs uppercase font-extrabold tracking-wider text-purple-700 px-3.5 py-1 rounded-full bg-purple-100 border border-purple-200 inline-block mb-3 sm:mb-4 ${isFeaturesInView ? 'section-entrance-badge' : 'opacity-0'
@@ -943,7 +943,7 @@ export default function App() {
       <section id="packages" className="section-spacing bg-[#fafbff] border-b border-slate-200/60">
         <div className="content-container">
 
-          <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8">
             <span className="text-xs uppercase font-extrabold tracking-wider text-purple-700 px-3.5 py-1 rounded-full bg-purple-100 border border-purple-200">
               Home Broadband Plans
             </span>
@@ -1210,7 +1210,7 @@ export default function App() {
       <section id="paybill" className="section-spacing bg-white border-b border-slate-200/60">
         <div className="content-container">
 
-          <div className="text-center max-w-2xl mx-auto mb-16">
+          <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8">
             <span className="text-xs uppercase font-extrabold tracking-wider text-purple-700 px-3.5 py-1 rounded-full bg-purple-100 border border-purple-200">
               Bill Payment Methods
             </span>
