@@ -97,7 +97,7 @@ function FeatureCardItem({ card, isSectionInView }) {
       </h3>
 
       {/* Card Description */}
-      <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+      <p className="text-slate-600 text-xs sm:text-sm leading-relaxed [text-wrap:balance]">
         {card.description}
       </p>
     </div>
@@ -922,11 +922,11 @@ export default function App() {
             </h2>
 
             <p
-              className={`text-slate-600 text-sm sm:text-base mt-2.5 sm:mt-3 leading-relaxed ${
+              className={`text-slate-600 text-sm sm:text-base mt-2.5 sm:mt-3 leading-relaxed max-w-[330px] sm:max-w-[480px] mx-0 sm:mx-auto [text-wrap:balance] ${
                 isFeaturesInView ? 'section-entrance-desc' : 'opacity-0'
               }`}
             >
-              We deliver true optical fiber directly to your room with local neighborhood support that responds in minutes.
+              We deliver true optical fiber to your room with local support that responds in minutes.
             </p>
           </div>
 
