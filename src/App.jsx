@@ -31,7 +31,7 @@ import {
   Gamepad2
 } from 'lucide-react';
 
-import hero1Img from './image/hero-1.jpg';
+import hero1Img from './image/hero 1 update.png';
 import hero2Img from './image/hero-2.jpg';
 import hero3Img from './image/hero-3.jpg';
 
@@ -76,11 +76,9 @@ function FeatureCardItem({ card, isSectionInView }) {
   return (
     <div
       ref={cardRef}
-      className={`group relative bg-[#fbfbfe] hover:bg-white border border-slate-200/90 rounded-2xl p-5 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 ease-out text-left cursor-default ${card.cardBorder} ${
-        isSectionInView ? card.desktopAnimClass : 'md:opacity-0'
-      } ${
-        isCardInView ? 'section-card-mobile-rise' : 'max-md:opacity-0'
-      }`}
+      className={`group relative bg-[#fbfbfe] hover:bg-white border border-slate-200/90 rounded-2xl p-5 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 ease-out text-left cursor-default ${card.cardBorder} ${isSectionInView ? card.desktopAnimClass : 'md:opacity-0'
+        } ${isCardInView ? 'section-card-mobile-rise' : 'max-md:opacity-0'
+        }`}
     >
       {/* Icon Box with Interactive Hover State */}
       <div
@@ -97,7 +95,7 @@ function FeatureCardItem({ card, isSectionInView }) {
       </h3>
 
       {/* Card Description */}
-      <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+      <p className="text-slate-600 text-xs sm:text-sm leading-relaxed [text-wrap:balance]">
         {card.description}
       </p>
     </div>
@@ -902,31 +900,28 @@ export default function App() {
         <div className="content-container">
 
           {/* Section Header: Left on Phone, Centered on PC */}
-          <div className="text-left sm:text-center max-w-2xl sm:mx-auto mb-10 sm:mb-16">
+          <div className="text-left sm:text-center max-w-2xl sm:mx-auto mb-2 sm:mb-16">
             <div className="flex justify-start sm:justify-center">
               <span
-                className={`text-xs uppercase font-extrabold tracking-wider text-purple-700 px-3.5 py-1 rounded-full bg-purple-100 border border-purple-200 inline-block mb-3 sm:mb-4 ${
-                  isFeaturesInView ? 'section-entrance-badge' : 'opacity-0'
-                }`}
+                className={`text-xs uppercase font-extrabold tracking-wider text-purple-700 px-3.5 py-1 rounded-full bg-purple-100 border border-purple-200 inline-block mb-3 sm:mb-4 ${isFeaturesInView ? 'section-entrance-badge' : 'opacity-0'
+                  }`}
               >
                 Why Bagnibari Net
               </span>
             </div>
 
             <h2
-              className={`text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-snug sm:leading-tight ${
-                isFeaturesInView ? 'section-entrance-title' : 'opacity-0'
-              }`}
+              className={`text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-snug sm:leading-tight ${isFeaturesInView ? 'section-entrance-title' : 'opacity-0'
+                }`}
             >
               Designed for Unstoppable <br /> Speed &amp; Reliability
             </h2>
 
             <p
-              className={`text-slate-600 text-sm sm:text-base mt-2.5 sm:mt-3 leading-relaxed ${
-                isFeaturesInView ? 'section-entrance-desc' : 'opacity-0'
-              }`}
+              className={`text-slate-600 text-sm sm:text-base mt-2.5 sm:mt-3 leading-relaxed max-w-[400px] sm:max-w-[480px] mx-0 sm:mx-auto [text-wrap:balance] ${isFeaturesInView ? 'section-entrance-desc' : 'opacity-0'
+                }`}
             >
-              We deliver true optical fiber directly to your room with local neighborhood support that responds in minutes.
+              We deliver true optical fiber to your room with local support that responds in minutes.
             </p>
           </div>
 
