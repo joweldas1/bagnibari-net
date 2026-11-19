@@ -644,10 +644,10 @@ export default function App() {
                   />
                 </div>
 
-                {/* Cinematic Soft Gradient Overlays for Maximum Text Legibility */}
-                <div className="absolute inset-0 hidden md:block bg-gradient-to-r from-slate-950/92 via-slate-950/80 via-55% to-slate-950/35 pointer-events-none"></div>
-                <div className="absolute inset-0 md:hidden bg-gradient-to-t from-slate-950/95 via-slate-950/80 via-60% to-slate-950/40 pointer-events-none"></div>
-                <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent pointer-events-none"></div>
+                {/* Deep Blackish Cinematic Overlay for 100% Crisp Text Contrast */}
+                <div className="absolute inset-0 hidden md:block hero-dark-overlay pointer-events-none"></div>
+                <div className="absolute inset-0 md:hidden hero-mobile-overlay pointer-events-none"></div>
+                <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-slate-950/95 to-transparent pointer-events-none"></div>
 
                 {/* Content Container */}
                 <div className="content-container relative z-10 w-full py-10 lg:py-14">

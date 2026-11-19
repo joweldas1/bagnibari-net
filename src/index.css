@@ -136,6 +136,26 @@ button:active {
   box-shadow: none !important;
 }
 
+/* Hero Cinematic Dark Gradient Overlays - Guaranteed 100% Text Legibility */
+.hero-dark-overlay {
+  background: linear-gradient(
+    90deg,
+    rgba(2, 6, 23, 0.95) 0%,
+    rgba(2, 6, 23, 0.88) 45%,
+    rgba(2, 6, 23, 0.60) 70%,
+    rgba(2, 6, 23, 0.25) 100%
+  ) !important;
+}
+
+.hero-mobile-overlay {
+  background: linear-gradient(
+    0deg,
+    rgba(2, 6, 23, 0.98) 0%,
+    rgba(2, 6, 23, 0.85) 60%,
+    rgba(2, 6, 23, 0.35) 100%
+  ) !important;
+}
+
 /* Dynamic Ken Burns Zoom In / Out Animations for Hero Active Slides */
 @keyframes kenburns-zoom-in {
   0% {
