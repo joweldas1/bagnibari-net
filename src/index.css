@@ -73,32 +73,39 @@
   scrollbar-width: none;
 }
 
-/* Hero Slide Staggered Entrance Animations - Ultra Smooth & Cinematic */
-@keyframes slide-in-fade {
+
+/* Cinematic Slow & Smooth Entrance Animations on Slide Change */
+@keyframes hero-content-entrance {
   0% {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(24px);
+    filter: blur(6px);
   }
   100% {
     opacity: 1;
     transform: translateY(0);
+    filter: blur(0px);
   }
 }
 
-.animate-slide-badge {
-  animation: slide-in-fade 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+.animate-hero-badge {
+  animation: hero-content-entrance 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+  will-change: transform, opacity, filter;
 }
 
-.animate-slide-title {
-  animation: slide-in-fade 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+.animate-hero-title {
+  animation: hero-content-entrance 1.05s cubic-bezier(0.16, 1, 0.3, 1) 0.22s both;
+  will-change: transform, opacity, filter;
 }
 
-.animate-slide-desc {
-  animation: slide-in-fade 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.32s both;
+.animate-hero-desc {
+  animation: hero-content-entrance 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+  will-change: transform, opacity, filter;
 }
 
-.animate-slide-btns {
-  animation: slide-in-fade 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.44s both;
+.animate-hero-btns {
+  animation: hero-content-entrance 1.15s cubic-bezier(0.16, 1, 0.3, 1) 0.48s both;
+  will-change: transform, opacity, filter;
 }
 
 /* Dynamic Ken Burns Zoom In / Out Animations for Hero Active Slides */
