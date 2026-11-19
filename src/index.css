@@ -43,3 +43,23 @@
 .glow-card {
   box-shadow: 0 20px 40px -15px rgba(124, 58, 237, 0.15);
 }
+
+/* Smooth 1-Line Sliding Marquee for Mobile Top Notice */
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-smooth {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 22s linear infinite;
+}
+
+.animate-marquee-smooth:hover {
+  animation-play-state: paused;
+}
