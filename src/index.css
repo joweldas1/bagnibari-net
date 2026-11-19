@@ -92,6 +92,52 @@
   animation: slide-in-fade 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
 }
 
+/* Dynamic Ken Burns Zoom In / Out Animations for Hero Active Slides */
+@keyframes kenburns-zoom-in {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.10);
+  }
+}
+
+@keyframes kenburns-zoom-out {
+  0% {
+    transform: scale(1.10);
+  }
+  100% {
+    transform: scale(1.01);
+  }
+}
+
+@keyframes kenburns-dynamic-pan {
+  0% {
+    transform: scale(1) translate(0%, 0%);
+  }
+  50% {
+    transform: scale(1.08) translate(-1%, -0.5%);
+  }
+  100% {
+    transform: scale(1.03) translate(0.5%, 0%);
+  }
+}
+
+.animate-kenburns-in {
+  animation: kenburns-zoom-in 10s cubic-bezier(0.25, 1, 0.5, 1) alternate infinite both;
+  transform-origin: center center;
+}
+
+.animate-kenburns-out {
+  animation: kenburns-zoom-out 10s cubic-bezier(0.25, 1, 0.5, 1) alternate infinite both;
+  transform-origin: center center;
+}
+
+.animate-kenburns-pan {
+  animation: kenburns-dynamic-pan 12s cubic-bezier(0.25, 1, 0.5, 1) alternate infinite both;
+  transform-origin: center center;
+}
+
 /* Custom Breakpoint & Spacing Specifications (User Defined):
    Device        Screen width        Content max-width   Padding top/bottom   Padding left/right
    Large screen  1400px+             1300px              100px                20px

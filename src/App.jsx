@@ -152,7 +152,8 @@ export default function App() {
       badgeColor: "bg-purple-100 text-purple-700 border-purple-200",
       badgeIcon: Tv,
       tag: "Streaming & Family",
-      shortTag: "Streaming"
+      shortTag: "Streaming",
+      kenburnsClass: "animate-kenburns-in"
     },
     {
       id: 2,
@@ -168,7 +169,8 @@ export default function App() {
       badgeColor: "bg-blue-100 text-blue-700 border-blue-200",
       badgeIcon: Users,
       tag: "Work & Multi-Device",
-      shortTag: "Work"
+      shortTag: "Work",
+      kenburnsClass: "animate-kenburns-out"
     },
     {
       id: 3,
@@ -184,7 +186,8 @@ export default function App() {
       badgeColor: "bg-emerald-100 text-emerald-700 border-emerald-200",
       badgeIcon: Gamepad2,
       tag: "Low-Ping Gaming",
-      shortTag: "Gaming"
+      shortTag: "Gaming",
+      kenburnsClass: "animate-kenburns-pan"
     }
   ];
 
@@ -562,16 +565,23 @@ export default function App() {
           {slides.map((slide, idx) => (
             <div
               key={slide.id}
-              className="relative h-full flex flex-col justify-center flex-shrink-0"
+              className="relative h-full flex flex-col justify-center flex-shrink-0 overflow-hidden"
               style={{ width: `${100 / slides.length}%` }}
             >
-              {/* Background Photography for each slide */}
-              <img
-                src={slide.image}
-                alt={slide.smallTitle}
-                className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none select-none"
-                draggable={false}
-              />
+              {/* Background Photography with Dynamic Ken Burns Zoom In/Out Animation */}
+              <div className="absolute inset-0 overflow-hidden pointer-events-none select-none">
+                <img
+                  key={`hero-img-${currentSlide === idx ? 'active-' + currentSlide : 'idle-' + idx}`}
+                  src={slide.image}
+                  alt={slide.smallTitle}
+                  className={`w-full h-full object-cover object-center will-change-transform ${
+                    currentSlide === idx 
+                      ? slide.kenburnsClass 
+                      : 'scale-100 transition-transform duration-1000 ease-out'
+                  }`}
+                  draggable={false}
+                />
+              </div>
 
               {/* Soft, Transparent Directional Overlay (Subtle wash behind text to highlight it without obscuring photography) */}
               <div className="absolute inset-0 hidden md:block bg-gradient-to-r from-white/90 via-white/45 via-45% to-transparent pointer-events-none"></div>
@@ -673,7 +683,7 @@ export default function App() {
                       : 'bg-white/90 hover:bg-white text-slate-700 border border-slate-200/90 backdrop-blur-sm'
                   }`}
                 >
-                  <span className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${currentSlide === idx ? 'bg-amber-300' : 'bg-slate-400'}`}></span>
+                  <span className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${currentSlide === idx ? 'bg-amber-300 animate-pulse' : 'bg-slate-400'}`}></span>
                   <span className="hidden sm:inline">0{s.id} • {s.tag}</span>
                   <span className="sm:hidden">0{s.id} • {s.shortTag}</span>
                 </button>
