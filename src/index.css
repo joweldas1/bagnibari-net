@@ -63,3 +63,69 @@
 .animate-marquee-smooth:hover {
   animation-play-state: paused;
 }
+
+/* Custom Breakpoint & Spacing Specifications (User Defined):
+   Device        Screen width        Content max-width   Padding top/bottom   Padding left/right
+   Large screen  1400px+             1300px              100px                20px
+   Laptop        1024px → 1399px     100% (full)         89px                 40px
+   Tab           768px → 1023px      100%                60px                 20px
+   Mobile        < 768px             100%                40px                 20px
+*/
+
+.section-spacing {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+@media (min-width: 768px) {
+  .section-spacing {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-spacing {
+    padding-top: 89px;
+    padding-bottom: 89px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .section-spacing {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+}
+
+.content-container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+@media (min-width: 768px) {
+  .content-container {
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .content-container {
+    width: 100%;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .content-container {
+    max-width: 1300px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}

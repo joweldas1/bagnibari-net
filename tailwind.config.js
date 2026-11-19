@@ -5,6 +5,13 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    screens: {
+      'sm': '640px',
+      'md': '768px',    // Tab: 768px → 1023px
+      'lg': '1024px',   // Laptop: 1024px → 1399px
+      'xl': '1280px',
+      '2xl': '1400px',  // Large screen: 1400px and above
+    },
     extend: {
       fontFamily: {
         sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],

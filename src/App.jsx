@@ -26,8 +26,14 @@ import {
   Activity,
   Award,
   Menu,
-  X
+  X,
+  Users,
+  Gamepad2
 } from 'lucide-react';
+
+import hero1Img from './hero-1.jpg';
+import hero2Img from './hero-2.jpg';
+import hero3Img from './hero-3.jpg';
 
 export default function App() {
   // Mobile Drawer State
@@ -63,69 +69,69 @@ export default function App() {
     }
   }, [mobileMenuOpen]);
 
-  // Slider Data
+  // Slider Data matching User's Exact Specification
   const slides = [
     {
-      badge: "100% Optical Fiber • Ultra-Low Latency",
-      badgeColor: "bg-purple-100 text-purple-700 border-purple-200",
-      headline: "Blazing Fast Home Internet for Streaming & Gaming",
-      headlineHighlight: "Built for Your Family",
-      description: "Experience truly bufferless 4K movies, lag-free competitive gaming, and lightning-speed BDIX routing across Bagnibari and Siddham neighborhoods.",
-      primaryBtn: "Explore Packages",
-      primaryLink: "#packages",
-      secondaryBtn: "WhatsApp Support",
+      id: 1,
+      smallTitle: "High-Speed Broadband",
+      mainTitle: "Watch Anything Without Buffering",
+      mainHighlight: "Without Buffering",
+      description: "Enjoy uninterrupted HD and 4K streaming—whether it’s movies, series, or live sports. Stable and fast internet for your whole family.",
+      buttonText: "View Packages",
+      buttonLink: "#packages",
+      secondaryText: "WhatsApp Support",
       secondaryLink: "https://wa.me/8801700000000",
-      accent: "from-purple-600 to-indigo-600",
+      image: hero1Img,
+      badgeColor: "bg-purple-100 text-purple-700 border-purple-200",
+      badgeIcon: Tv,
+      tag: "Streaming & Family",
       card: {
-        title: "Live Fiber Network Status",
-        speed: "60",
-        unit: "Mbps",
-        sub: "Dedicated Real-Time Bandwidth",
-        ping: "3 ms",
-        cache: "100 Mbps",
-        loss: "0.0%"
+        badge: "4K UHD Streaming",
+        stat: "100 Mbps",
+        label: "BDIX & Media Cache",
+        highlight: "Zero Buffer Guaranteed"
       }
     },
     {
-      badge: "🎉 Limited Time Welcome Offer",
-      badgeColor: "bg-amber-100 text-amber-700 border-amber-200",
-      headline: "Free Optical Fiber Setup & Free Router Tuning",
-      headlineHighlight: "Zero Installation Fee",
-      description: "Get connected today and receive 100% free drop-wire fiber cable setup, 24-hour guaranteed line activation, and professional Wi-Fi router tuning.",
-      primaryBtn: "Claim Free Setup Offer",
-      primaryLink: "#contact",
-      secondaryBtn: "View All Plans",
+      id: 2,
+      smallTitle: "Together for Everyone",
+      mainTitle: "More Devices, Same Speed",
+      mainHighlight: "Same Speed",
+      description: "Browsing, online classes, freelancing, or office work—your speed won't drop even with multiple devices connected at once. Get everything done hassle-free.",
+      buttonText: "Get Connected Now",
+      buttonLink: "#contact",
+      secondaryText: "View Packages",
       secondaryLink: "#packages",
-      accent: "from-blue-600 to-cyan-500",
+      image: hero2Img,
+      badgeColor: "bg-blue-100 text-blue-700 border-blue-200",
+      badgeIcon: Users,
+      tag: "Work & Multi-Device",
       card: {
-        title: "Welcome Gift Bundle",
-        speed: "Free",
-        unit: "Setup",
-        sub: "Drop Cable & Router Config Included",
-        ping: "24 Hrs",
-        cache: "Priority",
-        loss: "৳0 Fee"
+        badge: "Multi-Device Network",
+        stat: "15+ Devices",
+        label: "Simultaneous Bandwidth",
+        highlight: "Zero Speed Drop"
       }
     },
     {
-      badge: "🎬 Entertainment & Sports Hub",
-      badgeColor: "bg-rose-100 text-rose-700 border-rose-200",
-      headline: "Bufferless BDIX FTP & 50+ HD Live TV Channels",
-      headlineHighlight: "Unlimited Streaming",
-      description: "Ultra-fast local caching up to 100 Mbps. Stream your favorite movies, TV shows, and live sports tournaments with zero lag or loading delays.",
-      primaryBtn: "Get Connected Now",
-      primaryLink: "#contact",
-      secondaryBtn: "Coverage Areas",
+      id: 3,
+      smallTitle: "Gamers' Choice",
+      mainTitle: "Zero Lag, Maximum Fun",
+      mainHighlight: "Zero Lag",
+      description: "Play online games worry-free with low ping and a stable connection. Download large files or game updates at lightning speed.",
+      buttonText: "View Offers",
+      buttonLink: "#packages",
+      secondaryText: "Coverage Areas",
       secondaryLink: "#coverage",
-      accent: "from-pink-600 to-rose-500",
+      image: hero3Img,
+      badgeColor: "bg-emerald-100 text-emerald-700 border-emerald-200",
+      badgeIcon: Gamepad2,
+      tag: "Low-Ping Gaming",
       card: {
-        title: "BDIX & Entertainment Hub",
-        speed: "100",
-        unit: "Mbps",
-        sub: "Ultra High-Speed Media Cache",
-        ping: "1 ms",
-        cache: "4K Ready",
-        loss: "No Buffer"
+        badge: "Low-Ping Gaming",
+        stat: "1-3 ms",
+        label: "Direct BDIX Route",
+        highlight: "Lag-Free Competitive Play"
       }
     }
   ];
@@ -255,7 +261,7 @@ export default function App() {
       
       {/* 1. TOP ANNOUNCEMENT STRIP (1-LINE SLIDING MARQUEE ON MOBILE, CLEAN FLEX ON DESKTOP - ALIGNED WITH NAVBAR) */}
       <div className="bg-gradient-to-r from-purple-700 via-indigo-600 to-blue-600 text-white text-xs py-2 shadow-sm overflow-hidden select-none">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
+        <div className="content-container">
           
           {/* Mobile View: 1-line smooth sliding marquee ticker */}
           <div className="flex md:hidden items-center h-5 overflow-hidden">
@@ -301,7 +307,7 @@ export default function App() {
 
       {/* 2. STICKY LIGHT NAVBAR (WITH MOBILE HAMBURGER TOGGLE) */}
       <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between">
+        <div className="content-container h-20 flex items-center justify-between">
           
           {/* Brand Logo */}
           <a href="#home" className="flex items-center gap-2.5 sm:gap-3 group">
@@ -481,193 +487,161 @@ export default function App() {
         </div>
       </div>
 
-      {/* 3. HERO SECTION WITH VIBRANT LIGHT SLIDER */}
+      {/* 3. HERO SLIDER SECTION (RESPECTING EXACT USER BREAKPOINTS & SPACING) */}
       <section 
         id="home" 
-        className="relative overflow-hidden bg-gradient-to-b from-purple-50/70 via-indigo-50/40 to-[#fafbff] border-b border-slate-200/60 py-12 lg:py-20"
+        className="relative overflow-hidden section-spacing bg-[#fafbff] border-b border-slate-200/80 min-h-[540px] sm:min-h-[580px] lg:min-h-[620px] flex items-center"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
-        {/* Colorful Ambient Glows */}
-        <div className="absolute top-10 left-10 w-96 h-96 bg-purple-200/50 rounded-full blur-3xl pointer-events-none -z-10 animate-pulse-subtle"></div>
-        <div className="absolute top-20 right-10 w-80 h-80 bg-cyan-200/40 rounded-full blur-3xl pointer-events-none -z-10"></div>
-        <div className="absolute bottom-5 left-1/3 w-72 h-72 bg-pink-200/30 rounded-full blur-3xl pointer-events-none -z-10"></div>
+        {/* Dynamic Background Images with Smooth Cross-Fade */}
+        {slides.map((slide, idx) => (
+          <div
+            key={slide.id}
+            className={`absolute inset-0 z-0 transition-opacity duration-1000 ease-in-out ${
+              currentSlide === idx ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+            }`}
+          >
+            {/* Background Photography (hero-1, hero-2, hero-3) */}
+            <img
+              src={slide.image}
+              alt={slide.mainTitle}
+              className={`w-full h-full object-cover object-right md:object-center transform transition-transform duration-[10000ms] ease-out ${
+                currentSlide === idx ? 'scale-105' : 'scale-100'
+              }`}
+            />
+            {/* Light-theme directional gradient overlays: Keep 100% light, pure, and high contrast */}
+            <div className="absolute inset-0 hidden md:block bg-gradient-to-r from-white via-white/95 via-50% to-white/30"></div>
+            <div className="absolute inset-0 md:hidden bg-gradient-to-t from-white via-white/95 to-white/80 backdrop-blur-[1px]"></div>
+          </div>
+        ))}
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
-          
-          {/* SLIDER ACTIVE CONTENT */}
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-12 min-h-[460px]">
+        {/* Subtle Ambient Colorful Glow Accents */}
+        <div className="absolute top-10 left-10 w-96 h-96 bg-purple-200/40 rounded-full blur-3xl pointer-events-none z-0 animate-pulse-subtle"></div>
+        <div className="absolute bottom-10 right-20 w-80 h-80 bg-cyan-200/30 rounded-full blur-3xl pointer-events-none z-0"></div>
+
+        {/* Content Container adhering strictly to User's Breakpoint & Spacing Specs */}
+        <div className="content-container relative z-10 w-full">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-14">
             
-            {/* Left Column: Hero Text */}
+            {/* Left Content Column */}
             <div className="max-w-2xl text-center lg:text-left">
               
-              {/* Badge */}
-              <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold border mb-6 shadow-sm ${slides[currentSlide].badgeColor}`}>
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>{slides[currentSlide].badge}</span>
+              {/* Small Title Badge */}
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-[4px] text-xs sm:text-sm font-bold border mb-5 shadow-sm bg-white/90 backdrop-blur-sm border-purple-200 text-purple-700">
+                {React.createElement(slides[currentSlide].badgeIcon, { className: "w-4 h-4 text-purple-600 flex-shrink-0" })}
+                <span>{slides[currentSlide].smallTitle}</span>
               </div>
 
-              {/* Main Headline */}
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.15] mb-6">
-                {slides[currentSlide].headline} <br className="hidden sm:block" />
-                <span className="colorful-gradient-text">
-                  {slides[currentSlide].headlineHighlight}
+              {/* Main Title */}
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-extrabold text-slate-900 tracking-tight leading-[1.15] mb-5 min-h-[72px] sm:min-h-[88px] lg:min-h-[125px] flex items-center justify-center lg:justify-start">
+                <span>
+                  {slides[currentSlide].mainTitle.replace(slides[currentSlide].mainHighlight, '')}
+                  <span className="bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-700 bg-clip-text text-transparent">
+                    {slides[currentSlide].mainHighlight}
+                  </span>
                 </span>
               </h1>
 
               {/* Description */}
-              <p className="text-slate-600 text-base sm:text-lg mb-8 leading-relaxed font-normal">
+              <p className="text-slate-600 text-sm sm:text-base lg:text-lg font-normal leading-relaxed mb-8 max-w-xl min-h-[48px] sm:min-h-[54px]">
                 {slides[currentSlide].description}
               </p>
 
               {/* Action Buttons */}
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3.5">
                 <a 
-                  href={slides[currentSlide].primaryLink}
+                  href={slides[currentSlide].buttonLink}
                   className="px-6 h-12 rounded-[4px] bg-purple-600 hover:bg-purple-700 text-white font-semibold text-sm sm:text-base shadow-lg shadow-purple-500/25 transition-all flex items-center justify-center leading-none transform hover:-translate-y-0.5"
                 >
-                  <span className="flex items-center gap-2 -translate-y-[1.5px]">
-                    <span>{slides[currentSlide].primaryBtn}</span>
+                  <span className="flex items-center gap-2 -translate-y-[2px]">
+                    <span>{slides[currentSlide].buttonText}</span>
                     <ArrowRight className="w-4 h-4 flex-shrink-0" />
                   </span>
                 </a>
 
                 <a 
                   href={slides[currentSlide].secondaryLink}
-                  className="px-5 h-12 rounded-[4px] bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 font-semibold text-sm sm:text-base shadow-sm hover:shadow transition-all flex items-center justify-center leading-none"
+                  className="px-5 h-12 rounded-[4px] bg-white/95 hover:bg-white border border-slate-300 text-slate-700 font-semibold text-sm sm:text-base shadow-sm hover:shadow transition-all flex items-center justify-center leading-none"
                 >
                   <span className="flex items-center gap-2 -translate-y-[1px]">
                     <MessageSquare className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                    <span>{slides[currentSlide].secondaryBtn}</span>
+                    <span>{slides[currentSlide].secondaryText}</span>
                   </span>
                 </a>
               </div>
 
-              {/* Quick Trust Highlights */}
-              <div className="grid grid-cols-3 gap-6 pt-10 border-t border-slate-200/80 mt-10">
-                <div>
-                  <div className="text-2xl sm:text-3xl font-extrabold text-purple-600">20-90 Mbps</div>
-                  <div className="text-xs text-slate-500 font-medium mt-1">Dedicated Speeds</div>
-                </div>
-                <div>
-                  <div className="text-2xl sm:text-3xl font-extrabold text-indigo-600">100 Mbps</div>
-                  <div className="text-xs text-slate-500 font-medium mt-1">BDIX & YouTube Cache</div>
-                </div>
-                <div>
-                  <div className="text-2xl sm:text-3xl font-extrabold text-emerald-600">24/7 Support</div>
-                  <div className="text-xs text-slate-500 font-medium mt-1">Neighborhood Techs</div>
-                </div>
-              </div>
-
             </div>
 
-            {/* Right Column: Interactive Colorful Visual Card */}
-            <div className="w-full lg:w-[480px]">
-              <div className="bg-white/90 backdrop-blur-xl border border-purple-100 rounded-3xl p-6 sm:p-8 glow-card relative">
-                
-                {/* Card Header */}
-                <div className="flex items-center justify-between pb-6 border-b border-slate-100">
+            {/* Right Interactive Highlights Card (Floating Glassy Status Badge) */}
+            <div className="w-full lg:w-[420px] flex-shrink-0">
+              <div className="bg-white/90 backdrop-blur-md border border-purple-100/90 rounded-2xl p-6 sm:p-7 shadow-xl shadow-purple-900/10 relative">
+                <div className="flex items-center justify-between pb-4 border-b border-slate-100">
                   <div className="flex items-center gap-2">
                     <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span className="font-bold text-slate-900 text-sm">{slides[currentSlide].card.title}</span>
+                    <span className="font-bold text-slate-800 text-sm">{slides[currentSlide].card.badge}</span>
                   </div>
-                  <span className="text-xs font-bold px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 border border-emerald-200">
-                    ONLINE • 99.9% Uptime
+                  <span className="text-[11px] font-extrabold px-2.5 py-0.5 rounded-[4px] bg-purple-100 text-purple-700">
+                    Bagnibari Fiber
                   </span>
                 </div>
-
-                {/* Big Speedometer Box */}
-                <div className="my-6 py-8 px-4 rounded-2xl bg-gradient-to-br from-purple-50 via-indigo-50/50 to-blue-50 border border-purple-100 text-center relative overflow-hidden">
-                  <div className="text-5xl sm:text-6xl font-black text-slate-900 tracking-tight">
-                    {slides[currentSlide].card.speed} 
-                    <span className="text-2xl sm:text-3xl font-extrabold text-purple-600 ml-2">
-                      {slides[currentSlide].card.unit}
-                    </span>
+                
+                <div className="my-5 py-5 px-4 rounded-xl bg-gradient-to-br from-purple-50/70 via-indigo-50/40 to-blue-50/40 border border-purple-100 text-center">
+                  <div className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+                    {slides[currentSlide].card.stat}
                   </div>
-                  <p className="text-xs font-semibold uppercase tracking-wider text-slate-500 mt-2">
-                    {slides[currentSlide].card.sub}
+                  <p className="text-xs text-purple-700 font-bold mt-1 uppercase tracking-wider">
+                    {slides[currentSlide].card.label}
                   </p>
                 </div>
 
-                {/* 3 Metrics Grid */}
-                <div className="grid grid-cols-3 gap-3">
-                  <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-100 text-center">
-                    <div className="text-lg font-bold text-emerald-600">{slides[currentSlide].card.ping}</div>
-                    <div className="text-[11px] text-slate-500 font-medium mt-0.5">Latency (BDIX)</div>
-                  </div>
-                  <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-100 text-center">
-                    <div className="text-lg font-bold text-purple-600">{slides[currentSlide].card.cache}</div>
-                    <div className="text-[11px] text-slate-500 font-medium mt-0.5">Media Cache</div>
-                  </div>
-                  <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-100 text-center">
-                    <div className="text-lg font-bold text-indigo-600">{slides[currentSlide].card.loss}</div>
-                    <div className="text-[11px] text-slate-500 font-medium mt-0.5">Packet Quality</div>
-                  </div>
+                <div className="flex items-center justify-between text-xs font-semibold text-slate-600 pt-1">
+                  <span className="flex items-center gap-1.5 text-emerald-600">
+                    <CheckCircle2 className="w-4 h-4" /> {slides[currentSlide].card.highlight}
+                  </span>
+                  <span className="text-slate-400">99.9% Uptime</span>
                 </div>
-
-                {/* Extra Value-Added Badges */}
-                <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600 font-medium">
-                  <div className="flex items-center gap-1.5">
-                    <Tv className="w-3.5 h-3.5 text-purple-600" />
-                    <span>50+ HD Live TV Channels</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <Film className="w-3.5 h-3.5 text-indigo-600" />
-                    <span>Ultra BDIX Movie FTP</span>
-                  </div>
-                </div>
-
               </div>
             </div>
 
           </div>
 
-          {/* SLIDER CONTROLS & BOTTOM NAVIGATION */}
-          <div className="mt-12 pt-6 border-t border-slate-200/80 flex flex-col sm:flex-row items-center justify-between gap-4">
+          {/* Slider Navigation Bar & Indicators */}
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-12 pt-8 border-t border-slate-200/70">
             
-            {/* Slide Category Switchers */}
-            <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm">
+            {/* Category / Slide Selectors */}
+            <div className="flex items-center gap-2 sm:gap-3 flex-wrap justify-center">
               {slides.map((s, idx) => (
                 <button
-                  key={idx}
+                  key={s.id}
                   onClick={() => setCurrentSlide(idx)}
-                  className={`px-3.5 py-1.5 rounded-full font-bold transition-all flex items-center gap-2 ${
+                  className={`px-3.5 py-2 rounded-[4px] text-xs font-bold transition-all flex items-center gap-2 ${
                     currentSlide === idx 
-                      ? 'bg-purple-600 text-white shadow-md shadow-purple-500/20' 
-                      : 'bg-white text-slate-600 hover:text-slate-900 border border-slate-200'
+                      ? 'bg-purple-600 text-white shadow-md shadow-purple-500/25 scale-105' 
+                      : 'bg-white/80 hover:bg-white text-slate-600 border border-slate-200/80'
                   }`}
                 >
-                  <span className={`w-2 h-2 rounded-full ${currentSlide === idx ? 'bg-amber-300' : 'bg-slate-400'}`}></span>
-                  <span>{idx === 0 ? '01. Ultra-Fast Fiber' : idx === 1 ? '02. Free Setup Offer' : '03. BDIX Movie Hub'}</span>
+                  <span className={`w-2 h-2 rounded-full ${currentSlide === idx ? 'bg-amber-300' : 'bg-slate-300'}`}></span>
+                  <span>0{s.id} • {s.tag}</span>
                 </button>
               ))}
             </div>
 
-            {/* Slider Next/Prev Arrows & Dots */}
-            <div className="flex items-center gap-3">
-              <button 
+            {/* Prev / Next Arrows */}
+            <div className="flex items-center gap-2">
+              <button
                 onClick={() => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)}
-                className="w-10 h-10 rounded-full bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 flex items-center justify-center shadow-sm transition-all"
+                className="w-10 h-10 rounded-[4px] bg-white/90 hover:bg-white text-slate-700 border border-slate-200 shadow-sm flex items-center justify-center transition-all hover:border-purple-300 active:scale-95"
                 aria-label="Previous Slide"
               >
-                <ChevronLeft className="w-5 h-5" />
+                <ChevronLeft className="w-5 h-5 text-slate-700" />
               </button>
-
-              <div className="flex items-center gap-1.5 px-3 py-2 bg-white rounded-full border border-slate-200">
-                {slides.map((_, idx) => (
-                  <span 
-                    key={idx} 
-                    className={`h-2 rounded-full transition-all ${currentSlide === idx ? 'w-6 bg-purple-600' : 'w-2 bg-slate-300'}`}
-                  ></span>
-                ))}
-              </div>
-
-              <button 
+              <button
                 onClick={() => setCurrentSlide((prev) => (prev + 1) % slides.length)}
-                className="w-10 h-10 rounded-full bg-purple-600 hover:bg-purple-700 text-white flex items-center justify-center shadow-md shadow-purple-500/20 transition-all"
+                className="w-10 h-10 rounded-[4px] bg-white/90 hover:bg-white text-slate-700 border border-slate-200 shadow-sm flex items-center justify-center transition-all hover:border-purple-300 active:scale-95"
                 aria-label="Next Slide"
               >
-                <ChevronRight className="w-5 h-5" />
+                <ChevronRight className="w-5 h-5 text-slate-700" />
               </button>
             </div>
 
@@ -677,8 +651,8 @@ export default function App() {
       </section>
 
       {/* 4. KEY ADVANTAGES (4 COLORFUL FEATURE CARDS) */}
-      <section id="features" className="py-16 sm:py-24 bg-white border-b border-slate-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
+      <section id="features" className="section-spacing bg-white border-b border-slate-100">
+        <div className="content-container">
           
           <div className="text-center max-w-2xl mx-auto mb-16">
             <span className="text-xs uppercase font-extrabold tracking-wider text-purple-700 px-3.5 py-1 rounded-full bg-purple-100 border border-purple-200">
@@ -744,8 +718,8 @@ export default function App() {
       </section>
 
       {/* 5. PACKAGES SECTION (LIGHT, VIBRANT & HIGH-CONVERTING) */}
-      <section id="packages" className="py-16 sm:py-24 bg-[#fafbff] border-b border-slate-200/60">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
+      <section id="packages" className="section-spacing bg-[#fafbff] border-b border-slate-200/60">
+        <div className="content-container">
           
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="text-xs uppercase font-extrabold tracking-wider text-purple-700 px-3.5 py-1 rounded-full bg-purple-100 border border-purple-200">
@@ -845,8 +819,8 @@ export default function App() {
       </section>
 
       {/* 6. INTERACTIVE SPEED TEST SIMULATOR WIDGET */}
-      <section id="speedtest" className="py-16 sm:py-24 bg-white border-b border-slate-200/60">
-        <div className="max-w-4xl mx-auto px-4 sm:px-8 text-center">
+      <section id="speedtest" className="section-spacing bg-white border-b border-slate-200/60">
+        <div className="content-container text-center">
           
           <span className="text-xs uppercase font-extrabold tracking-wider text-purple-700 px-3.5 py-1 rounded-full bg-purple-100 border border-purple-200">
             Live Network Diagnostic
@@ -936,8 +910,8 @@ export default function App() {
       </section>
 
       {/* 7. COVERAGE AREA SECTION (WITH INTERACTIVE FILTER SEARCH) */}
-      <section id="coverage" className="py-16 sm:py-24 bg-[#fafbff] border-b border-slate-200/60">
-        <div className="max-w-6xl mx-auto px-4 sm:px-8">
+      <section id="coverage" className="section-spacing bg-[#fafbff] border-b border-slate-200/60">
+        <div className="content-container">
           
           <div className="text-center max-w-2xl mx-auto mb-12">
             <span className="text-xs uppercase font-extrabold tracking-wider text-purple-700 px-3.5 py-1 rounded-full bg-purple-100 border border-purple-200">
@@ -1013,8 +987,8 @@ export default function App() {
       </section>
 
       {/* 8. EASY BILL PAYMENT GUIDE (BKASH & NAGAD) */}
-      <section id="paybill" className="py-16 sm:py-24 bg-white border-b border-slate-200/60">
-        <div className="max-w-6xl mx-auto px-4 sm:px-8">
+      <section id="paybill" className="section-spacing bg-white border-b border-slate-200/60">
+        <div className="content-container">
           
           <div className="text-center max-w-2xl mx-auto mb-16">
             <span className="text-xs uppercase font-extrabold tracking-wider text-purple-700 px-3.5 py-1 rounded-full bg-purple-100 border border-purple-200">
@@ -1129,8 +1103,8 @@ export default function App() {
       </section>
 
       {/* 9. INSTANT CONNECTION & CONTACT FORM */}
-      <section id="contact" className="py-16 sm:py-24 bg-[#fafbff] border-b border-slate-200/60">
-        <div className="max-w-6xl mx-auto px-4 sm:px-8">
+      <section id="contact" className="section-spacing bg-[#fafbff] border-b border-slate-200/60">
+        <div className="content-container">
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             
@@ -1335,7 +1309,7 @@ export default function App() {
 
       {/* 10. COLORFUL MODERN FOOTER */}
       <footer className="bg-white border-t border-slate-200 pt-16 pb-12 mt-auto text-slate-500 text-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
+        <div className="content-container">
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-slate-100">
             
