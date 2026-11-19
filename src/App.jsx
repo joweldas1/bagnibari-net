@@ -59,7 +59,7 @@ export default function App() {
       smallTitle: "High-Speed Broadband",
       titlePrefix: "Watch Anything ",
       titleHighlight: "Without Buffering",
-      description: "Enjoy uninterrupted HD and 4K streaming—whether it’s movies, series, or live sports. Stable and fast internet for your whole family.",
+      description: "Enjoy uninterrupted HD and 4K streaming - whether it’s movies, series, or live sports. Stable and fast internet for your whole family.",
       buttonText: "View Packages",
       buttonLink: "#packages",
       secondaryText: "WhatsApp Support",
@@ -76,7 +76,7 @@ export default function App() {
       smallTitle: "Together for Everyone",
       titlePrefix: "More Devices, ",
       titleHighlight: "Same Speed",
-      description: "Browsing, online classes, freelancing, or office work—your speed won't drop even with multiple devices connected at once. Get everything done hassle-free.",
+      description: "Browsing, online classes, freelancing, or office work - your speed won't drop even with multiple devices connected at once. Get everything done hassle-free.",
       buttonText: "Get Connected Now",
       buttonLink: "#contact",
       secondaryText: "View Packages",
@@ -616,7 +616,7 @@ export default function App() {
           onTransitionEnd={handleTrackTransitionEnd}
           className={`absolute inset-0 flex h-full ${isDragging || !isTransitioning
             ? ''
-            : 'transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]'
+            : 'transition-transform duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)]'
             }`}
           style={{
             width: `${extendedSlides.length * 100}%`,
@@ -653,12 +653,12 @@ export default function App() {
                 <div className="content-container relative z-10 w-full py-10 lg:py-14">
                   <div className="max-w-xl lg:max-w-2xl text-left">
 
-                    {/* Small Title Badge - Fixed Symmetric Top/Bottom Padding */}
+                    {/* Small Title Badge - Balanced & Symmetrical Padding */}
                     <div
-                      className={`inline-flex items-center justify-center gap-2 px-4 h-8 sm:h-9 rounded-full text-xs sm:text-sm font-bold leading-none border mb-5 shadow-sm backdrop-blur-md ${slide.badgeColor} ${isSlideActive ? 'animate-slide-badge' : ''
+                      className={`inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 h-7 sm:h-8 rounded-full text-xs sm:text-[13px] font-semibold tracking-wide border mb-5 shadow-sm backdrop-blur-md ${slide.badgeColor} ${isSlideActive ? 'animate-slide-badge' : ''
                         }`}
                     >
-                      {React.createElement(slide.badgeIcon, { className: "w-4 h-4 flex-shrink-0 block" })}
+                      {React.createElement(slide.badgeIcon, { className: "w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" })}
                       <span className="leading-none">{slide.smallTitle}</span>
                     </div>
 
@@ -681,7 +681,7 @@ export default function App() {
                       {slide.description}
                     </p>
 
-                    {/* Action Buttons */}
+                    {/* Action Buttons with Modern Hover & Moving Arrow */}
                     <div
                       className={`flex flex-wrap items-center justify-start gap-3.5 ${isSlideActive ? 'animate-slide-btns' : ''
                         }`}
@@ -691,10 +691,10 @@ export default function App() {
                         onClick={(e) => {
                           if (wasDraggingRef.current) e.preventDefault();
                         }}
-                        className="inline-flex items-center justify-center gap-2 px-7 h-12 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold text-sm sm:text-base shadow-lg shadow-purple-600/35 hover:shadow-purple-600/50 transition-all whitespace-nowrap transform hover:-translate-y-0.5 active:translate-y-0"
+                        className="group inline-flex items-center justify-center gap-2 px-6 sm:px-7 h-11 sm:h-12 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold text-sm sm:text-base shadow-lg shadow-purple-600/35 hover:shadow-xl hover:shadow-purple-500/50 transition-all duration-300 ease-out whitespace-nowrap transform hover:-translate-y-0.5 active:translate-y-0"
                       >
                         <span>{slide.buttonText}</span>
-                        <ArrowRight className="w-4 h-4 flex-shrink-0" />
+                        <ArrowRight className="w-4 h-4 flex-shrink-0 transition-transform duration-300 ease-out group-hover:translate-x-1.5" />
                       </a>
 
                       <a
@@ -702,38 +702,39 @@ export default function App() {
                         onClick={(e) => {
                           if (wasDraggingRef.current) e.preventDefault();
                         }}
-                        className="inline-flex items-center justify-center gap-2 px-6 h-12 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold text-sm sm:text-base backdrop-blur-md shadow-sm transition-all whitespace-nowrap transform hover:-translate-y-0.5 active:translate-y-0"
+                        className="group inline-flex items-center justify-center gap-2 px-5 sm:px-6 h-11 sm:h-12 rounded-full bg-white/10 hover:bg-white/20 hover:border-white/40 border border-white/20 text-white font-semibold text-sm sm:text-base backdrop-blur-md shadow-sm hover:shadow-md hover:shadow-white/10 transition-all duration-300 ease-out whitespace-nowrap transform hover:-translate-y-0.5 active:translate-y-0"
                       >
-                        <MessageSquare className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                        <MessageSquare className="w-4 h-4 text-emerald-400 flex-shrink-0 transition-transform duration-300 ease-out group-hover:scale-110" />
                         <span>{slide.secondaryText}</span>
                       </a>
-                    </div>
-
-                    {/* Clean Slider Dots Placed Directly Below the Action Buttons */}
-                    <div className="mt-8 sm:mt-10 flex items-center gap-2.5">
-                      {slides.map((s, dotIdx) => {
-                        const isDotActive = activeRealIndex === dotIdx;
-                        return (
-                          <button
-                            key={s.id}
-                            type="button"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              goToSlide(dotIdx);
-                            }}
-                            className={`rounded-full transition-all duration-300 focus:outline-none ${isDotActive
-                              ? 'w-8 h-2.5 bg-gradient-to-r from-purple-500 via-indigo-400 to-fuchsia-500 shadow-md shadow-purple-500/40'
-                              : 'w-2.5 h-2.5 bg-white/35 hover:bg-white/75'
-                              }`}
-                            aria-label={`Go to slide ${s.id}: ${s.smallTitle}`}
-                          />
-                        );
-                      })}
                     </div>
 
                   </div>
                 </div>
               </div>
+            );
+          })}
+        </div>
+
+        {/* Carousel Navigation Dots - Bottom Center */}
+        <div className="absolute bottom-5 sm:bottom-7 left-1/2 -translate-x-1/2 z-20 flex items-center justify-center gap-2.5 px-3.5 py-1.5 rounded-full bg-slate-950/40 backdrop-blur-md border border-white/10 shadow-lg">
+          {slides.map((s, dotIdx) => {
+            const isDotActive = activeRealIndex === dotIdx;
+            return (
+              <button
+                key={s.id}
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  goToSlide(dotIdx);
+                }}
+                className={`rounded-full transition-all duration-500 focus:outline-none ${
+                  isDotActive
+                    ? 'w-7 sm:w-8 h-2 sm:h-2.5 bg-gradient-to-r from-purple-500 via-indigo-400 to-fuchsia-500 shadow-md shadow-purple-500/50'
+                    : 'w-2 sm:w-2.5 h-2 sm:h-2.5 bg-white/40 hover:bg-white/80'
+                }`}
+                aria-label={`Go to slide ${s.id}: ${s.smallTitle}`}
+              />
             );
           })}
         </div>
