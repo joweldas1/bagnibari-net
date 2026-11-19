@@ -149,7 +149,7 @@ export default function App() {
       secondaryText: "WhatsApp Support",
       secondaryLink: "https://wa.me/8801700000000",
       image: hero1Img,
-      badgeColor: "bg-purple-100 text-purple-700 border-purple-200",
+      badgeColor: "bg-purple-500/20 text-purple-200 border-purple-400/30",
       badgeIcon: Tv,
       tag: "Streaming & Family",
       shortTag: "Streaming",
@@ -166,7 +166,7 @@ export default function App() {
       secondaryText: "View Packages",
       secondaryLink: "#packages",
       image: hero2Img,
-      badgeColor: "bg-blue-100 text-blue-700 border-blue-200",
+      badgeColor: "bg-indigo-500/20 text-indigo-200 border-indigo-400/30",
       badgeIcon: Users,
       tag: "Work & Multi-Device",
       shortTag: "Work",
@@ -183,7 +183,7 @@ export default function App() {
       secondaryText: "Coverage Areas",
       secondaryLink: "#coverage",
       image: hero3Img,
-      badgeColor: "bg-emerald-100 text-emerald-700 border-emerald-200",
+      badgeColor: "bg-emerald-500/20 text-emerald-200 border-emerald-400/30",
       badgeIcon: Gamepad2,
       tag: "Low-Ping Gaming",
       shortTag: "Gaming",
@@ -583,36 +583,37 @@ export default function App() {
                 />
               </div>
 
-              {/* Soft, Transparent Directional Overlay (Subtle wash behind text to highlight it without obscuring photography) */}
-              <div className="absolute inset-0 hidden md:block bg-gradient-to-r from-white/90 via-white/45 via-45% to-transparent pointer-events-none"></div>
-              <div className="absolute inset-0 md:hidden bg-gradient-to-t from-white/95 via-white/55 via-50% to-transparent pointer-events-none"></div>
+              {/* Cinematic Blackish Gradient Overlay (Eliminates white fog, highlights photography & guarantees 100% text contrast) */}
+              <div className="absolute inset-0 hidden md:block bg-gradient-to-r from-slate-950/95 via-slate-950/75 via-45% to-slate-950/25 pointer-events-none"></div>
+              <div className="absolute inset-0 md:hidden bg-gradient-to-t from-slate-950/95 via-slate-950/75 via-55% to-slate-950/30 pointer-events-none"></div>
+              <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-950/85 to-transparent pointer-events-none"></div>
 
               {/* Content Container adhering strictly to User's Breakpoint & Spacing Specs */}
               <div className="content-container relative z-10 w-full py-8 lg:py-12">
                 
-                {/* Hero Text Column (NO Solid Card / Box - Entire Background Image Remains Visible) */}
+                {/* Hero Text Column (Crisp, High-Contrast Ultra-Readable Typography) */}
                 <div className="max-w-xl lg:max-w-2xl text-center lg:text-left">
                   
                   {/* Small Title Badge - Staggered 1 */}
                   <div 
                     key={`badge-${currentSlide}-${idx}`}
-                    className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-[4px] text-xs sm:text-sm font-bold border mb-4 shadow-sm bg-white/90 border-purple-200 text-purple-700 ${
-                      currentSlide === idx ? 'animate-slide-badge' : 'opacity-0'
+                    className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold border mb-4 shadow-sm backdrop-blur-md ${slide.badgeColor} ${
+                      currentSlide === idx ? 'animate-slide-badge' : ''
                     }`}
                   >
-                    {React.createElement(slide.badgeIcon, { className: "w-4 h-4 text-purple-600 flex-shrink-0" })}
+                    {React.createElement(slide.badgeIcon, { className: "w-4 h-4 flex-shrink-0" })}
                     <span>{slide.smallTitle}</span>
                   </div>
 
                   {/* Main Title - Staggered 2 */}
                   <h1 
                     key={`title-${currentSlide}-${idx}`}
-                    className={`text-3xl sm:text-4xl md:text-5xl lg:text-[48px] font-extrabold text-slate-900 tracking-tight leading-[1.15] mb-4 ${
-                      currentSlide === idx ? 'animate-slide-title' : 'opacity-0'
+                    className={`text-3xl sm:text-4xl md:text-5xl lg:text-[50px] font-extrabold text-white tracking-tight leading-[1.14] mb-4 drop-shadow-sm ${
+                      currentSlide === idx ? 'animate-slide-title' : ''
                     }`}
                   >
                     <span>{slide.titlePrefix}</span>
-                    <span className="bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-700 bg-clip-text text-transparent">
+                    <span className="bg-gradient-to-r from-purple-400 via-indigo-300 to-fuchsia-400 bg-clip-text text-transparent">
                       {slide.titleHighlight}
                     </span>
                   </h1>
@@ -620,8 +621,8 @@ export default function App() {
                   {/* Description - Staggered 3 */}
                   <p 
                     key={`desc-${currentSlide}-${idx}`}
-                    className={`text-slate-600 text-sm sm:text-base lg:text-lg font-normal leading-relaxed mb-8 max-w-xl ${
-                      currentSlide === idx ? 'animate-slide-desc' : 'opacity-0'
+                    className={`text-slate-200 text-sm sm:text-base lg:text-lg font-normal leading-relaxed mb-8 max-w-xl drop-shadow-sm ${
+                      currentSlide === idx ? 'animate-slide-desc' : ''
                     }`}
                   >
                     {slide.description}
@@ -631,7 +632,7 @@ export default function App() {
                   <div 
                     key={`btns-${currentSlide}-${idx}`}
                     className={`flex flex-wrap items-center justify-center lg:justify-start gap-3.5 ${
-                      currentSlide === idx ? 'animate-slide-btns' : 'opacity-0'
+                      currentSlide === idx ? 'animate-slide-btns' : ''
                     }`}
                   >
                     <a 
@@ -639,7 +640,7 @@ export default function App() {
                       onClick={(e) => {
                         if (wasDraggingRef.current) e.preventDefault();
                       }}
-                      className="inline-flex items-center justify-center gap-2 px-6 h-12 rounded-[4px] bg-purple-600 hover:bg-purple-700 text-white font-semibold text-sm sm:text-base shadow-lg shadow-purple-500/25 transition-all whitespace-nowrap transform hover:-translate-y-0.5 active:translate-y-0"
+                      className="inline-flex items-center justify-center gap-2 px-7 h-12 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold text-sm sm:text-base shadow-lg shadow-purple-600/35 hover:shadow-purple-600/50 transition-all whitespace-nowrap transform hover:-translate-y-0.5 active:translate-y-0"
                     >
                       <span>{slide.buttonText}</span>
                       <ArrowRight className="w-4 h-4 flex-shrink-0" />
@@ -650,9 +651,9 @@ export default function App() {
                       onClick={(e) => {
                         if (wasDraggingRef.current) e.preventDefault();
                       }}
-                      className="inline-flex items-center justify-center gap-2 px-5 h-12 rounded-[4px] bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 font-semibold text-sm sm:text-base shadow-sm hover:shadow transition-all whitespace-nowrap"
+                      className="inline-flex items-center justify-center gap-2 px-6 h-12 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold text-sm sm:text-base backdrop-blur-md shadow-sm transition-all whitespace-nowrap transform hover:-translate-y-0.5 active:translate-y-0"
                     >
-                      <MessageSquare className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                      <MessageSquare className="w-4 h-4 text-emerald-400 flex-shrink-0" />
                       <span>{slide.secondaryText}</span>
                     </a>
                   </div>
@@ -671,40 +672,40 @@ export default function App() {
         <div className="relative z-10 w-full pb-6 lg:pb-8">
           <div className="content-container flex flex-row items-center justify-between gap-2 sm:gap-4">
             
-            {/* Category / Slide Selectors */}
-            <div className="flex items-center gap-1.5 sm:gap-2.5">
+            {/* Category / Slide Selectors - Fully Rounded Pill Radius */}
+            <div className="flex items-center gap-1.5 sm:gap-2.5 overflow-x-auto no-scrollbar py-1">
               {slides.map((s, idx) => (
                 <button
                   key={s.id}
                   onClick={() => setCurrentSlide(idx)}
-                  className={`px-2.5 py-1.5 sm:px-3.5 sm:py-2 rounded-[4px] text-xs sm:text-sm font-bold transition-all flex items-center gap-1.5 shadow-sm whitespace-nowrap ${
+                  className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-bold transition-all flex items-center gap-2 shadow-sm whitespace-nowrap ${
                     currentSlide === idx 
-                      ? 'bg-purple-600 text-white shadow-md shadow-purple-500/30 scale-105' 
-                      : 'bg-white/90 hover:bg-white text-slate-700 border border-slate-200/90 backdrop-blur-sm'
+                      ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-500/35 ring-1 ring-white/25 scale-105' 
+                      : 'bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white border border-white/15 backdrop-blur-md'
                   }`}
                 >
-                  <span className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${currentSlide === idx ? 'bg-amber-300 animate-pulse' : 'bg-slate-400'}`}></span>
+                  <span className={`w-2 h-2 rounded-full ${currentSlide === idx ? 'bg-amber-300 animate-pulse' : 'bg-slate-500'}`}></span>
                   <span className="hidden sm:inline">0{s.id} • {s.tag}</span>
                   <span className="sm:hidden">0{s.id} • {s.shortTag}</span>
                 </button>
               ))}
             </div>
 
-            {/* Prev / Next Arrows */}
+            {/* Prev / Next Arrows - Fully Rounded Circular Buttons */}
             <div className="flex items-center gap-1.5 sm:gap-2.5 flex-shrink-0">
               <button
                 onClick={() => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)}
-                className="w-9 h-9 sm:w-10 sm:h-10 rounded-[4px] bg-white/95 hover:bg-white text-slate-700 border border-slate-200 shadow-md backdrop-blur-sm flex items-center justify-center transition-all hover:border-purple-400 hover:text-purple-600 active:scale-95"
+                className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-slate-900/80 hover:bg-purple-600 text-white border border-white/15 hover:border-purple-500 shadow-md backdrop-blur-md flex items-center justify-center transition-all hover:scale-105 active:scale-95"
                 aria-label="Previous Slide"
               >
-                <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+                <ChevronLeft className="w-5 h-5" />
               </button>
               <button
                 onClick={() => setCurrentSlide((prev) => (prev + 1) % slides.length)}
-                className="w-9 h-9 sm:w-10 sm:h-10 rounded-[4px] bg-white/95 hover:bg-white text-slate-700 border border-slate-200 shadow-md backdrop-blur-sm flex items-center justify-center transition-all hover:border-purple-400 hover:text-purple-600 active:scale-95"
+                className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-slate-900/80 hover:bg-purple-600 text-white border border-white/15 hover:border-purple-500 shadow-md backdrop-blur-md flex items-center justify-center transition-all hover:scale-105 active:scale-95"
                 aria-label="Next Slide"
               >
-                <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                <ChevronRight className="w-5 h-5" />
               </button>
             </div>
 

@@ -64,11 +64,20 @@
   animation-play-state: paused;
 }
 
+/* Hide scrollbar for Chrome, Safari, Edge and Firefox */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /* Hero Slide Staggered Entrance Animations */
 @keyframes slide-in-fade {
   0% {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(12px);
   }
   100% {
     opacity: 1;
@@ -77,19 +86,19 @@
 }
 
 .animate-slide-badge {
-  animation: slide-in-fade 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
+  animation: slide-in-fade 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
 }
 
 .animate-slide-title {
-  animation: slide-in-fade 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+  animation: slide-in-fade 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
 }
 
 .animate-slide-desc {
-  animation: slide-in-fade 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.38s both;
+  animation: slide-in-fade 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
 }
 
 .animate-slide-btns {
-  animation: slide-in-fade 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+  animation: slide-in-fade 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
 }
 
 /* Dynamic Ken Burns Zoom In / Out Animations for Hero Active Slides */
