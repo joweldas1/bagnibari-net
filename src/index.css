@@ -74,12 +74,12 @@
 }
 
 
-/* Cinematic Slow & Smooth Entrance Animations on Slide Change */
-@keyframes hero-content-entrance {
+/* Cinematic Rhythmic Staggered Entrance (Badge -> Title -> Desc -> Left Button -> Right Button) */
+@keyframes hero-rhythm-entrance {
   0% {
     opacity: 0;
-    transform: translateY(24px);
-    filter: blur(6px);
+    transform: translateY(22px);
+    filter: blur(4px);
   }
   100% {
     opacity: 1;
@@ -89,22 +89,27 @@
 }
 
 .animate-hero-badge {
-  animation: hero-content-entrance 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+  animation: hero-rhythm-entrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
   will-change: transform, opacity, filter;
 }
 
 .animate-hero-title {
-  animation: hero-content-entrance 1.05s cubic-bezier(0.16, 1, 0.3, 1) 0.22s both;
+  animation: hero-rhythm-entrance 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.30s both;
   will-change: transform, opacity, filter;
 }
 
 .animate-hero-desc {
-  animation: hero-content-entrance 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+  animation: hero-rhythm-entrance 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.45s both;
   will-change: transform, opacity, filter;
 }
 
-.animate-hero-btns {
-  animation: hero-content-entrance 1.15s cubic-bezier(0.16, 1, 0.3, 1) 0.48s both;
+.animate-hero-btn-primary {
+  animation: hero-rhythm-entrance 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.60s both;
+  will-change: transform, opacity, filter;
+}
+
+.animate-hero-btn-secondary {
+  animation: hero-rhythm-entrance 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.75s both;
   will-change: transform, opacity, filter;
 }
 

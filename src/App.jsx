@@ -684,17 +684,16 @@ export default function App() {
                       {slide.description}
                     </p>
 
-                    {/* Action Buttons with Sleek & Balanced Dimensions */}
-                    <div
-                      className={`flex flex-wrap items-center justify-start gap-3 ${isSlideActive ? 'animate-hero-btns' : 'opacity-0'
-                        }`}
-                    >
+                    {/* Action Buttons with Rhythmic Individual Stagger */}
+                    <div className="flex flex-wrap items-center justify-start gap-3">
                       <a
                         href={slide.buttonLink}
                         onClick={(e) => {
                           if (wasDraggingRef.current) e.preventDefault();
                         }}
-                        className="group inline-flex items-center justify-center gap-2 px-5 sm:px-6 h-10 sm:h-10.5 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-semibold text-xs sm:text-sm shadow-md shadow-slate-950/30 hover:shadow-lg transition-all duration-300 ease-out whitespace-nowrap transform hover:-translate-y-0.5 active:translate-y-0"
+                        className={`group inline-flex items-center justify-center gap-2 px-5 sm:px-6 h-10 sm:h-10.5 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-semibold text-xs sm:text-sm shadow-md shadow-slate-950/30 hover:shadow-lg transition-all duration-300 ease-out whitespace-nowrap transform hover:-translate-y-0.5 active:translate-y-0 ${
+                          isSlideActive ? 'animate-hero-btn-primary' : 'opacity-0'
+                        }`}
                       >
                         <span>{slide.buttonText}</span>
                         <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0 transition-transform duration-300 ease-out group-hover:translate-x-1" />
@@ -705,7 +704,9 @@ export default function App() {
                         onClick={(e) => {
                           if (wasDraggingRef.current) e.preventDefault();
                         }}
-                        className="group inline-flex items-center justify-center gap-2 px-4.5 sm:px-5 h-10 sm:h-10.5 rounded-full bg-white/10 hover:bg-white/20 hover:border-white/40 border border-white/20 text-white font-medium text-xs sm:text-sm backdrop-blur-md shadow-sm hover:shadow-md transition-all duration-300 ease-out whitespace-nowrap transform hover:-translate-y-0.5 active:translate-y-0"
+                        className={`group inline-flex items-center justify-center gap-2 px-4.5 sm:px-5 h-10 sm:h-10.5 rounded-full bg-white/10 hover:bg-white/20 hover:border-white/40 border border-white/20 text-white font-medium text-xs sm:text-sm backdrop-blur-md shadow-sm hover:shadow-md transition-all duration-300 ease-out whitespace-nowrap transform hover:-translate-y-0.5 active:translate-y-0 ${
+                          isSlideActive ? 'animate-hero-btn-secondary' : 'opacity-0'
+                        }`}
                       >
                         <MessageSquare className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400 flex-shrink-0 transition-transform duration-300 ease-out group-hover:scale-110" />
                         <span>{slide.secondaryText}</span>
