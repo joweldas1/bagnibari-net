@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   Wifi, 
   Zap, 
@@ -39,9 +39,76 @@ export default function App() {
   // Mobile Drawer State
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Slider State
+  // Slider State & Mouse Drag / Touch Swipe Support
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [dragOffset, setDragOffset] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+
+  const startXRef = useRef(0);
+  const isDraggingRef = useRef(false);
+  const wasDraggingRef = useRef(false);
+
+  // Mouse drag handlers
+  const handleMouseDown = (e) => {
+    if (e.button !== 0) return;
+    isDraggingRef.current = true;
+    wasDraggingRef.current = false;
+    startXRef.current = e.clientX;
+    setIsDragging(true);
+    setIsPaused(true);
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isDraggingRef.current) return;
+    const diff = e.clientX - startXRef.current;
+    if (Math.abs(diff) > 6) {
+      wasDraggingRef.current = true;
+    }
+    setDragOffset(diff);
+  };
+
+  const handleMouseUp = () => {
+    if (!isDraggingRef.current) return;
+    isDraggingRef.current = false;
+    setIsDragging(false);
+    setIsPaused(false);
+
+    if (dragOffset < -50) {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    } else if (dragOffset > 50) {
+      setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+    }
+    setDragOffset(0);
+  };
+
+  const handleMouseLeave = () => {
+    if (isDraggingRef.current) {
+      handleMouseUp();
+    }
+  };
+
+  // Touch swipe handlers
+  const handleTouchStart = (e) => {
+    isDraggingRef.current = true;
+    wasDraggingRef.current = false;
+    startXRef.current = e.touches[0].clientX;
+    setIsDragging(true);
+    setIsPaused(true);
+  };
+
+  const handleTouchMove = (e) => {
+    if (!isDraggingRef.current) return;
+    const diff = e.touches[0].clientX - startXRef.current;
+    if (Math.abs(diff) > 6) {
+      wasDraggingRef.current = true;
+    }
+    setDragOffset(diff);
+  };
+
+  const handleTouchEnd = () => {
+    handleMouseUp();
+  };
 
   // Coverage Search State
   const [searchArea, setSearchArea] = useState('');
@@ -464,82 +531,131 @@ export default function App() {
         </div>
       </div>
 
-      {/* 3. HERO SLIDER SECTION (80VH HEIGHT, CRYSTAL-CLEAR BACKGROUND IMAGERY, TRANSLUCENT FROSTED TEXT GLASS, REMOVED RIGHT CARDS) */}
+      {/* 3. HERO SLIDER SECTION (TRUE HORIZONTAL SLIDING, MOUSE DRAG / TOUCH SWIPE, STAGGERED CONTENT ANIMATIONS) */}
       <section 
         id="home" 
-        className="relative overflow-hidden min-h-[580px] lg:h-[80vh] flex flex-col justify-between border-b border-slate-200/80 bg-slate-900"
+        className="relative overflow-hidden min-h-[580px] lg:h-[80vh] flex flex-col justify-between border-b border-slate-200/80 bg-slate-900 select-none cursor-grab active:cursor-grabbing"
         onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
+        onMouseLeave={() => {
+          if (!isDraggingRef.current) setIsPaused(false);
+          handleMouseLeave();
+        }}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
-        {/* Dynamic Background Images with Smooth Cross-Fade */}
-        {slides.map((slide, idx) => (
-          <div
-            key={slide.id}
-            className={`absolute inset-0 z-0 transition-opacity duration-1000 ease-in-out ${
-              currentSlide === idx ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-            }`}
-          >
-            {/* Background Photography (hero-1, hero-2, hero-3) - Clear, vivid, high resolution */}
-            <img
-              src={slide.image}
-              alt={slide.smallTitle}
-              className={`w-full h-full object-cover object-center transform transition-transform duration-[8000ms] ease-out ${
-                currentSlide === idx ? 'scale-105' : 'scale-100'
-              }`}
-            />
-            {/* Soft, Transparent Directional Vignette: keeps 100% of the image recognizable while ensuring text contrast */}
-            <div className="absolute inset-0 hidden md:block bg-gradient-to-r from-white/90 via-white/40 to-transparent"></div>
-            <div className="absolute inset-0 md:hidden bg-gradient-to-t from-white/95 via-white/60 to-white/20"></div>
-          </div>
-        ))}
+        {/* Dynamic Sliding Track (moves horizontally with true sliding transition and drag tracking) */}
+        <div 
+          className={`absolute inset-0 flex h-full ${
+            isDragging 
+              ? '' 
+              : 'transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]'
+          }`}
+          style={{
+            width: `${slides.length * 100}%`,
+            transform: `translate3d(calc(-${(currentSlide * 100) / slides.length}% + ${dragOffset}px), 0, 0)`
+          }}
+        >
+          {slides.map((slide, idx) => (
+            <div
+              key={slide.id}
+              className="relative h-full flex flex-col justify-center flex-shrink-0"
+              style={{ width: `${100 / slides.length}%` }}
+            >
+              {/* Background Photography for each slide */}
+              <img
+                src={slide.image}
+                alt={slide.smallTitle}
+                className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none select-none"
+                draggable={false}
+              />
 
-        {/* Content Container adhering strictly to User's Breakpoint & Spacing Specs */}
-        <div className="content-container relative z-10 w-full flex-1 flex flex-col justify-center py-10 lg:py-16">
-          
-          {/* Frosted Translucent Glass Card for Text - High legibility, sleek modern aesthetic */}
-          <div className="max-w-xl lg:max-w-2xl bg-white/80 backdrop-blur-md p-6 sm:p-8 md:p-10 rounded-2xl border border-white/70 shadow-xl shadow-purple-950/5 text-center lg:text-left">
-            
-            {/* Small Title Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-[4px] text-xs sm:text-sm font-bold border mb-4 shadow-sm bg-white/90 border-purple-200 text-purple-700">
-              {React.createElement(slides[currentSlide].badgeIcon, { className: "w-4 h-4 text-purple-600 flex-shrink-0" })}
-              <span>{slides[currentSlide].smallTitle}</span>
+              {/* Soft, Transparent Directional Vignette */}
+              <div className="absolute inset-0 hidden md:block bg-gradient-to-r from-white/90 via-white/40 to-transparent pointer-events-none"></div>
+              <div className="absolute inset-0 md:hidden bg-gradient-to-t from-white/95 via-white/60 to-white/20 pointer-events-none"></div>
+
+              {/* Content Container adhering strictly to User's Breakpoint & Spacing Specs */}
+              <div className="content-container relative z-10 w-full py-8 lg:py-12">
+                
+                {/* Frosted Translucent Glass Card for Text */}
+                <div className="max-w-xl lg:max-w-2xl bg-white/80 backdrop-blur-md p-6 sm:p-8 md:p-10 rounded-2xl border border-white/70 shadow-xl shadow-purple-950/5 text-center lg:text-left">
+                  
+                  {/* Small Title Badge - Staggered 1 */}
+                  <div 
+                    key={`badge-${currentSlide}-${idx}`}
+                    className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-[4px] text-xs sm:text-sm font-bold border mb-4 shadow-sm bg-white/90 border-purple-200 text-purple-700 ${
+                      currentSlide === idx ? 'animate-slide-badge' : 'opacity-0'
+                    }`}
+                  >
+                    {React.createElement(slide.badgeIcon, { className: "w-4 h-4 text-purple-600 flex-shrink-0" })}
+                    <span>{slide.smallTitle}</span>
+                  </div>
+
+                  {/* Main Title - Staggered 2 */}
+                  <h1 
+                    key={`title-${currentSlide}-${idx}`}
+                    className={`text-3xl sm:text-4xl md:text-5xl lg:text-[48px] font-extrabold text-slate-900 tracking-tight leading-[1.15] mb-4 ${
+                      currentSlide === idx ? 'animate-slide-title' : 'opacity-0'
+                    }`}
+                  >
+                    <span>{slide.titlePrefix}</span>
+                    <span className="bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-700 bg-clip-text text-transparent">
+                      {slide.titleHighlight}
+                    </span>
+                  </h1>
+
+                  {/* Description - Staggered 3 */}
+                  <p 
+                    key={`desc-${currentSlide}-${idx}`}
+                    className={`text-slate-600 text-sm sm:text-base lg:text-lg font-normal leading-relaxed mb-8 max-w-xl ${
+                      currentSlide === idx ? 'animate-slide-desc' : 'opacity-0'
+                    }`}
+                  >
+                    {slide.description}
+                  </p>
+
+                  {/* Action Buttons - Staggered 4 */}
+                  <div 
+                    key={`btns-${currentSlide}-${idx}`}
+                    className={`flex flex-wrap items-center justify-center lg:justify-start gap-3.5 ${
+                      currentSlide === idx ? 'animate-slide-btns' : 'opacity-0'
+                    }`}
+                  >
+                    <a 
+                      href={slide.buttonLink}
+                      onClick={(e) => {
+                        if (wasDraggingRef.current) e.preventDefault();
+                      }}
+                      className="inline-flex items-center justify-center gap-2 px-6 h-12 rounded-[4px] bg-purple-600 hover:bg-purple-700 text-white font-semibold text-sm sm:text-base shadow-lg shadow-purple-500/25 transition-all whitespace-nowrap transform hover:-translate-y-0.5 active:translate-y-0"
+                    >
+                      <span>{slide.buttonText}</span>
+                      <ArrowRight className="w-4 h-4 flex-shrink-0" />
+                    </a>
+
+                    <a 
+                      href={slide.secondaryLink}
+                      onClick={(e) => {
+                        if (wasDraggingRef.current) e.preventDefault();
+                      }}
+                      className="inline-flex items-center justify-center gap-2 px-5 h-12 rounded-[4px] bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 font-semibold text-sm sm:text-base shadow-sm hover:shadow transition-all whitespace-nowrap"
+                    >
+                      <MessageSquare className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                      <span>{slide.secondaryText}</span>
+                    </a>
+                  </div>
+
+                </div>
+
+              </div>
             </div>
-
-            {/* Main Title - Perfectly split into prefix and highlighted text */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[48px] font-extrabold text-slate-900 tracking-tight leading-[1.15] mb-4">
-              <span>{slides[currentSlide].titlePrefix}</span>
-              <span className="bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-700 bg-clip-text text-transparent">
-                {slides[currentSlide].titleHighlight}
-              </span>
-            </h1>
-
-            {/* Description */}
-            <p className="text-slate-600 text-sm sm:text-base lg:text-lg font-normal leading-relaxed mb-8 max-w-xl">
-              {slides[currentSlide].description}
-            </p>
-
-            {/* Action Buttons */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3.5">
-              <a 
-                href={slides[currentSlide].buttonLink}
-                className="inline-flex items-center justify-center gap-2 px-6 h-12 rounded-[4px] bg-purple-600 hover:bg-purple-700 text-white font-semibold text-sm sm:text-base shadow-lg shadow-purple-500/25 transition-all whitespace-nowrap transform hover:-translate-y-0.5 active:translate-y-0"
-              >
-                <span>{slides[currentSlide].buttonText}</span>
-                <ArrowRight className="w-4 h-4 flex-shrink-0" />
-              </a>
-
-              <a 
-                href={slides[currentSlide].secondaryLink}
-                className="inline-flex items-center justify-center gap-2 px-5 h-12 rounded-[4px] bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 font-semibold text-sm sm:text-base shadow-sm hover:shadow transition-all whitespace-nowrap"
-              >
-                <MessageSquare className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                <span>{slides[currentSlide].secondaryText}</span>
-              </a>
-            </div>
-
-          </div>
-
+          ))}
         </div>
+
+        {/* Empty placeholder flex spacer so bottom controls stay at bottom */}
+        <div className="flex-1 pointer-events-none"></div>
 
         {/* Slider Bottom Navigation & Controls */}
         <div className="relative z-10 w-full pb-6 lg:pb-8">
