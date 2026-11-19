@@ -591,8 +591,8 @@ export default function App() {
               {/* Content Container adhering strictly to User's Breakpoint & Spacing Specs */}
               <div className="content-container relative z-10 w-full py-8 lg:py-12">
                 
-                {/* Hero Text Column (Crisp, High-Contrast Ultra-Readable Typography) */}
-                <div className="max-w-xl lg:max-w-2xl text-center lg:text-left">
+                {/* Hero Text Column (Crisp, High-Contrast Ultra-Readable Typography - Left Aligned on All Devices) */}
+                <div className="max-w-xl lg:max-w-2xl text-left">
                   
                   {/* Small Title Badge - Staggered 1 */}
                   <div 
@@ -628,10 +628,10 @@ export default function App() {
                     {slide.description}
                   </p>
 
-                  {/* Action Buttons - Staggered 4 */}
+                  {/* Action Buttons - Staggered 4 (Left-Aligned on Mobile & Desktop) */}
                   <div 
                     key={`btns-${currentSlide}-${idx}`}
-                    className={`flex flex-wrap items-center justify-center lg:justify-start gap-3.5 ${
+                    className={`flex flex-wrap items-center justify-start gap-3.5 ${
                       currentSlide === idx ? 'animate-slide-btns' : ''
                     }`}
                   >
