@@ -35,9 +35,129 @@ import hero1Img from './image/hero-1.jpg';
 import hero2Img from './image/hero-2.jpg';
 import hero3Img from './image/hero-3.jpg';
 
+// Reusable Viewport Visibility Hook (Triggers Once on Scroll)
+function useInView(options = { threshold: 0.12, rootMargin: '0px' }) {
+  const [inView, setInView] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    if (typeof IntersectionObserver === 'undefined') {
+      setInView(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.unobserve(el);
+        }
+      },
+      {
+        threshold: options.threshold ?? 0.12,
+        rootMargin: options.rootMargin ?? '0px'
+      }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [options.threshold, options.rootMargin]);
+
+  return [ref, inView];
+}
+
+// Sub-component for individual Feature Card with responsive viewport trigger
+function FeatureCardItem({ card, isSectionInView }) {
+  const [cardRef, isCardInView] = useInView({ threshold: 0.12 });
+
+  return (
+    <div
+      ref={cardRef}
+      className={`group relative bg-[#fbfbfe] hover:bg-white border border-slate-200/90 rounded-2xl p-5 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 ease-out text-left cursor-default ${card.cardBorder} ${
+        isSectionInView ? card.desktopAnimClass : 'md:opacity-0'
+      } ${
+        isCardInView ? 'section-card-mobile-rise' : 'max-md:opacity-0'
+      }`}
+    >
+      {/* Icon Box with Interactive Hover State */}
+      <div
+        className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-4 transition-all duration-300 ease-out shadow-sm ${card.iconDefault} ${card.iconHover}`}
+      >
+        {React.createElement(card.icon, {
+          className: "w-6 h-6 flex-shrink-0 transition-transform duration-300 ease-out group-hover:scale-110"
+        })}
+      </div>
+
+      {/* Card Title */}
+      <h3 className={`text-lg font-bold text-slate-900 mb-2 transition-colors duration-200 ${card.titleHover}`}>
+        {card.title}
+      </h3>
+
+      {/* Card Description */}
+      <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+        {card.description}
+      </p>
+    </div>
+  );
+}
+
+// Feature Cards Data for "Why Bagnibari Net"
+const featureCardsData = [
+  {
+    id: 'optical-fiber',
+    icon: Zap,
+    title: '100% Optical Fiber',
+    description: 'Direct fiber line to your home router. No signal drop during heavy rain, thunderstorms, or local load-shedding.',
+    cardBorder: 'hover:border-purple-300 hover:shadow-purple-500/10',
+    iconDefault: 'bg-purple-50 border border-purple-100 text-purple-600',
+    iconHover: 'group-hover:bg-gradient-to-tr group-hover:from-purple-600 group-hover:to-indigo-600 group-hover:text-white group-hover:shadow-purple-500/35 group-hover:rotate-3 group-hover:border-transparent',
+    titleHover: 'group-hover:text-purple-600',
+    desktopAnimClass: 'section-card-stagger-1'
+  },
+  {
+    id: 'gaming',
+    icon: Gamepad2,
+    title: 'Ultra-Low Ping Gaming',
+    description: 'Optimized direct BDIX routing for PubG, Valorant, FreeFire, and CS:GO with consistent 3-5ms local latency.',
+    cardBorder: 'hover:border-blue-300 hover:shadow-blue-500/10',
+    iconDefault: 'bg-blue-50 border border-blue-100 text-blue-600',
+    iconHover: 'group-hover:bg-gradient-to-tr group-hover:from-blue-600 group-hover:to-cyan-500 group-hover:text-white group-hover:shadow-blue-500/35 group-hover:-rotate-3 group-hover:border-transparent',
+    titleHover: 'group-hover:text-blue-600',
+    desktopAnimClass: 'section-card-stagger-2'
+  },
+  {
+    id: 'bdix-media',
+    icon: Tv,
+    title: 'BDIX & Live Media Hub',
+    description: '100 Mbps dedicated caching for YouTube 4K, Facebook HD video, local FTP movie archives, and 50+ live TV channels.',
+    cardBorder: 'hover:border-emerald-300 hover:shadow-emerald-500/10',
+    iconDefault: 'bg-emerald-50 border border-emerald-100 text-emerald-600',
+    iconHover: 'group-hover:bg-gradient-to-tr group-hover:from-emerald-600 group-hover:to-teal-500 group-hover:text-white group-hover:shadow-emerald-500/35 group-hover:rotate-3 group-hover:border-transparent',
+    titleHover: 'group-hover:text-emerald-600',
+    desktopAnimClass: 'section-card-stagger-3'
+  },
+  {
+    id: 'local-support',
+    icon: Headphones,
+    title: '24/7 Local Support',
+    description: 'Our support team and field technicians reside right inside Bagnibari to provide rapid on-site resolution.',
+    cardBorder: 'hover:border-rose-300 hover:shadow-rose-500/10',
+    iconDefault: 'bg-rose-50 border border-rose-100 text-rose-600',
+    iconHover: 'group-hover:bg-gradient-to-tr group-hover:from-rose-600 group-hover:to-pink-500 group-hover:text-white group-hover:shadow-rose-500/35 group-hover:-rotate-3 group-hover:border-transparent',
+    titleHover: 'group-hover:text-rose-600',
+    desktopAnimClass: 'section-card-stagger-4'
+  }
+];
+
 export default function App() {
   // Mobile Drawer State
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Features Section Viewport Hook for Synchronized Entrance Elevation
+  const [featuresSectionRef, isFeaturesInView] = useInView({ threshold: 0.12 });
 
   // Slider State & Mouse Drag / Touch Swipe Support
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -335,13 +455,13 @@ export default function App() {
     }
   ];
 
-  // Coverage Areas Data
+  // Coverage Areas Data (Exclusively Bagnibari)
   const coverageAreas = [
     { name: "Bagnibari Central Bazar", landmark: "Main Market & Commercial Hub", status: "Active (100% Fiber Coverage)" },
-    { name: "Siddham North Para", landmark: "North Para Main Road & Residential Lanes", status: "Active (100% Fiber Coverage)" },
+    { name: "Bagnibari North Para", landmark: "North Para Main Road & Residential Lanes", status: "Active (100% Fiber Coverage)" },
     { name: "School & College Road", landmark: "High School, College & Madrasa Link", status: "Active (100% Fiber Coverage)" },
     { name: "West Para & Jame Mosque Lane", landmark: "Surrounding residential quarters", status: "Active (100% Fiber Coverage)" },
-    { name: "South Siddham Junction", landmark: "South Crossroads & Adjacent Homes", status: "Active (100% Fiber Coverage)" },
+    { name: "Bagnibari South Para", landmark: "South Crossroads & Adjacent Homes", status: "Active (100% Fiber Coverage)" },
     { name: "East Para & Canal Road Extension", landmark: "New Fiber Expansion & Pre-Booking", status: "Expanding (Pre-booking open)" },
   ];
 
@@ -387,11 +507,11 @@ export default function App() {
             </div>
             <div className="flex-1 min-w-0 overflow-hidden relative">
               <div className="animate-marquee-smooth flex items-center gap-8 text-[11px] font-medium whitespace-nowrap pl-2">
-                <span>🚀 Ultra-Fast Optical Fiber Broadband is now live across Bagnibari & Siddham!</span>
+                <span>🚀 Ultra-Fast Optical Fiber Broadband is now live across Bagnibari!</span>
                 <span className="text-amber-300 font-bold">📞 24/7 Hotline: 017XX-XXXXXX</span>
                 <span>🎁 Special Welcome Offer: 100% Free Optical Fiber Drop Wire Setup!</span>
                 {/* Duplicate for seamless infinite loop */}
-                <span>🚀 Ultra-Fast Optical Fiber Broadband is now live across Bagnibari & Siddham!</span>
+                <span>🚀 Ultra-Fast Optical Fiber Broadband is now live across Bagnibari!</span>
                 <span className="text-amber-300 font-bold">📞 24/7 Hotline: 017XX-XXXXXX</span>
                 <span>🎁 Special Welcome Offer: 100% Free Optical Fiber Drop Wire Setup!</span>
               </div>
@@ -404,7 +524,7 @@ export default function App() {
               <span className="bg-white/20 text-white px-2 py-0.5 rounded-full text-xs font-bold flex items-center gap-1">
                 <Zap className="w-3 h-3 text-amber-300" /> NEW
               </span>
-              <span>Ultra-Fast Optical Fiber Broadband is now live in Bagnibari & Siddham areas!</span>
+              <span>Ultra-Fast Optical Fiber Broadband is now live across Bagnibari!</span>
             </div>
             <div className="flex items-center gap-6">
               <div className="flex items-center gap-1.5 opacity-90">
@@ -691,9 +811,8 @@ export default function App() {
                         onClick={(e) => {
                           if (wasDraggingRef.current) e.preventDefault();
                         }}
-                        className={`group inline-flex items-center justify-center gap-2 px-5 sm:px-6 h-10 sm:h-10.5 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-semibold text-xs sm:text-sm shadow-md shadow-slate-950/30 hover:shadow-lg transition-all duration-300 ease-out whitespace-nowrap transform hover:-translate-y-0.5 active:translate-y-0 ${
-                          isSlideActive ? 'animate-hero-btn-primary' : 'opacity-0'
-                        }`}
+                        className={`group inline-flex items-center justify-center gap-2 px-5 sm:px-6 h-10 sm:h-10.5 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-semibold text-xs sm:text-sm shadow-md shadow-slate-950/30 hover:shadow-lg transition-all duration-300 ease-out whitespace-nowrap transform hover:-translate-y-0.5 active:translate-y-0 ${isSlideActive ? 'animate-hero-btn-primary' : 'opacity-0'
+                          }`}
                       >
                         <span>{slide.buttonText}</span>
                         <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0 transition-transform duration-300 ease-out group-hover:translate-x-1" />
@@ -704,9 +823,8 @@ export default function App() {
                         onClick={(e) => {
                           if (wasDraggingRef.current) e.preventDefault();
                         }}
-                        className={`group inline-flex items-center justify-center gap-2 px-5 sm:px-6 h-10 sm:h-10.5 rounded-full bg-white/10 hover:bg-white/20 hover:border-white/40 border border-white/20 text-white font-medium text-xs sm:text-sm backdrop-blur-md shadow-sm hover:shadow-md transition-all duration-300 ease-out whitespace-nowrap transform hover:-translate-y-0.5 active:translate-y-0 ${
-                          isSlideActive ? 'animate-hero-btn-secondary' : 'opacity-0'
-                        }`}
+                        className={`group inline-flex items-center justify-center gap-2 px-5 sm:px-6 h-10 sm:h-10.5 rounded-full bg-white/10 hover:bg-white/20 hover:border-white/40 border border-white/20 text-white font-medium text-xs sm:text-sm backdrop-blur-md shadow-sm hover:shadow-md transition-all duration-300 ease-out whitespace-nowrap transform hover:-translate-y-0.5 active:translate-y-0 ${isSlideActive ? 'animate-hero-btn-secondary' : 'opacity-0'
+                          }`}
                       >
                         <MessageSquare className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400 flex-shrink-0 transition-transform duration-300 ease-out group-hover:scale-110" />
                         <span>{slide.secondaryText}</span>
@@ -759,11 +877,10 @@ export default function App() {
                   e.stopPropagation();
                   goToSlide(dotIdx);
                 }}
-                className={`slider-nav-btn rounded-full transition-all duration-300 outline-none border-none ring-0 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 active:outline-none active:ring-0 select-none ${
-                  isDotActive
-                    ? 'w-7 sm:w-8 h-2 sm:h-2.5 bg-gradient-to-r from-purple-500 via-indigo-400 to-fuchsia-500 shadow-md shadow-purple-500/50'
-                    : 'w-2 sm:w-2.5 h-2 sm:h-2.5 bg-white/40 hover:bg-white/80 shadow-sm'
-                }`}
+                className={`slider-nav-btn rounded-full transition-all duration-300 outline-none border-none ring-0 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 active:outline-none active:ring-0 select-none ${isDotActive
+                  ? 'w-7 sm:w-8 h-2 sm:h-2.5 bg-gradient-to-r from-purple-500 via-indigo-400 to-fuchsia-500 shadow-md shadow-purple-500/50'
+                  : 'w-2 sm:w-2.5 h-2 sm:h-2.5 bg-white/40 hover:bg-white/80 shadow-sm'
+                  }`}
                 aria-label={`Go to slide ${s.id}: ${s.smallTitle}`}
               />
             );
@@ -777,67 +894,51 @@ export default function App() {
       {/* ========================================================================= */}
 
       {/* 4. KEY ADVANTAGES (4 COLORFUL FEATURE CARDS) */}
-      <section id="features" className="section-spacing bg-white border-b border-slate-100">
+      <section
+        id="features"
+        ref={featuresSectionRef}
+        className="section-spacing bg-white border-b border-slate-100 overflow-hidden"
+      >
         <div className="content-container">
 
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-xs uppercase font-extrabold tracking-wider text-purple-700 px-3.5 py-1 rounded-full bg-purple-100 border border-purple-200">
-              Why Bagnibari Net
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-4 tracking-tight">
-              Designed for Unstoppable Speed & Reliability
+          {/* Section Header: Left on Phone, Centered on PC */}
+          <div className="text-left sm:text-center max-w-2xl sm:mx-auto mb-10 sm:mb-16">
+            <div className="flex justify-start sm:justify-center">
+              <span
+                className={`text-xs uppercase font-extrabold tracking-wider text-purple-700 px-3.5 py-1 rounded-full bg-purple-100 border border-purple-200 inline-block mb-3 sm:mb-4 ${
+                  isFeaturesInView ? 'section-entrance-badge' : 'opacity-0'
+                }`}
+              >
+                Why Bagnibari Net
+              </span>
+            </div>
+
+            <h2
+              className={`text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-snug sm:leading-tight ${
+                isFeaturesInView ? 'section-entrance-title' : 'opacity-0'
+              }`}
+            >
+              Designed for Unstoppable <br /> Speed &amp; Reliability
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base mt-3">
+
+            <p
+              className={`text-slate-600 text-sm sm:text-base mt-2.5 sm:mt-3 leading-relaxed ${
+                isFeaturesInView ? 'section-entrance-desc' : 'opacity-0'
+              }`}
+            >
               We deliver true optical fiber directly to your room with local neighborhood support that responds in minutes.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-
-            {/* Feature 1 */}
-            <div className="bg-[#fbfbfe] border border-slate-200/80 rounded-3xl p-8 hover:border-purple-300 hover:shadow-xl hover:shadow-purple-500/5 transition-all">
-              <div className="w-14 h-14 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center mb-6">
-                <Zap className="w-7 h-7" />
-              </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-2">100% Optical Fiber</h3>
-              <p className="text-slate-600 text-sm leading-relaxed">
-                Direct fiber line to your home router. No signal drop during heavy rain, thunderstorms, or local load-shedding.
-              </p>
-            </div>
-
-            {/* Feature 2 */}
-            <div className="bg-[#fbfbfe] border border-slate-200/80 rounded-3xl p-8 hover:border-blue-300 hover:shadow-xl hover:shadow-blue-500/5 transition-all">
-              <div className="w-14 h-14 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center mb-6">
-                <Gauge className="w-7 h-7" />
-              </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-2">Ultra-Low Ping Gaming</h3>
-              <p className="text-slate-600 text-sm leading-relaxed">
-                Optimized direct BDIX routing for PubG, Valorant, FreeFire, and CS:GO with consistent 3-5ms local latency.
-              </p>
-            </div>
-
-            {/* Feature 3 */}
-            <div className="bg-[#fbfbfe] border border-slate-200/80 rounded-3xl p-8 hover:border-emerald-300 hover:shadow-xl hover:shadow-emerald-500/5 transition-all">
-              <div className="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center mb-6">
-                <Tv className="w-7 h-7" />
-              </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-2">BDIX & Live Media Hub</h3>
-              <p className="text-slate-600 text-sm leading-relaxed">
-                100 Mbps dedicated caching for YouTube 4K, Facebook HD video, local FTP movie archives, and 50+ live TV channels.
-              </p>
-            </div>
-
-            {/* Feature 4 */}
-            <div className="bg-[#fbfbfe] border border-slate-200/80 rounded-3xl p-8 hover:border-rose-300 hover:shadow-xl hover:shadow-rose-500/5 transition-all">
-              <div className="w-14 h-14 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center mb-6">
-                <Headphones className="w-7 h-7" />
-              </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-2">24/7 Local Support</h3>
-              <p className="text-slate-600 text-sm leading-relaxed">
-                Our support team and field technicians reside right inside Bagnibari and Siddham to provide rapid on-site resolution.
-              </p>
-            </div>
-
+          {/* Feature Cards Grid: 20px padding (p-5), Custom Lucide Icons, Interactive Hover State */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7">
+            {featureCardsData.map((card) => (
+              <FeatureCardItem
+                key={card.id}
+                card={card}
+                isSectionInView={isFeaturesInView}
+              />
+            ))}
           </div>
 
         </div>
@@ -1052,7 +1153,7 @@ export default function App() {
             <div className="mt-8 max-w-md mx-auto relative">
               <input
                 type="text"
-                placeholder="Search area (e.g. Bazar, Siddham, School Road)..."
+                placeholder="Search area in Bagnibari (e.g. Bazar, School Road, West Para)..."
                 value={searchArea}
                 onChange={(e) => setSearchArea(e.target.value)}
                 className="w-full px-5 py-3.5 pl-11 rounded-2xl bg-white border border-slate-300 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 shadow-sm"
@@ -1251,7 +1352,7 @@ export default function App() {
                     <div>
                       <h4 className="font-bold text-slate-900 text-sm">Physical Office</h4>
                       <p className="text-slate-600 text-xs sm:text-sm mt-1 leading-relaxed">
-                        Bagnibari Central Bazar Junction, Siddham Road, Dhaka-1340, Bangladesh.
+                        Bagnibari Central Bazar Junction, Dhaka-1340, Bangladesh.
                       </p>
                     </div>
                   </div>
@@ -1388,11 +1489,11 @@ export default function App() {
                           className="w-full px-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:bg-white transition-all"
                         >
                           <option value="Bagnibari Central Bazar">Bagnibari Central Bazar Area</option>
-                          <option value="Siddham North Para">Siddham North Para</option>
+                          <option value="Bagnibari North Para">Bagnibari North Para</option>
                           <option value="School & College Road">School & College Road</option>
                           <option value="West Para & Jame Mosque Lane">West Para & Jame Mosque Lane</option>
-                          <option value="South Siddham Junction">South Siddham Junction</option>
-                          <option value="Other Area">Other (Specify in Address)</option>
+                          <option value="Bagnibari South Para">Bagnibari South Para</option>
+                          <option value="Other Bagnibari Area">Other Area in Bagnibari</option>
                         </select>
                       </div>
 
@@ -1448,7 +1549,7 @@ export default function App() {
                 </span>
               </div>
               <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4">
-                The premier home optical fiber broadband provider across Bagnibari and Siddham areas. Reliable, bufferless, and high-speed.
+                The premier home optical fiber broadband provider across Bagnibari. Reliable, bufferless, and high-speed.
               </p>
               <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-purple-50 border border-purple-200 text-xs text-purple-700 font-bold">
                 <Award className="w-3.5 h-3.5" />
@@ -1474,10 +1575,10 @@ export default function App() {
               <h4 className="text-slate-900 font-bold text-base mb-4">Coverage Zones</h4>
               <ul className="space-y-2 text-xs sm:text-sm font-medium">
                 <li className="flex items-center gap-1.5">📍 <span>Bagnibari Central Bazar</span></li>
-                <li className="flex items-center gap-1.5">📍 <span>Siddham North Para Road</span></li>
+                <li className="flex items-center gap-1.5">📍 <span>Bagnibari North Para Road</span></li>
                 <li className="flex items-center gap-1.5">📍 <span>School & College Lane</span></li>
                 <li className="flex items-center gap-1.5">📍 <span>West Para & Jame Mosque</span></li>
-                <li className="flex items-center gap-1.5">📍 <span>South Siddham Junction</span></li>
+                <li className="flex items-center gap-1.5">📍 <span>Bagnibari South Para</span></li>
               </ul>
             </div>
 

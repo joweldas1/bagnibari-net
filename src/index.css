@@ -157,6 +157,65 @@ button:active {
   ) !important;
 }
 
+/* ========================================================================= */
+/* >>> Features Section Synchronized Rise-Up Entrance Animations <<< */
+/* ========================================================================= */
+@keyframes section-rise-up {
+  0% {
+    opacity: 0;
+    transform: translateY(24px);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0px);
+  }
+}
+
+.section-entrance-badge {
+  animation: section-rise-up 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+  will-change: transform, opacity, filter;
+}
+
+.section-entrance-title {
+  animation: section-rise-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.30s both;
+  will-change: transform, opacity, filter;
+}
+
+.section-entrance-desc {
+  animation: section-rise-up 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.45s both;
+  will-change: transform, opacity, filter;
+}
+
+/* PC Staggered Cascade for the 4 Feature Cards */
+@media (min-width: 768px) {
+  .section-card-stagger-1 {
+    animation: section-rise-up 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.60s both;
+    will-change: transform, opacity, filter;
+  }
+  .section-card-stagger-2 {
+    animation: section-rise-up 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.75s both;
+    will-change: transform, opacity, filter;
+  }
+  .section-card-stagger-3 {
+    animation: section-rise-up 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.90s both;
+    will-change: transform, opacity, filter;
+  }
+  .section-card-stagger-4 {
+    animation: section-rise-up 0.85s cubic-bezier(0.16, 1, 0.3, 1) 1.05s both;
+    will-change: transform, opacity, filter;
+  }
+}
+
+/* Phone Individual Viewport Entrance for each card */
+@media (max-width: 767px) {
+  .section-card-mobile-rise {
+    animation: section-rise-up 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.10s both;
+    will-change: transform, opacity, filter;
+  }
+}
+
 /* Dynamic Ken Burns Zoom In / Out Animations for Hero Active Slides */
 @keyframes kenburns-zoom-in {
   0% {
