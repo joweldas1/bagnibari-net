@@ -668,45 +668,51 @@ export default function App() {
         {/* Empty placeholder flex spacer so bottom controls stay at bottom */}
         <div className="flex-1 pointer-events-none"></div>
 
-        {/* Slider Bottom Navigation & Controls */}
+        {/* Slider Bottom Navigation & Controls (No Arrows - Pure Responsive Sleek Dots & Pill Tags) */}
         <div className="relative z-10 w-full pb-6 lg:pb-8">
-          <div className="content-container flex flex-row items-center justify-between gap-2 sm:gap-4">
+          <div className="content-container flex flex-row items-center justify-between gap-3 sm:gap-4">
             
-            {/* Category / Slide Selectors - Fully Rounded Pill Radius */}
-            <div className="flex items-center gap-1.5 sm:gap-2.5 overflow-x-auto no-scrollbar py-1">
+            {/* Desktop & Tablet: All 3 Category Tag Pills */}
+            <div className="hidden sm:flex items-center gap-2 sm:gap-2.5">
               {slides.map((s, idx) => (
                 <button
                   key={s.id}
                   onClick={() => setCurrentSlide(idx)}
-                  className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-bold transition-all flex items-center gap-2 shadow-sm whitespace-nowrap ${
+                  className={`px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-bold transition-all flex items-center gap-2 shadow-sm whitespace-nowrap ${
                     currentSlide === idx 
                       ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-500/35 ring-1 ring-white/25 scale-105' 
                       : 'bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white border border-white/15 backdrop-blur-md'
                   }`}
                 >
                   <span className={`w-2 h-2 rounded-full ${currentSlide === idx ? 'bg-amber-300 animate-pulse' : 'bg-slate-500'}`}></span>
-                  <span className="hidden sm:inline">0{s.id} • {s.tag}</span>
-                  <span className="sm:hidden">0{s.id} • {s.shortTag}</span>
+                  <span>0{s.id} • {s.tag}</span>
                 </button>
               ))}
             </div>
 
-            {/* Prev / Next Arrows - Fully Rounded Circular Buttons */}
-            <div className="flex items-center gap-1.5 sm:gap-2.5 flex-shrink-0">
-              <button
-                onClick={() => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)}
-                className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-slate-900/80 hover:bg-purple-600 text-white border border-white/15 hover:border-purple-500 shadow-md backdrop-blur-md flex items-center justify-center transition-all hover:scale-105 active:scale-95"
-                aria-label="Previous Slide"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-              <button
-                onClick={() => setCurrentSlide((prev) => (prev + 1) % slides.length)}
-                className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-slate-900/80 hover:bg-purple-600 text-white border border-white/15 hover:border-purple-500 shadow-md backdrop-blur-md flex items-center justify-center transition-all hover:scale-105 active:scale-95"
-                aria-label="Next Slide"
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
+            {/* Mobile View: Active Category Pill */}
+            <div className="flex sm:hidden items-center">
+              <div className="px-3.5 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md shadow-purple-500/35 ring-1 ring-white/25 flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-300 animate-pulse"></span>
+                <span>0{slides[currentSlide].id} • {slides[currentSlide].shortTag}</span>
+              </div>
+            </div>
+
+            {/* Dots Navigation for Changing Slides (Interactive Animated Dots Replacing Arrows) */}
+            <div className="flex items-center gap-2 sm:gap-2.5 bg-slate-900/80 backdrop-blur-md px-3 sm:px-3.5 py-2 rounded-full border border-white/15 shadow-md flex-shrink-0">
+              {slides.map((s, idx) => (
+                <button
+                  key={s.id}
+                  onClick={() => setCurrentSlide(idx)}
+                  className={`rounded-full transition-all duration-300 focus:outline-none ${
+                    currentSlide === idx
+                      ? 'w-7 sm:w-8 h-2 sm:h-2.5 bg-gradient-to-r from-purple-500 via-indigo-500 to-fuchsia-500 shadow-md shadow-purple-500/50 ring-1 ring-white/30'
+                      : 'w-2 sm:w-2.5 h-2 sm:h-2.5 bg-white/30 hover:bg-white/70 hover:scale-125'
+                  }`}
+                  aria-label={`Go to slide ${s.id}: ${s.smallTitle}`}
+                  title={`0${s.id} • ${s.tag}`}
+                />
+              ))}
             </div>
 
           </div>
