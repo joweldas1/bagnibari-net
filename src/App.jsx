@@ -253,13 +253,13 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#fafbff] text-slate-800 flex flex-col font-sans">
       
-      {/* 1. TOP ANNOUNCEMENT STRIP (1-LINE SLIDING MARQUEE ON MOBILE, CLEAN FLEX ON DESKTOP) */}
-      <div className="bg-gradient-to-r from-purple-700 via-indigo-600 to-blue-600 text-white text-xs py-2 px-3 sm:px-4 shadow-sm overflow-hidden select-none">
-        <div className="max-w-7xl mx-auto">
+      {/* 1. TOP ANNOUNCEMENT STRIP (1-LINE SLIDING MARQUEE ON MOBILE, CLEAN FLEX ON DESKTOP - ALIGNED WITH NAVBAR) */}
+      <div className="bg-gradient-to-r from-purple-700 via-indigo-600 to-blue-600 text-white text-xs py-2 shadow-sm overflow-hidden select-none">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8">
           
           {/* Mobile View: 1-line smooth sliding marquee ticker */}
           <div className="flex md:hidden items-center overflow-hidden h-5">
-            <span className="bg-white/20 text-white px-1.5 py-0.5 rounded text-[10px] font-extrabold mr-2 flex-shrink-0 flex items-center gap-1 z-10 shadow-sm">
+            <span className="bg-white/20 text-white px-1.5 py-0.5 rounded text-[10px] font-extrabold mr-2.5 flex-shrink-0 flex items-center gap-1 z-10 shadow-sm">
               <Zap className="w-2.5 h-2.5 text-amber-300" /> LIVE
             </span>
             <div className="animate-marquee-smooth flex items-center gap-8 text-[11px] font-medium whitespace-nowrap">
@@ -346,13 +346,13 @@ export default function App() {
           {/* Mobile Hamburger / Close Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2.5 rounded-lg text-slate-700 hover:text-purple-600 hover:bg-slate-100 border border-slate-200 transition-colors focus:outline-none"
+            className="lg:hidden w-10 h-10 rounded-[4px] bg-purple-600 hover:bg-purple-700 active:bg-purple-800 text-white flex items-center justify-center shadow-sm shadow-purple-500/25 transition-all focus:outline-none"
             aria-label="Toggle Navigation Menu"
           >
             {mobileMenuOpen ? (
-              <X className="w-6 h-6 text-purple-600 transition-transform duration-200 rotate-90 scale-110" />
+              <X className="w-5 h-5 text-white transition-transform duration-200 rotate-90 scale-110" />
             ) : (
-              <Menu className="w-6 h-6 text-slate-800 transition-transform duration-200" />
+              <Menu className="w-5 h-5 text-white transition-transform duration-200" />
             )}
           </button>
 
@@ -370,91 +370,102 @@ export default function App() {
 
       {/* Drawer Container (Sliding in from LEFT) */}
       <div
-        className={`fixed top-0 left-0 bottom-0 w-[82vw] max-w-[320px] bg-white z-50 shadow-2xl p-6 flex flex-col justify-between transform transition-transform duration-300 ease-in-out lg:hidden border-r border-slate-200 overflow-y-auto ${
+        className={`fixed top-0 left-0 bottom-0 w-[84vw] max-w-[320px] bg-white z-50 shadow-2xl p-5 sm:p-6 flex flex-col justify-between transform transition-transform duration-300 ease-in-out lg:hidden border-r border-slate-200 overflow-y-auto ${
           mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         <div>
-          {/* Drawer Top Header */}
-          <div className="flex items-center justify-between pb-5 border-b border-slate-100 mb-6">
+          {/* Drawer Top Header - Align Logo and Close Button to the edges */}
+          <div className="flex items-center justify-between pb-4 border-b border-slate-100 mb-5">
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-purple-600 to-indigo-600 flex items-center justify-center text-white font-bold shadow-md shadow-purple-500/20">
+              <div className="w-9 h-9 rounded-[4px] bg-gradient-to-tr from-purple-600 to-indigo-600 flex items-center justify-center text-white font-bold shadow-md shadow-purple-500/20">
                 <Wifi className="w-5 h-5 text-white" />
               </div>
               <div>
-                <span className="text-lg font-extrabold text-slate-900">
+                <span className="text-lg font-extrabold text-slate-900 leading-tight block">
                   Bagnibari<span className="text-purple-600">Net</span>
                 </span>
                 <p className="text-[9px] uppercase tracking-wider text-indigo-600 font-bold">Ultra Fast Fiber</p>
               </div>
             </div>
             
-            {/* Drawer Close Button */}
+            {/* Drawer Close Button (Pushed further to the right) */}
             <button
               onClick={() => setMobileMenuOpen(false)}
-              className="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
+              className="-mr-1.5 p-2 rounded-[4px] text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
               aria-label="Close Menu"
             >
-              <X className="w-5 h-5 text-slate-600" />
+              <X className="w-5 h-5 text-slate-700" />
             </button>
           </div>
 
-          {/* Navigation Links */}
-          <nav className="flex flex-col space-y-1.5">
+          {/* Navigation Links - Perfect vertical alignment with Logo */}
+          <nav className="flex flex-col space-y-1">
             {[
-              { name: 'Home', href: '#home' },
-              { name: 'Packages', href: '#packages' },
-              { name: 'Why Us', href: '#features' },
-              { name: 'Speed Test', href: '#speedtest' },
-              { name: 'Coverage Areas', href: '#coverage' },
-              { name: 'Pay Bill (bKash/Nagad)', href: '#paybill' },
-              { name: 'Contact & Support', href: '#contact' }
-            ].map((item, idx) => (
-              <a
-                key={idx}
-                href={item.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="px-4 py-3 rounded-xl font-bold text-sm text-slate-700 hover:text-purple-600 hover:bg-purple-50 transition-colors flex items-center justify-between group"
-              >
-                <span>{item.name}</span>
-                <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-purple-600 transition-colors" />
-              </a>
-            ))}
+              { name: 'Home', href: '#home', icon: Wifi },
+              { name: 'Packages', href: '#packages', icon: Zap },
+              { name: 'Why Choose Us', href: '#features', icon: ShieldCheck },
+              { name: 'Speed Test', href: '#speedtest', icon: Gauge },
+              { name: 'Coverage Areas', href: '#coverage', icon: MapPin },
+              { name: 'Pay Bill (bKash/Nagad)', href: '#paybill', icon: CreditCard },
+              { name: 'Contact & Support', href: '#contact', icon: Phone }
+            ].map((item, idx) => {
+              const IconComp = item.icon;
+              return (
+                <a
+                  key={idx}
+                  href={item.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="px-2.5 py-2.5 rounded-[4px] font-semibold text-sm text-slate-700 hover:text-purple-600 hover:bg-purple-50/80 transition-colors flex items-center justify-between group"
+                >
+                  <div className="flex items-center gap-3">
+                    <IconComp className="w-4 h-4 text-slate-400 group-hover:text-purple-600 transition-colors flex-shrink-0" />
+                    <span>{item.name}</span>
+                  </div>
+                  <ChevronRight className="w-3.5 h-3.5 text-slate-300 group-hover:text-purple-600 transition-colors" />
+                </a>
+              );
+            })}
           </nav>
         </div>
 
-        {/* Drawer Bottom Actions: Buttons inside mobile drawer as requested */}
-        <div className="pt-6 border-t border-slate-100 space-y-3 mt-6">
-          
-          {/* Get Connected Action */}
-          <a
-            href="#contact"
-            onClick={() => setMobileMenuOpen(false)}
-            className="w-full h-11 px-4 rounded-lg bg-purple-600 hover:bg-purple-700 text-white font-semibold text-center text-sm shadow-md shadow-purple-500/20 flex items-center justify-center gap-2 leading-none transition-all active:scale-[0.98]"
-          >
-            <span>Get Connected</span>
-            <ArrowRight className="w-4 h-4 flex-shrink-0" />
-          </a>
-
-          {/* WhatsApp Action */}
-          <a
-            href="https://wa.me/8801700000000"
-            target="_blank"
-            rel="noreferrer"
-            className="w-full h-11 px-4 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-center text-sm shadow-md shadow-emerald-500/20 flex items-center justify-center gap-2 leading-none transition-all active:scale-[0.98]"
-          >
-            <MessageSquare className="w-4 h-4 flex-shrink-0" />
-            <span>Chat on WhatsApp</span>
-          </a>
-
-          {/* 24/7 Helpline Call Pill */}
-          <div className="bg-purple-50 p-3 rounded-lg border border-purple-100 text-center">
-            <p className="text-[11px] text-slate-500 font-medium">24/7 Emergency Helpline:</p>
-            <a href="tel:01700000000" className="text-purple-700 font-extrabold text-xs block mt-0.5 hover:underline">
-              📞 017XX-XXXXXX
+        {/* Drawer Bottom Actions: Redesigned Beautiful Mobile Action Card */}
+        <div className="pt-5 border-t border-slate-100 mt-6">
+          <div className="bg-slate-50/90 rounded-xl p-3.5 border border-slate-200/70 space-y-2.5 shadow-sm">
+            
+            {/* Get Connected Action - Optically balanced vertical padding */}
+            <a
+              href="#contact"
+              onClick={() => setMobileMenuOpen(false)}
+              className="w-full h-11 px-4 rounded-[4px] bg-purple-600 hover:bg-purple-700 active:bg-purple-800 text-white font-semibold text-sm shadow-md shadow-purple-500/20 flex items-center justify-center gap-2 transition-all active:scale-[0.99]"
+            >
+              <span className="relative top-[0.5px]">Get Connected</span>
+              <ArrowRight className="w-4 h-4 flex-shrink-0 relative top-[0.5px]" />
             </a>
-          </div>
 
+            {/* WhatsApp Action */}
+            <a
+              href="https://wa.me/8801700000000"
+              target="_blank"
+              rel="noreferrer"
+              className="w-full h-10 px-4 rounded-[4px] bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-semibold text-sm shadow-sm shadow-emerald-600/15 flex items-center justify-center gap-2 transition-all active:scale-[0.99]"
+            >
+              <MessageSquare className="w-4 h-4 flex-shrink-0 relative top-[0.5px]" />
+              <span className="relative top-[0.5px]">Chat on WhatsApp</span>
+            </a>
+
+            {/* 24/7 Helpline Row */}
+            <div className="pt-1.5 flex items-center justify-between text-xs text-slate-500 px-1 font-medium border-t border-slate-200/50">
+              <span className="flex items-center gap-1 text-[11px]">
+                <Clock className="w-3 h-3 text-purple-600" />
+                <span>24/7 Support:</span>
+              </span>
+              <a href="tel:01700000000" className="text-purple-700 font-extrabold text-xs hover:underline">
+                017XX-XXXXXX
+              </a>
+            </div>
+
+          </div>
         </div>
       </div>
 
