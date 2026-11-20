@@ -3,9 +3,23 @@
 @tailwind utilities;
 
 @layer base {
+  html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
   body {
     @apply bg-[#f8fafc] text-slate-800;
   }
+}
+
+/* Beautiful, Crisp Bangla Font Rendering */
+html[lang="bn"],
+html[lang="bn"] body,
+html[lang="bn"] input,
+html[lang="bn"] button,
+html[lang="bn"] select,
+html[lang="bn"] textarea {
+  font-family: 'Hind Siliguri', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
 }
 
 /* Vibrant Light Gradient Backgrounds */
@@ -300,8 +314,8 @@ button:active {
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 @media (min-width: 768px) {

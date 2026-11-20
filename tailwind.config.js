@@ -14,7 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
+        sans: ['Plus Jakarta Sans', 'Hind Siliguri', 'Inter', 'system-ui', 'sans-serif'],
+        bangla: ['Hind Siliguri', 'sans-serif'],
       },
       colors: {
         brand: {
